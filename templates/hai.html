@@ -1,0 +1,702 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <style type="text/css">
+        element.style {
+}
+#right-component {
+    background-color: #f5f5f5;
+    left: 20%;
+}
+.split-pane.fixed-left>.split-pane-component, .split-pane.fixed-right>.split-pane-component, .split-pane.vertical-percent>.split-pane-component {
+    position: absolute;
+    top: 0;
+    height: 100%;
+    overflow: auto;
+    left: auto;
+    right: 0;
+    z-index: 1;
+}
+* {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+user agent stylesheet
+div {
+    display: block;
+}
+body {
+    font-family: helvetica,sans-serif,arial;
+    color: #111;
+}
+body {
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-size: 14px;
+    line-height: 1.42857143;
+    color: #333;
+    background-color: #fff;
+}
+#right-component {
+    background-color: #f5f5f5;
+    left: 20%;
+}
+html {
+    font-size: 10px;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+}
+html {
+    font-family: sans-serif;
+    -webkit-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
+}
+:after, :before {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+:after, :before {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+    </style>
+</head>
+<body>
+
+<div class="split-pane-component" id="right-component">
+
+        
+        <input type="hidden" id="snippet_id" value="">
+
+        <div class="split-pane fixed-left" style="min-width: 1px;">
+            <div class="split-pane-component" id="right-left-component" style="width: 646px;">
+                <div class="split-pane fixed-top" style="min-height: 7px;">
+                    <div class="split-pane-component" id="top-component">
+                        <!-- middle top start --> 
+                        <div id="native-inline"></div>
+                        <div id="editor-container">
+                            
+    <a name="title-bar"></a>
+    <div id="title-bar" style="padding:0px 5px;min-width:900px">
+        <div id="connectingMessage" class="loadingdots" style="display:none">connecting to server </div>
+        <div style="position:relative">
+            <!--<span class="col-sm-3" style="float:left"><b>Source Code</b></span>-->
+            <span class="col-sm-63" id="control-bar" style="float:left">
+                <span id="project_title" class="hide">
+                     Source Code &nbsp;&nbsp;
+                </span>
+                
+                
+                
+                <div class="btn-group">
+                <button type="button" id="control-btn-newfile" class="btn btn-default btn-half" data-placement="right" data-toggle="tooltip" title="" data-original-title="New File (Ctrl+M)"><span class="glyphicon glyphicon-file"></span></button>
+                <button type="button" id="control-btn-upload" class="btn btn-default btn-half" data-placement="bottom" data-toggle="tooltip" title="" data-original-title="Upload File"><span class="glyphicon glyphicon-cloud-upload"></span></button>
+                </div>
+
+                <span id="upload_file_container" class="hide"></span>
+                
+                <button type="submit" id="control-btn-run" class="btn btn-success" onclick="ide.runcode()" data-placement="bottom" data-toggle="tooltip" title="" data-original-title="F9">
+                    <span class="glyphicon glyphicon-play" aria-hidden="true"></span> Run</button>
+                
+                <button type="submit" id="control-btn-debug" class="btn btn-primary" onclick="ide.debugcode()" data-placement="bottom" data-toggle="tooltip" title="" data-original-title="F8">
+                    <span class="glyphicon glyphicon-play-circle" aria-hidden="true"></span> Debug</button>
+                <button type="submit" id="control-btn-stop" class="btn btn-danger" disabled="disabled" onclick="pstop()">   <span class="glyphicon glyphicon-stop" aria-hidden="true"></span> Stop</button>
+                <!--<button type="submit" id="control-btn-save" class="btn btn-warning" onclick="idesave(editor.getValue())"> <span class="glyphicon glyphicon-floppy-save" aria-hidden="true"></span> Save</button>-->
+                
+                
+                <button type="submit" id="control-btn-share" class="btn btn-warning" onclick="shareCode()"> <span class="glyphicon glyphicon-share" aria-hidden="true"></span> Share</button>
+                
+                
+                <button type="button" id="control-btn-save" class="btn btn-primary" data-placement="bottom" data-toggle="tooltip" title="" data-original-title="Ctrl+S"> <span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span> <span class="btn_text">Save</span></button>
+                
+                
+                
+                <button type="submit" id="control-btn-beautify" class="btn btn-info" onclick="beautifyCode()" data-placement="bottom" data-toggle="tooltip" title="" data-original-title="Ctrl+B">{ } Beautify</button>
+                <button type="button" id="control-btn-download" class="btn btn-info" onclick="downloadCode()" title="" data-placement="bottom" data-toggle="tooltip" data-original-title="Download Code"><span class="glyphicon glyphicon-save" aria-hidden="true"></span></button>
+                
+
+
+                
+                
+                
+                
+            </span>
+            
+
+            
+            <span class="col-sm-64">
+                
+                    <span class="" style="float:right;padding-right:50px;">
+                
+                Language
+                <select id="lang-select" class="form-control" style="width:90px; display:inline; border-radius:0px;">
+                        
+                  <option disabled="" value=""> -- select -- </option>
+                  <option value="c">C</option>
+<!--                  <option  value="c99">C99</option>-->
+                  <option value="c++">C++</option>
+<!--                  <option  value="c++11">C++ 11</option> -->
+                  <option value="c++14">C++ 14</option>
+                  <option value="c++17">C++ 17</option>
+                  <option value="java">Java</option>
+                  <option value="python">Python 3</option>
+                  <option value="php">PHP</option>
+                  <option value="c#">C#</option>
+                  <option value="vb">VB</option>
+                  <option selected="" value="html">HTML,JS,CSS</option>
+                  <option value="ruby">Ruby</option>
+                  <option value="perl">Perl</option>
+                  <option value="pascal">Pascal</option>
+                  <option value="r">R</option>
+                  <option value="fortran">Fortran</option>
+                  <option value="haskell">Haskell</option>
+                  <option value="asm_gcc">Assembly(GCC)</option>
+                  <option value="objc">Objective C</option>
+                  <option value="sqlite3">SQLite</option>
+                  <option value="js_rhino">Javascript(Rhino)</option>
+                  <option value="prolog">Prolog</option>
+                  <option value="swift">Swift</option>
+                  
+                  <option value="rust">Rust</option>
+                  <option value="go">Go</option>
+                  
+                  <option value="bash">Bash</option> 
+                </select>
+                
+                <button type="submit" class="btn btn-warning" onclick="ide.showinfo();">
+                    <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span></button>
+                <button type="submit" class="btn btn-warning" onclick="ide.showsettings();">
+                <span class="glyphicon glyphicon-cog" aria-hidden="true"></span></button>
+                
+                </span>
+            </span>
+            <div id="popup-settings" style="position:absolute; right:0px; z-index:123;">
+                <div>
+                    <button type="submit" style="visibility: hidden;" class="btn btn-warning" onclick=""> <span class="glyphicon glyphicon-cog" aria-hidden="true"></span></button>
+                </div>
+                <div style="background-color:#f0ad4e;padding: 15px;">
+                    <p>
+                        </p><form class="form-inline" role="form">
+                            <div class="form-group">
+                                <label for="settings-editor-theme">Editor Theme:</label>
+                                <select class="form-control" id="settings-editor-theme">
+                                    <option value="dark">Dark</option>
+                                    <option value="light">Light</option>
+                                </select>
+                            </div>
+                        </form>
+
+                    <p>
+                        </p><form class="form-inline" role="form">
+                            <div class="form-group">
+                                <label for="settings-editor-mode">Editor Mode:</label>
+                                <select class="form-control" id="settings-editor-mode">
+                                    <option value="textinput">Normal</option>
+                                    <option value="emacs">Emacs</option>
+                                    <option value="vim">vim</option>
+                                </select>
+                            </div>
+                        </form>
+
+                    <p>
+                        </p><form class="form-inline" role="form">
+                            <div class="form-group">
+                                <label for="settings-editor-font-size">Font size:</label>
+                                <select class="form-control" id="settings-editor-font-size">
+                                    <option value="small">Small</option>
+                                    <option value="medium" selected="selected">Medium</option>
+                                    <option value="large">Large</option>
+                                </select>
+                            </div>
+                        </form>
+
+                    <p>
+                        </p><form class="form-inline" role="form">
+                            <div class="form-group">
+                                <label for="settings-editor-tab-space">Tab Space:</label>
+                                <select class="form-control" id="settings-editor-tab-space">
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4" selected="selected">4</option>
+                                    <option value="5">5</option>
+                                    <option value="6">6</option>
+                                    <option value="7">7</option>
+                                    <option value="8">8</option>
+                                </select>
+                            </div>
+                        </form>
+                    <p>
+                        </p><form class="form-nline" role="form">
+                            <div class="form-group">
+                                <div class="input-group">
+                                <label for="setting-editor-autocomplete">Autocomplete: </label>
+                                <input type="radio" name="settings-editor-autocomplete" id="settings-editor-autocomplete-on" checked="">on
+                                <input type="radio" name="settings-editor-autocomplete" id="settings-editor-autocomplete-off">off
+                                </div>
+                            </div>
+                        </form>
+                    <p></p>
+                    <p>
+                        </p><form class="form-inline" role="form">
+                            <div class="form-group">
+                                <button type="button" class="btn btn-primary" style="width:100%;" onclick="display_compiler_flags_box()">Extra Compiler Flags</button> 
+                            </div>
+                        </form>
+        
+                    <div>
+                        <p>
+                        </p><form role="form" post="#">
+                            <button type="button" class="btn btn-default" style="width:100%;" onclick="ide.closesettings();">Done</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+    <div id="multi_editor_container">
+        <div style="clear:both; background-color:#757575;">
+            <ul class="editor_file_tabs nav nav-pills">
+                
+                    <li class="active">
+                        <a href="#editor_1" data-toggle="tab"><span class="filename">index.html</span>                   
+                        </a>
+                    </li>
+                
+            </ul>
+        </div>
+        <div class="editor_text_panes tab-content clearfix">
+            
+            
+            <div id="editor_1" class="tab-pane active editor ace_editor ace-idle-fingers ace_dark" style="position: absolute; width: 100%; top: 52px; bottom: 0px; font-size: medium;"><textarea class="ace_text-input" wrap="off" autocorrect="off" autocapitalize="off" spellcheck="false" style="opacity: 0; height: 19px; width: 8.79688px; left: 626.797px; top: 57px;"></textarea><div class="ace_gutter"><div class="ace_layer ace_gutter-layer ace_folding-enabled" style="margin-top: 0px; height: 468px; width: 51px;"><div class="ace_gutter-cell " style="height: 19px;">1<span class="ace_fold-widget ace_start ace_open" style="height: 19px;"></span></div><div class="ace_gutter-cell " style="height: 19px;">2</div><div class="ace_gutter-cell " style="height: 19px;">3</div><div class="ace_gutter-cell " style="height: 19px;">4</div><div class="ace_gutter-cell " style="height: 19px;">5</div><div class="ace_gutter-cell " style="height: 19px;">6</div><div class="ace_gutter-cell " style="height: 19px;">7</div><div class="ace_gutter-cell " style="height: 19px;">8</div><div class="ace_gutter-cell  ace_info" style="height: 19px;">9<span class="ace_fold-widget ace_start ace_open" style="height: 19px;"></span></div><div class="ace_gutter-cell " style="height: 19px;">10<span class="ace_fold-widget ace_start ace_open" style="height: 19px;"></span></div><div class="ace_gutter-cell " style="height: 19px;">11</div><div class="ace_gutter-cell " style="height: 19px;">12</div><div class="ace_gutter-cell " style="height: 19px;">13</div><div class="ace_gutter-cell " style="height: 19px;">14</div></div><div class="ace_gutter-active-line" style="top: 57px; height: 19px;"></div></div><div class="ace_scroller" style="left: 51px; right: 0px; bottom: 0px;"><div class="ace_content" style="margin-top: 0px; width: 849px; height: 468px; margin-left: 0px;"><div class="ace_layer ace_print-margin-layer"><div class="ace_print-margin" style="left: 707.75px; visibility: visible;"></div></div><div class="ace_layer ace_marker-layer"><div class="ace_active-line" style="height:19px;top:57px;left:0;right:0;"></div></div><div class="ace_layer ace_text-layer" style="padding: 0px 4px;"><div class="ace_line" style="height:19px"><span class="ace_comment ace_start ace_xml">&lt;!--</span></div><div class="ace_line" style="height:19px"></div><div class="ace_line" style="height:19px"><span class="ace_indent-guide">    </span><span class="ace_indent-guide">    </span><span class="ace_indent-guide">    </span><span class="ace_indent-guide">    </span><span class="ace_indent-guide">    </span><span class="ace_indent-guide">    </span><span class="ace_comment ace_xml">    Online HTML Compiler.</span></div><div class="ace_line" style="height:19px"><span class="ace_indent-guide">    </span><span class="ace_indent-guide">    </span><span class="ace_indent-guide">    </span><span class="ace_comment ace_xml">    Code, Compile, Run and Debug HTML program online.</span></div><div class="ace_line" style="height:19px"><span class="ace_comment ace_xml">Write your code in this editor and press "Run" button to execute it.</span></div><div class="ace_line" style="height:19px"></div><div class="ace_line" style="height:19px"><span class="ace_comment ace_end ace_xml">--&gt;</span></div><div class="ace_line" style="height:19px"></div><div class="ace_line" style="height:19px"><span class="ace_meta ace_tag ace_punctuation ace_tag-open ace_xml">&lt;</span><span class="ace_meta ace_tag ace_tag-name ace_xml">html</span><span class="ace_meta ace_tag ace_punctuation ace_tag-close ace_xml">&gt;</span></div><div class="ace_line" style="height:19px"><span class="ace_meta ace_tag ace_punctuation ace_tag-open ace_xml">&lt;</span><span class="ace_meta ace_tag ace_tag-name ace_xml">body</span><span class="ace_meta ace_tag ace_punctuation ace_tag-close ace_xml">&gt;</span></div><div class="ace_line" style="height:19px"><span class="ace_meta ace_tag ace_punctuation ace_tag-open ace_xml">&lt;</span><span class="ace_meta ace_tag ace_tag-name ace_xml">h1</span><span class="ace_meta ace_tag ace_punctuation ace_tag-close ace_xml">&gt;</span><span class="ace_text ace_xml">Hello World</span><span class="ace_meta ace_tag ace_punctuation ace_end-tag-open ace_xml">&lt;/</span><span class="ace_meta ace_tag ace_tag-name ace_xml">h1</span><span class="ace_meta ace_tag ace_punctuation ace_tag-close ace_xml">&gt;</span></div><div class="ace_line" style="height:19px"><span class="ace_meta ace_tag ace_punctuation ace_end-tag-open ace_xml">&lt;/</span><span class="ace_meta ace_tag ace_tag-name ace_xml">body</span><span class="ace_meta ace_tag ace_punctuation ace_tag-close ace_xml">&gt;</span></div><div class="ace_line" style="height:19px"><span class="ace_meta ace_tag ace_punctuation ace_end-tag-open ace_xml">&lt;/</span><span class="ace_meta ace_tag ace_tag-name ace_xml">html</span><span class="ace_meta ace_tag ace_punctuation ace_tag-close ace_xml">&gt;</span></div><div class="ace_line" style="height:19px"></div></div><div class="ace_layer ace_marker-layer"></div><div class="ace_layer ace_cursor-layer ace_hidden-cursors"><div class="ace_cursor" style="left: 575.797px; top: 57px; width: 8.79688px; height: 19px;"></div></div></div></div><div class="ace_scrollbar ace_scrollbar-v" style="display: none; width: 22px; bottom: 0px;"><div class="ace_scrollbar-inner" style="width: 22px; height: 266px;"></div></div><div class="ace_scrollbar ace_scrollbar-h" style="display: none; height: 22px; left: 51px; right: 0px;"><div class="ace_scrollbar-inner" style="height: 22px; width: 849px;"></div></div><div style="height: auto; width: auto; top: 0px; left: 0px; visibility: hidden; position: absolute; white-space: pre; font: inherit; overflow: hidden;"><div style="height: auto; width: auto; top: 0px; left: 0px; visibility: hidden; position: absolute; white-space: pre; font: inherit; overflow: visible;"></div><div style="height: auto; width: auto; top: 0px; left: 0px; visibility: hidden; position: absolute; white-space: pre; font-style: inherit; font-variant: inherit; font-stretch: inherit; font-size: inherit; line-height: inherit; font-family: inherit; overflow: visible;">XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</div></div></div>
+            
+        </div>
+    </div>
+</div>
+                        <!-- middle top end -->
+                    </div>
+                    <div class="split-pane-divider" id="my-divider1"><div class="split-pane-divider-inner"></div></div>
+                    <div class="split-pane-component" id="bottom-component">
+                        <button onclick="toggle_bottom_pane_size()">
+                            <span class="btn_minmax glyphicon glyphicon-resize-full" title="Maximize"></span> 
+                        </button>       
+                        <button onclick="toggle_bottom_pane_size_hide()">
+                            <span class="btn_hide glyphicon glyphicon-chevron-down" title="Hide"></span> 
+                        </button> 
+                        <button onclick="copy_output()">
+                            <span class="btn_copy glyphicon glyphicon-copy" title="Copy output to clipboard"></span> 
+                        </button>               
+                        <!-- middle bottom start -->
+                         <div id="console-wrapper" style="">
+    <div id="console-fadder">
+        <center><img src="/public/img/loading.gif"><img>
+        <div class="msg-wrapper"><h4 class="msg">Compiling Program...</h4></div>
+        </center>
+    </div>
+    <div id="console-title-bar">
+        <ul class="nav nav-tabs nav-justified">
+            <li class="active tab-input"><a data-toggle="tab" href="#tab-stdin">input</a></li>
+            <li class="tab-stdout" style="display:none"><a data-toggle="tab" href="#tab-stdout">stdout</a></li>
+            <li class="tab-stderr" style="display:none"><a data-toggle="tab" href="#tab-stderr">stderr</a></li>
+            <li class="tab-debug" style="display:none"><a data-toggle="tab" href="#tab-debug-console">Debug Console</a></li>
+        </ul>
+    </div>
+    <div id="console-content" class="tab-content">
+        <div id="tab-stdin" class="tab-pane fade in active">
+            <div id="stdin-wrapper" style="z-index:10;position:absolute;width:100%;height:100%;">
+            <div style="height:37px; padding:5px 10px;  position:absolute;left:0px;right:0px;">
+            <span style="float:left;width:20%;text-overflow: ellipsis;max-height:100%;overflow:hidden">Command line arguments:</span> <span style="display: block;"><input id="cmd_line_args" style="width:80%" name="cmd_line_args" value=""><br>
+            </span></div>
+            <div class="well" style="position:absolute; padding-top:0px; width:100%;top:37px; bottom:0px;border-radius:0px;padding:9px;">
+                <div style="z-index:1">
+                Standard Input: 
+                <input type="radio" id="input_method_interactive" name="input_method" value="interactive" checked=""> Interactive Console
+                    <input style="margin-left:50px;" type="radio" id="input_method_text" name="input_method" value="text"> Text<br>
+                </div>
+                    <div id="ad_unit_bottom_wrapper">
+                        <div id="ad_unit_bottom">
+                            
+                            <!-- /8691100/OnlineGDB_S2S_Leaderboard_BTF -->
+                            <div id="bsa-zone_1573224210072-0_123456" data-google-query-id="CNrX4-Td8O0CFe8EtwAdZ0QC9A"><div id="google_ads_iframe_/8691100/OnlineGDB_S2S_Leaderboard_BTF_0__container__" style="border: 0pt none; display: inline-block; width: 728px; height: 90px;"><iframe frameborder="0" src="https://a8f588bb812d186883fe32297cff2875.safeframe.googlesyndication.com/safeframe/1-0-37/html/container.html" id="google_ads_iframe_/8691100/OnlineGDB_S2S_Leaderboard_BTF_0" title="3rd party ad content" name="" scrolling="no" marginwidth="0" marginheight="0" width="728" height="90" data-is-safeframe="true" sandbox="allow-forms allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts allow-top-navigation-by-user-activation" data-google-container-id="1" style="border: 0px; vertical-align: bottom;" data-load-complete="true"></iframe></div></div>
+                            <!--<div id="native-banner" class="native-standard"></div>-->
+                            
+                        </div>
+                    </div>
+                    <textarea class="form-control" id="stdinput" placeholder="Enter input to program here" style="height:100%; resize: none;  display:none "></textarea>
+            </div>
+            </div>
+            <div id="interactive-terminal-container" style="position:absolute; margin:0px;top:0px; bottom:0px; left:0px; right:0px;" class="col-sm-121"></div>
+            
+        </div>
+        <div id="tab-stdout" class="tab-pane fade">
+            <div id="stdout-wrapper" class="well" style="border:none;height:100%;border-radius:0px;padding:9px; margin:0px;"><span id="ide-run-result"></span>
+                <div id="stdout-container" style="position: absolute;    top: 30px;    bottom: 0px;    left: 10px;   right: 10px;">
+                <pre class="msg" style="position: absolute;    top: 0px;    bottom: 0px;    left: 0px;    right: 0px;background-color: white;"></pre>
+                </div>
+            </div>
+        </div>
+        <div id="tab-stderr" class="tab-pane fade">
+            <div id="stderr-wrapper" class="well" style="border:none;height:100%;border-radius:0px;padding:9px; margin:0px;"><span id="ide-compile-result"></span>
+                <div id="stderr-container" style="position: absolute;    top: 30px;    bottom: 0px;    left: 10px;   right: 10px;">
+                <pre class="msg" style="position: absolute;    top: 0px;    bottom: 0px;    left: 0px;    right: 0px;"></pre>
+                </div>
+            </div>
+        </div>
+        <div id="tab-debug-console" class="tab-pane fade">
+            <div id="debug-console" style="border:none; height:100%; border-radius:0px;padding:0px; margin:0px;">
+                <div class="inactive-content" style="color:#bdbdbd; padding-top:15px; text-align:center">
+                    <h4>
+                    Program is not being debugged. Click "Debug" button to start program in debug mode.
+                        </h4>
+                </div>
+                <span id="debug-bar" style="display:none">
+                    <button type="submit" id="debug_btn_run" class="btn btn-success" disabled="true" onclick="ide.debug('run')"><span class="glyphicon glyphicon-eject" aria-hidden="true" title="start"></span> start</button>
+                    <button type="submit" id="debug_btn_pause" class="btn btn-warning" disabled="true" onclick="ide.debug('interrupt')"> <span class="glyphicon glyphicon-pause" aria-hidden="true" title="interrupt"></span> pause</button>
+                    <button type="submit" id="debug_btn_cont" class="btn btn-primary" disabled="true" onclick="ide.debug('continue')"> <span class="glyphicon glyphicon-play" aria-hidden="true" title="continue"></span> continue</button>
+                    <button type="submit" id="debug_btn_next" class="btn btn-primary" disabled="true" onclick="ide.debug('next')"> <span class="glyphicon glyphicon-step-forward" aria-hidden="true" title="next/step over"></span> step over</button>
+                    <button type="submit" id="debug_btn_step" class="btn btn-primary" disabled="true" onclick="ide.debug('step')"> <span class="glyphicon glyphicon-forward" aria-hidden="true" title="step into"></span> step into</button>
+                    <button type="submit" id="debug_btn_finish" class="btn btn-primary" disabled="true" onclick="ide.debug('finish')"> <span class="glyphicon glyphicon-fast-forward" aria-hidden="true" title="finish/step out"></span> step out</button>
+                    
+                    <a class="btn btn-success" href="https://www.onlinegdb.com/blog/brief-guide-on-how-to-use-onlinegdb-debugger/" target="_blank"> <span class="glyphicon glyphicon-info-sign" aria-hidden="true" title="Help : How to use debugger?"></span> help</a>
+                    
+                    </span>
+                <div class="col-sm-121 active-content" style="position: absolute;    top: 24px;    bottom: 0px;    left: 0px;    right: 0px;">
+                <div id="terminal-container" class="col-sm-12"></div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</div>
+                        <!-- middle bottom end -->
+                    </div>
+                </div>
+            </div>
+            <div class="split-pane-divider" id="my-divider2" style="left: 646px;"><div class="split-pane-divider-inner"></div></div>
+            <div class="split-pane-component" id="right-right-component" style="left: 646px;">                
+                <!-- right component start -->
+                <div class="col-sm-41" id="debug-pan" style="background-color:#bdbdbd">
+                    <div class="panel-group">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h4 class="panel-title">
+        <a data-toggle="collapse" class="collapse-toggle" href="#debug_window_call_stack">Call Stack</a>
+      </h4>
+    </div>
+    <div id="debug_window_call_stack" class="collapse in">
+        <div class="table-responsive"><div class="JCLRgrips" style="width: 158px;"><div class="JCLRgrip" style="left: 1px; height: 25px;"><div class="JColResizer"></div></div><div class="JCLRgrip" style="left: 1px; height: 25px;"><div class="JColResizer"></div></div><div class="JCLRgrip JCLRLastGrip" style="left: 1px; height: 25px;"></div></div><table class="table table-bordered JPadding JColResizer" id="JColResizer1">
+       <thead> <tr><th style="width: 33.3%;">#</th><th style="width: 33.3%;">Function</th><th style="width: 33.3%;">File:Line</th></tr></thead>
+       <tbody></tbody>
+       </table></div>
+</div>
+  </div>
+
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h4 class="panel-title">
+        <a data-toggle="collapse" class="collapse-toggle" href="#debug_window_local_variables">Local Variables</a>
+      </h4>
+    </div>
+    <div id="debug_window_local_variables" class="collapse in">
+        <div class="table-responsive"><div class="JCLRgrips" style="width: 113px;"><div class="JCLRgrip" style="left: 1px; height: 25px;"><div class="JColResizer"></div></div><div class="JCLRgrip JCLRLastGrip" style="left: 1px; height: 25px;"></div></div><table class="table table-bordered JPadding JColResizer" id="JColResizer2">
+       <thead> <tr><th style="width: 50%;">Variable</th><th style="width: 50%;">Value</th></tr></thead>
+       <tbody></tbody>
+       </table></div>
+</div>
+</div>
+
+<div class="panel panel-default panel-registers">
+    <div class="panel-heading">
+      <h4 class="panel-title">
+        <a data-toggle="collapse" class="collapse-toggle" href="#debug_window_registers">Registers</a>
+      </h4>
+    </div>
+    <div id="debug_window_registers" class="collapse in">
+        <div class="table-responsive"><table class="table table-bordered">
+       <thead> <tr><th>Register</th><th>Value</th></tr></thead>
+       <tbody></tbody>
+       </table></div>
+</div>
+</div>
+
+<div class="panel panel-default panel-display-expression">
+    <div class="panel-heading">
+      <h4 class="panel-title">
+        <a data-toggle="collapse" class="collapse-toggle" href="#debug_window_display_expression">Display Expressions</a>
+      </h4>
+    </div>
+    <div id="debug_window_display_expression" class="collapse in">
+    <div class="table-responsive">
+        <div class="JCLRgrips" style="width: 148px;"><div class="JCLRgrip" style="left: 1px; height: 25px;"><div class="JColResizer"></div></div><div class="JCLRgrip" style="left: 1px; height: 25px;"><div class="JColResizer"></div></div><div class="JCLRgrip JCLRLastGrip" style="left: 1px; height: 25px;"></div></div><table class="table table-bordered JPadding JColResizer" style="margin-bottom:0px" id="JColResizer0">
+       <thead><tr><th style="width: 33.3%;">Expression</th><th style="width: 33.3%;">Value</th><th style="width: 33.3%;"></th></tr></thead>
+       <tbody>
+       </tbody>
+       </table>
+       <input id="input_watch_expr" class="col-sm-12" placeholder="Enter expression to watch">
+    </div>
+</div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+      <h4 class="panel-title">
+        <a data-toggle="collapse" class="collapse-toggle" href="#debug_window_breakpoints">Breakpoints and Watchpoints</a>
+      </h4>
+    </div>
+    <div id="debug_window_breakpoints" class="collapse in">
+        <div class="table-responsive"><div class="JCLRgrips" style="width: 141px;"><div class="JCLRgrip" style="left: 1px; height: 25px;"><div class="JColResizer"></div></div><div class="JCLRgrip" style="left: 1px; height: 25px;"><div class="JColResizer"></div></div><div class="JCLRgrip" style="left: 1px; height: 25px;"><div class="JColResizer"></div></div><div class="JCLRgrip JCLRLastGrip" style="left: 1px; height: 25px;"></div></div><table class="table table-bordered JPadding JColResizer" id="JColResizer3">
+       <thead><tr><th style="width: 25%;"></th><th style="width: 25%;">#</th><th style="width: 25%;">Description</th><th style="width: 25%;"></th></tr></thead>
+       <tbody></tbody>
+       </table></div>
+</div>
+</div>
+
+  </div>
+</div> 
+                <!-- right component end -->
+            </div>
+        </div>
+        <div class="right-sidebar">
+            <span id="right-sidebar-close" class="btn btn-info glyphicon glyphicon-menu-right"></span>
+                <div class="col-sm-41 hide" id="comment_box_wrapper" style="background-color:#bdbdbd">
+    <div class="panel-group">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a data-toggle="collapse" class="collapse-toggle" href="#comment_box">Comments</a>
+                </h4>
+            </div>
+            <div id="comment_box" class="collapse in">
+                <div id="comment_message_template" class="hide">
+                    <li class="media">
+                        <div class="media-body">
+                            <div class="well well-lg">
+                                <h4 class="media-heading text-uppercase reviews">{user} </h4>
+                                <ul class="media-date text-uppercase reviews list-inline">
+                                    {timestamp}
+                                </ul>
+                                <p class="media-comment">
+                                    {content}
+                                </p>
+                            </div>
+                        </div>
+                    </li>
+                </div>
+                <ul class="media-list">
+                </ul>
+                <div class="panel-footer">
+                    <div class="input-group">
+                        <span class="input_error_message"></span>
+                    </div>
+                    <div class="input-group">
+                        <input type="text" class="form-control input-sm input_content" placeholder="Write your message here...">
+                        <span class="input-group-btn">
+                        <button class="btn btn-primary btn-sm" id="btn-add-comment">Add Comment</button>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+        </div>
+    
+    
+    <script>
+        $(document).ready(function() {
+            Mousetrap.bind('f8', function() { trace_event('Key-F8'); $('#control-btn-debug').click(); return false;});
+            Mousetrap.bind("f9", function() { trace_event('Key-F9'); $('#control-btn-run').click(); return false;});
+            Mousetrap.bind(['command+s', 'ctrl+s'], function() { trace_event('Key-Ctrl+S'); $('#control-btn-save').click(); return false; });
+            Mousetrap.bind(['command+b', 'ctrl+b'], function() { trace_event('Key-Ctrl+B'); $('#control-btn-beautify').click(); return false; });
+            Mousetrap.bind(['command+m', 'ctrl+m'], function() { trace_event('Key-Ctrl+M'); $('#control-btn-newfile').click(); return false; });
+        
+            var editor = $("#multi_editor_container").editor();
+            editor.setModeForLang($("#lang-select").val());
+
+            
+
+            editor.addEventListener('breakpoint_set', function (e) { 
+                var bp = e.breakpoint;
+                ide.setBreakpoint(bp);
+            });
+            editor.addEventListener('breakpoint_unset', function (e) { 
+                var bp = e.breakpoint;
+                ide.clearBreakpoint(bp);
+            });
+            $("#control-btn-newfile").on('click', function(){
+                editor.new_editor();
+            });
+
+            $("#control-btn-upload").on('click', function(){
+                ide.upload_file();
+            });
+            $("#control-btn-save").on('click', function(){
+                saveCode();
+            });  
+
+            ide.editor = editor;    
+            //these guys can work after editor is initialized
+            enable_btn('control-btn-',['save','share','beautify','download']);      
+        });
+        
+        /*
+        ace.require("ace/ext/language_tools");
+        var editor = ace.edit("editor1");
+        var editor2 = ace.edit("editor2");
+        editor.getSession().setTabSize(4);
+        editor.setFontSize('medium');
+        editor.setTheme("ace/theme/idle_fingers");
+        editor.getSession().setMode("ace/mode/c_cpp");
+        // enable autocompletion and snippets
+        editor.setOptions({
+            enableBasicAutocompletion: true,
+            enableSnippets: true,
+            enableLiveAutocompletion: true
+        });
+        editor.on("guttermousedown", function(e){ 
+           // if(!ide.gdbstarted) return;
+            var Range = ace.require('ace/range').Range;
+
+            var target = e.domEvent.target; 
+            if (target.className.indexOf("ace_gutter-cell") == -1) 
+                return; 
+
+            if (e.clientX > 25 + target.getBoundingClientRect().left) 
+                return; 
+
+            var row = e.getDocumentPosition().row 
+
+            if (target.className.indexOf("ace_breakpoint") == -1)
+                ide.setBreakpoint(row+1, true);//e.editor.session.setBreakpoint(row)
+            else
+                ide.clearBreakpoint(row+1, true);//e.editor.session.clearBreakpoint(row)
+            e.stop() 
+        }); 
+        
+        editor.addBreakpoint = function(line, breaknumber) {
+            if(!editor.breakpointList){
+                editor.breakpointList = [];
+            }
+            editor.breakpointList[breaknumber] = line;
+            console.log(editor.breakpointList);
+        }
+        */
+        
+        var project_uid = null;
+        
+        
+    </script>
+    
+    <script>
+        /*_native.init("CK7DC2JE", {
+          targetClass: 'native-js'
+        });*/
+        </script>
+<script>
+    function track_event(arg1, arg2){
+        if(typeof ga !== 'undefined' && ga) ga('send', 'event', arg1, arg2);
+    }
+    function is_mobile(){
+        return $('#mobile_test_element').css('display')=='none';
+    }
+
+    (function () {
+        if(no_ads) return;
+        if (typeof _bsa !== 'undefined' && _bsa) {
+            /*_bsa.init('custom', 'CK7DC2JE', 'placement:onlinegdbcom', {
+                target: '#native-inline',
+                template: '<a href="##link##" target="_blank" rel="noopener" rel="nofollow"><div class="sponsor">Sponsor</div><div class="native-description">##company## — ##description##</div></a>'
+            });*/
+            
+            if(!is_mobile()) {
+
+            _bsa.init('custom', 'CK7I6K7M', 'placement:onlinegdbcom-top', {
+                target: '#native-inline',
+                template: `<a href="##link##" target="_blank" rel="noopener" rel="nofollow"><div class="sponsor">Sponsor</div><div class="native-description">##company## — ##description##</div></a>`
+            });
+            }
+            if(!do_fallback_ad_check) {
+            _bsa.init('custom', 'CK7DC2JE', 'placement:onlinegdbcom-banner', {
+                target: '#native-banner',
+                template: `
+            <a href="##link##" class="native-banner" style="background: linear-gradient(-30deg, ##backgroundColor##E5, ##backgroundColor##E5 45%, ##backgroundColor## 45%) #fff;">
+              <div class="native-main">
+                <img class="native-img" img src="##logo##">
+                <div class="native-details" style="color: ##textColor##">
+                  <span class="native-company">Sponsored by ##company##</span>
+                  <span class="native-desc">##description##</span>
+                </div>
+                <span class="native-cta" style="color: ##ctaTextColor##; background-color: ##ctaBackgroundColor##;">##callToAction##</span>
+              </div>
+            </a>
+            <a class="native-via" href="##adViaLink##">Ads via BuySellAds</a>
+            `
+            });
+            }
+        } else {
+            track_event('BSA Undefined', 'bsa_undefined');
+        }
+    })();
+</script>
+
+<script>
+    /*
+    _bsa.init('custom', 'CVADC53U', 'placement:onlinegdbcom', {
+        target: '.native-js',
+        template: '<a href="##link##" target="_blank" rel="noopener" rel="nofollow"><span class="sponsor">Sponsor</span> ##company## — ##description##</a>'
+    });*/
+
+    function fallback_native_top(){
+        return false;
+        
+        var html = '<a href="/contribute" target="_blank" rel="noopener"><div class="sponsor">Contribute</div><div class="native-description">Submit a programming article and win assured Amazon gift voucher!!</div></a>';
+        $("#native-inline").html(html);
+        return true;
+        
+    }
+    function process_no_bottom_adunit() {
+        return;
+        if(!do_fallback_ad_check) return;
+        var script = document.createElement("script"); 
+        script.src = "https://cdn.thisiswaldo.com/static/js/5831.js"; 
+        script.type = "text/javascript"; 
+        document.getElementById("ad_unit_bottom_wrapper").appendChild(script);
+    }
+    function BSANativeCallback(data) {
+        if (data.segment=="placement:onlinegdbcom-top") {
+            if((data.ads && data.ads.length > 0) || fallback_native_top())  {
+                $("#editor-container").css('top', '37px');
+                $("#editor_1").css('top', '57px');
+                $("#title-bar").css('padding-top', '5px');
+                $("#title-bar").css('padding-bottom', '5px');
+                track_event('BSA Top AdUnit', 'bsa_top_adunit');
+            } else {
+                track_event('BSA No Top AdUnit', 'bsa_no_top_adunit');
+            }
+        } else if (data.segment=="placement:onlinegdbcom-banner") {
+            if(data.ads && data.ads.length > 0) {
+                track_event('BSA Bottom AdUnit', 'bsa_bottom_adunit');
+            } else {
+                process_no_bottom_adunit();
+                track_event('BSA No Bottom AdUnit', 'bsa_no_bottom_adunit');
+            }
+        } else {
+            track_event('BSA No AdUnit', 'bsa_no_adunit');
+        }
+    }
+</script>
+
+    
+
+<!--<script src="//control.mockingfish.com/js/011503.js"></script>-->
+
+
+    </div>
+
+    </body>
+</html>
