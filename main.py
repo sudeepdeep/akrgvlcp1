@@ -1,108 +1,449 @@
-from flask import Flask,render_template,url_for
-app = Flask(__name__)
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Home Page</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+<style type="text/css">
+	body{
+		background-color: white;
+	}
+	.logo img{
+		width:80%;
+		height:120px;
+	}
 
-@app.route('/')
+ .heading{
+		font-family: cursive;
+		background-color: #031458;
+		  color:white;
+		  
+		   
+		    
+	}
 
-def home():
-	return render_template('home.html')
+	#myBtn {
+  display: none;
+  position: fixed;
+  bottom: 20px;
+  right: 30px;
+  z-index: 99;
+  font-size: 18px;
+  border: none;
+  outline: none;
+  background-color: transparent;
+  color: red;
+  cursor: pointer;
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: 0 6px 6px rgba(0, 0, 0, 0.6);
+}
 
-@app.route('/c')
-def c():
-	return render_template('c.html')
+#myBtn:hover {
+  background-color: transparent;
+}
 
-@app.route('/c1')
-def c1():
-	return render_template('c++.html')
+.splash{
+			position: fixed;
+			top: 0;
+			left: 0;
+			height: 100vh;
+			width: 100vw;
+			background-color: #10B4FC;
+			font-size: 2em;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			animation-name: open;
+			animation-delay:3.5s;
+			animation-duration: 2s;
+			animation-fill-mode: forwards;
+		}
+		.splash img{
+			z-index: 9;
+		}
+		.splash::after, .splash::before{
+			content: "";
+			position: absolute;
+			background-color: #10B4FC;
+			height: 100vh;
+			width: 300vw;
+			z-index: 99;
+			animation-name: open;
+			animation-fill-mode: forwards;
+			animation-duration: 3s;
+		}
+		.splash after{
+			left:30vw;
+			animation-delay: 200ms;
+		}
+		.splash before{
+			left: 0;
+			animation-delay: 2s;
+		}
+		@keyframes open{
+			0%{
+				transform: translate(0, 0);
+			}
+			100%{
+				transform: translate(100%, 0);
+			}
+		}
+@media screen and (max-width: 1060px) {
+.logo img{
+	width: 80%;
+	height: 120px;
 
-@app.route('/python')
-def python():
-	return render_template('python.html')
+}
+.heading{
+	color:white;
+	height: 120px;
+}
+}
+@media screen and (max-width: 1018px) {
+	.logo img{
+	width: 80%;
+	height: 120px;
 
-@app.route('/java')
-def java():
-	return render_template('java.html')
+}
+.heading{
+	color:white;
+	padding-top: 10px;
+	
+	
+}
 
-@app.route('/ds')
-def ds():
-	return render_template('ds.html')
-@app.route('/ads')
-def ads():
-	return render_template('ads.html')
+.heading1 h1{
+	width: 100%;
+	height: 100%;
+	font-size: 28px;
+	
+}
+.image2 img{
+	
 
-@app.route('/htm')
-def htm():
-	return render_template('htm.html')
+	width: 100%;
+	height: 100%;
+}
 
-@app.route('/ml')
-def ml():
-	return render_template('ml.html')
-@app.route('/rp')
-def rp():
-	return render_template('rp.html')
+marquee img{
+	height: 200px;
+	width: 200px;
+}
+}
 
-@app.route('/nix')
-def nix():
-	return render_template('nx.html')
-@app.route('/sql')
-def sql():
-	return render_template('sql.html')
+@media screen and (max-width: 768px) {
+	.logo img{
+	width: 80%;
+	height: 120px;
 
-@app.route('/c11')
-def c11():
-	return render_template('c11.html')
+}
+.heading{
+	color:white;
+	height: 120px;
+	
+}
 
-@app.route('/c12')
-def c12():
-	return render_template('c12.html')
+.heading1 h1{
+	width: 100%;
+	height: 100%;
+	font-size: 25px;
+	
+}
+.image2 img{
+	
 
-@app.route('/p1')
-def p1():
-	return render_template('p1.html')
+	width: 100%;
+	height: 100%;
+}
 
-@app.route('/j1')
-def j1():
-	return render_template('j1.html')
+marquee img{
+	height: 160px;
+	width: 160px;
+}
+}
+@media screen and (max-width: 668px) {
+	.logo img{
+	width: 80%;
+	height: 120px;
 
-@app.route('/ml1')
-def ml1():
-	return render_template('ml1.html')
+}
+ .heading{
+	color:white;
+	height: 120px;
+	text-align: center;
+}
 
-@app.route('/r1')
-def r1():
-	return render_template('r1.html')
+.heading1 h1{
+	width: 100%;
+	height: 100%;
+	font-size: 23px;
+	
+}
+.image2 img{
+	
 
-@app.route('/dbms1')
-def dbms1():
-	return render_template('dbms1.html')
+	width: 100%;
+	height: 100%;
+}
 
-@app.route('/nix1')
-def nix1():
-	return render_template('nix1.html')
+marquee img{
+	height: 140px;
+	width: 140px;
+}
+}
+@media screen and (max-width: 568px) {
+	.logo img{
+	width: 90%;
+	height: 100px;
+	margin-left:0px; 
 
-@app.route('/ds1')
-def ds1():
-	return render_template('ds1.html')
+}
+.heading{
+	width:100%;
+	height: 100px;
+}
+.heading h1{
+	color:white;
+	font-size: 25px;	
+	text-align: center;
 
-@app.route('/ds2')
-def ds2():
-	return render_template('ds2.html')
+}
+.heading1 h1{
+	width: 100%;
+	height: 100%;
+	font-size: 20px;
+	
+}
+.image2 img{
+	
 
-@app.route('/html1')
-def html1():
-	return render_template('html1.html')
+	width: 100%;
+	height: 100%;
+}
+
+
+marquee img{
+	height: 120px;
+	width: 120px;
+}
+}
+@media screen and (max-width: 548px) {
+	.logo img{
+		width: 80%
+		height: 100px;
+	margin-left:0px; 
+
+}
+.heading{
+	width:100%;
+	height: 100%;
+
+	
+}
+.heading h1{
+	color:white;
+
+
+	
+	
+}
+.heading1 h1{
+	width: 100%;
+	height: 100%;
+	font-size: 20px;
+	
+}
+.image2 img{
+	
+
+	width: 100%;
+	height: 100%;
+}
+
+marquee img{
+	height: 100px;
+	width: 100px;
+}	
+
+}
 
 
 
+</style></head>
+<body>
+<div class = "splash">
+	<img src = "{{url_for('static',filename = 'images/gifmaker.gif')}}">
+</div>
+<div class = "container">
+		<button onclick="topFunction()" id="myBtn" title="Go to top">Top</button>
 
 
 
+<script>
+//Get the button
+var mybutton = document.getElementById("myBtn");
 
+// When the user scrolls down 20px from the top of the document, show the button
+window.onscroll = function() {scrollFunction()};
 
-@app.route('/submit',methods = ['GET','POST'])
-def submit():
-	if request.method == 'POST':
-		return render_template('home.html')
+function scrollFunction() {
+  if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+    mybutton.style.display = "block";
+  } else {
+    mybutton.style.display = "none";
+  }
+}
 
-		
-if __name__ == "__main__":
-	app.run(debug = True)
+// When the user clicks on the button, scroll to the top of the document
+function topFunction() {
+  document.body.scrollTop = 0;
+  document.documentElement.scrollTop = 0;
+}
+</script>
+<table width="100%">
+	<tr>
+		<td colspan  = "2" align="center" width="100%">
+			<div class = "logo">
+			<img src = "{{url_for('static',filename = 'images/unnamed.png')}}"></div>
+		</td>
+	</tr>
+	<tr>
+		<td colspan  = "2" align="center" width="100%" style="background-color: #031458;">
+			<div class = "heading">
+			<h1>Welcome to the Virtual lab of <br>AKRG CET</h1></div>
+		</td>
+	</tr>
+	<tr>
+		<td align="center" width="50%" height="50px;">
+		</td>
+		<td  align="center" width="50%">
+		</td>
+	</tr>
+	<tr>
+		<td align="center" width = "40%">
+			<div class = "heading1">
+			<h1 style="font-family:cursive; color:black;">Here you can perform your Lab Works from Home!!
+			We are providing different compilers to work 
+				on your lab assignments and to finish your programs</h1></div>
+		</td>
+
+		<td align="center" width="60%">
+			<div class = "image2">
+			<img src = "{{url_for('static',filename = 'images/student.jpg')}}" width="60%"></div>
+		</td>
+
+	</tr>
+
+	<tr>
+		<td colspan="2" align="center">
+			<h1 style="font-family:candara; color:#031458;">Available Compilers</h1>
+		</td>
+	</tr>
+	
+	<tr>
+		<div class = "inside">
+		<td align="center" width="50%">
+			<a href = "/c" ><img src = "{{url_for('static',filename = 'images/cc.png')}}" 	width="30%;"></a>
+
+		</td>
+		<td  align="center" width="50%">
+			<a href = "/c1"><img src = "{{url_for('static',filename = 'images/c+++.png')}}" width="25%;" ></a>
+			
+		</td>
+	</tr>
+	<tr>
+		<td align="center" width="50%" height="100px;">
+		</td>
+		<td  align="center" width="50%">
+		</td>
+	</tr>
+	<tr>
+		<td align="center" width="50%">
+			<a href = "/python"><img src = "{{url_for('static',filename = 'images/python.png')}}"  width="30%;"></a>
+		</td>
+		<td  align="center" width="50%">
+			<a href = "/java"><img src = "{{url_for('static',filename = 'images/java1.png')}}" width="30%;" ></a>
+		</td>
+	</tr>
+<tr>
+		<td align="center" width="50%" height="100px;">
+		</td>
+		<td  align="center" width="50%">
+		</td>
+	</tr>
+	<tr>
+		<td align="center" width="50%">
+			<a href = "/ds"><img src = "{{url_for('static',filename = 'images/ds.png')}}"  width="40%"></a>
+		</td>
+		<td  align="center" width="50%">
+			<a href = "/ads"><img src = "{{url_for('static',filename = 'images/ads.png')}}" width="30%;" ></a>
+		</td>
+	</tr>
+	<tr>
+		<td align="center" width="50%" height="100px;">
+		</td>
+		<td  align="center" width="50%">
+		</td>
+	</tr>
+	<tr>
+		<td align="center" width="50%">
+			<a href = "/htm"><img src = "{{url_for('static',filename = 'images/html.png')}}"  width="30%;"></a>
+		</td>
+		<td  align="center" width="50%">
+			<a href = "/sql"><img src = "{{url_for('static',filename = 'images/sql2.png')}}" width="30%;" ></a>
+		</td>
+	</tr>
+<tr>
+		<td align="center" width="50%" height="100px;">
+		</td>
+		<td  align="center" width="50%">
+		</td>
+	</tr>
+	<tr>
+		<td align="center" width="50%">
+			<a href = "/ml"><img src = "{{url_for('static',filename = 'images/ml.png')}}"  width="30%;"></a>
+		</td>
+		<td  align="center" width="50%">
+			<a href = "/rp"><img src = "{{url_for('static',filename = 'images/rp.png')}}"  width="30%;" ></a>
+		</td>
+	</tr>
+	<tr>
+		<td align="center" width="50%" height="100px;">
+		</td>
+		<td  align="center" width="50%">
+		</td>
+	</tr>
+	<tr>
+		<td align="center" width="50%">
+			<a href = "/nix"><img src = "{{url_for('static',filename = 'images/nix.png')}}" width="30%;"></a>
+		</td>
+		<td  align="center" width="50%">
+			<a href = "#"></a>
+		</td>
+	</tr>
+	<tr>
+		<td align="center" width="50%" height="100px;">
+		</td>
+		<td  align="center" width="50%">
+		</td>
+	</tr></div>
+
+<tr><td colspan="2" width="100%" align="center">
+<h2 style="font-size: 20px;">To Submit your assingment Please <a href = " https://mail.google.com/mail/u/0/#inbox?compose=CllgCJZXhcwTsHSHBNMPhzvKghKlClmNMTQLBzJmXKXzmRqQWBkQkGWfGllLgtgchSDPXPwDhXV" target="_blank">Click Here</a></h2></td></tr>
+
+<tr><td colspan="2" width="100%" >
+
+<label style="font-size: 20px; font-family: candara; color: black;">Sincere thanks to </label></td></tr>
+<tr><td colspan="2" width="100%">
+<marquee >
+
+	<a href = "https://www.programiz.com/" target="_blank"><img src = "{{url_for('static',filename = 'images/pz.png')}}"></a>
+	<a href = "https://www.javatpoint.com/" target="_blank"><img src = "{{url_for('static',filename = 'images/javatpoint.png')}}" width="300px" height="250px;"></a>
+	<a href = "https://www.onlinegdb.com/" target="_blank"><img src = "{{url_for('static',filename = 'images/online.png')}}" width="300px" height="250px;"></a>
+	<a href = "https://paiza.io/en" target="_blank"><img src = "{{url_for('static',filename = 'images/paiza.png')}}" width="300px" height="250px;"></a>
+</marquee></td></tr>
+<tr><td colspan="2" width="100%" align="center">
+<footer style=" color: white;font-family: candara;font-size: 20px;background-color: #031458; padding-top: 20px; padding-bottom: 20px;">©CopyRight By CSE Students(2k17 - 2021)</footer></td></tr>
+</table></div>
+</body>
+</html>
