@@ -1,4 +1,5 @@
 from flask import Flask,render_template,url_for
+from flask import *
 app = Flask(__name__)
 
 @app.route('/')
@@ -6,6 +7,27 @@ app = Flask(__name__)
 def home():
 	return render_template('home.html')
 
+@app.route('/radio',methods = ['GET','POST'])
+def radio():
+	if request.method == 'POST':
+		i  = 0
+		opt1 = request.form['options1']
+		if opt1 == 'a':
+			i = i+1
+		opt2 = request.form['options2']
+		if opt2 == 'c':
+			i = i+1
+		return render_template('register.html',score = i)
+	return render_template('login.html')
+@app.route('/test1')
+def test1():
+	return render_template('test1.html')
+@app.route('/reg1')
+def reg1():
+	return render_template('reg1.html')
+@app.route('/register')
+def register():
+	return render_template('register.html')
 @app.route('/c')
 def c():
 	return render_template('c.html')
