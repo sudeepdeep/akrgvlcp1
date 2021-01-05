@@ -1,5 +1,6 @@
 from flask import Flask,render_template,url_for
 from flask import *
+import random
 app = Flask(__name__)
 
 @app.route('/')
@@ -7,18 +8,99 @@ app = Flask(__name__)
 def home():
 	return render_template('home.html')
 
+@app.route('/sub')
+def sub():
+	return render_template('subjects.html')
+@app.route('/testpaper')
+def testpaper():
+	lst2 = [0,1,2,3,4,5,6,7,8,9,10]
+	random.shuffle(lst2)
+	lst3 = lst2[0:5]
+	return render_template('testpaper.html',lst2 = lst3)
+
 @app.route('/radio',methods = ['GET','POST'])
 def radio():
 	if request.method == 'POST':
-		i  = 0
-		opt1 = request.form['options1']
-		if opt1 == 'a':
-			i = i+1
-		opt2 = request.form['options2']
-		if opt2 == 'c':
-			i = i+1
+		i = 0
+		try:
+			opt0 = request.form['options0']
+			if opt0 == 'd':
+				i = i+1
+		except Exception as e:
+			pass
+
+		try:
+			opt1 = request.form['options1']
+			if opt1 == 'b':
+				i = i+1
+		except Exception as e:
+			pass
+
+		try:
+			opt2 = request.form['options2']
+			if opt2 == 'd':
+				i = i+1
+		except Exception as e:
+			pass
+
+		try:
+			opt3 = request.form['options3']
+			if opt3 == 'c':
+				i = i+1
+		except Exception as e:
+			pass
+
+		try:
+			opt4 = request.form['options4']
+			if opt4 == 'a':
+				i = i+1
+		except Exception as e:
+			pass
+
+		try:
+			opt5 = request.form['options5']
+			if opt5 == 'b':
+				i = i+1
+		except Exception as e:
+			pass
+
+		try:
+			opt6 = request.form['options6']
+			if opt6 == 'c':
+				i = i+1
+		except Exception as e:
+			pass
+
+		try:
+			opt7 = request.form['options7']
+			if opt7 == 'c':
+				i = i+1
+		except Exception as e:
+			pass
+
+		try:
+			opt8 = request.form['options8']
+			if opt8 == 'b':
+				i = i+1
+		except Exception as e:
+			pass
+
+		try:
+			opt9 = request.form['options9']
+			if opt9 == 'b':
+				i = i+1
+		except Exception as e:
+			pass
+
+		try:
+			opt10 = request.form['options10']
+			if opt10 == 'a':
+				i = i+1
+		except Exception as e:
+			pass
 		return render_template('register.html',score = i)
-	return render_template('login.html')
+	return render_template('testpaper.html')
+
 @app.route('/test1')
 def test1():
 	return render_template('test1.html')
