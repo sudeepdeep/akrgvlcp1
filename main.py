@@ -7,7 +7,48 @@ app = Flask(__name__)
 
 def home():
 	return render_template('home.html')
+@app.route('/resu')
+def resu():
+	
+	return render_template('resu.html')
 
+@app.route('/nodata')
+def nodata():
+	return render_template('nodata.html')
+@app.route('/res')
+def res():
+	return render_template('res.html')
+
+@app.route('/131')
+def three():
+	return render_template('131.html')
+@app.route('/161')
+def six():
+	return render_template('161.html')
+
+@app.route('/162')
+def sixx():
+	return render_template('162.html')
+@app.route('/163')
+def sixxx():
+	return render_template('163.html')
+
+
+@app.route('/191')
+def nine():
+	return render_template('191.html')
+
+@app.route('/192')
+def ninee():
+	return render_template('192.html')
+
+@app.route('/193')
+def nineee():
+	return render_template('193.html')
+
+@app.route('/132')
+def three1():
+	return render_template('132.html')
 @app.route('/sub')
 def sub():
 	return render_template('subjects.html')
