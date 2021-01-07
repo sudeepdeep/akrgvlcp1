@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Python exam</title>
+	<title>Radio Buttons</title>
 	<style type="text/css">
 	body{
 		background-color: white;
@@ -67,7 +67,7 @@
 	<input type="radio" name="options0" value="b">32<br>
 	<input type="radio" name="options0" value="c">64<br>
 	<input type="radio" name="options0" value="d">None of the above<br></td></tr>
-
+<tr><td height="15px"></td></tr>
 {% elif item == 1 %}
 		<tr><td align="center" width="100%">
 <label> Who developed the Python language?</label><br>
@@ -80,6 +80,7 @@
 
 <br>
 </td></tr>
+<tr><td height="15px"></td></tr>
 <tr><td align="center" width="100%">
 {% elif item ==2 %}
 <label>In which year was the Python language developed?</label><br>
@@ -87,6 +88,7 @@
 	<input type="radio" name="options2" value="b">1972<br>
 	<input type="radio" name="options2" value="c">1981<br>
 	<input type="radio" name="options2" value="d">1989<br></td></tr>
+	<tr><td height="15px"></td></tr>
 <tr><td align="center" width="100%">
 {% elif item == 3 %}
 <label>In which language is Python written?</label><br>
@@ -94,6 +96,7 @@
 	<input type="radio" name="options3" value="b">PHP<br>
 	<input type="radio" name="options3" value="c">C<br>
 	<input type="radio" name="options3" value="d">All of the above<br></td></tr>
+	<tr><td height="15px"></td></tr>
 <tr><td align="center" width="100%">
 {% elif item == 4 %}
 <label>Which one of the following is the correct extension of the Python file?</label><br>
@@ -101,6 +104,7 @@
 	<input type="radio" name="options4" value="b">.txt<br>
 	<input type="radio" name="options4" value="c">.html<br>
 	<input type="radio" name="options4" value="d">.cpp<br></td></tr>
+	<tr><td height="15px"></td></tr>
 <tr><td align="center" width="100%">
 {% elif item == 5 %}
 <label>In which year was the Python 3.0 version developed?</label><br>
@@ -108,6 +112,7 @@
 	<input type="radio" name="options5" value="b">2008<br>
 	<input type="radio" name="options5" value="c">2012<br>
 	<input type="radio" name="options5" value="d">2009<br></td></tr>
+	<tr><td height="15px"></td></tr>
 <tr><td align="center" width="100%">
 {% elif item == 6 %}
 <label>What do we use to define a block of code in Python language?</label><br>
@@ -115,6 +120,7 @@
 	<input type="radio" name="options6" value="b">brackets<br>
 	<input type="radio" name="options6" value="c">identation<br>
 	<input type="radio" name="options6" value="d">None of these<br></td></tr>
+	<tr><td height="15px"></td></tr>
 <tr><td align="center" width="100%">
 {% elif item == 7 %}
 <label>Which character is used in Python to make a single line comment?</label><br>
@@ -122,6 +128,7 @@
 	<input type="radio" name="options7" value="b">//<br>
 	<input type="radio" name="options7" value="c">#<br>
 	<input type="radio" name="options7" value="d">!<br></td></tr>
+	<tr><td height="15px"></td></tr>
 <tr><td align="center" width="100%">
 {% elif item == 8 %}
 <label>What is the method inside the class in python language?</label><br>
@@ -129,6 +136,7 @@
 	<input type="radio" name="options8" value="b">function<br>
 	<input type="radio" name="options8" value="c">attribute<br>
 	<input type="radio" name="options8" value="d">argument<br></td></tr>
+	<tr><td height="15px"></td></tr>
 <tr><td align="center" width="100%">
 {% elif item == 9 %}
 <label>Which of the following statements is correct regarding the object-oriented programming concept in Python?</label><br>
@@ -136,6 +144,7 @@
 	<input type="radio" name="options9" value="b">Objects are real-world entities while classes are not real<br>
 	<input type="radio" name="options9" value="c">Both objects and classes are real-world entities<br>
 	<input type="radio" name="options9" value="d">All of the above<br></td></tr>
+	<tr><td height="15px"></td></tr>
 <tr><td align="center" width="100%">
 {% elif item == 10 %}
 <label> Which of the following is not a keyword in Python language?</label><br>
@@ -143,11 +152,12 @@
 	<input type="radio" name="options10" value="b">rise<br>
 	<input type="radio" name="options10" value="c">try<br>
 	<input type="radio" name="options10" value="d">with<br></td></tr>
+	<tr><td height="15px"></td></tr>
 
 {% endif %}
 
 {% endfor %}
 </table>
-<input type="submit" value=submit></form></center>
+<input type="submit" value=submit style="margin-bottom:  10px;" class="btn btn-primary"></form></center>
 </body>
 </html>
