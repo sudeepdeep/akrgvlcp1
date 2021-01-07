@@ -57,7 +57,7 @@ def testpaper():
 	lst2 = [0,1,2,3,4,5,6,7,8,9,10]
 	random.shuffle(lst2)
 	lst3 = lst2[0:5]
-	session['lst2'] = lst3
+	
 	return render_template('testpaper.html',lst2 = lst3)
 
 @app.route('/radio',methods = ['GET','POST'])
@@ -237,7 +237,7 @@ def radio():
 		else:
 			message = "You're Poor in this subject!!"
 			color = 'red'
-		slist = session['lst2']
+		
 		wrong1 = [wrong_dict]
 		return render_template('register.html',score = i,color=color,message = message,wrong1 = wrong1,lst2 = wrong_qstn)
 	return render_template('testpaper.html')
