@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Radio Buttons</title>
+	<title>Python exam</title>
 	<style type="text/css">
 	body{
 		background-color: white;
@@ -44,7 +44,7 @@
                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-graph-up" viewBox="0 0 16 16">
   <path fill-rule="evenodd" d="M0 0h1v15h15v1H0V0zm10 3.5a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-1 0V4.9l-3.613 4.417a.5.5 0 0 1-.74.037L7.06 6.767l-3.656 5.027a.5.5 0 0 1-.808-.588l4-5.5a.5.5 0 0 1 .758-.06l2.609 2.61L13.445 4H10.5a.5.5 0 0 1-.5-.5z"/>
 </svg>
-                <a href = "/radio" style="color: white;text-decoration: none;">Tests</a>
+                <a href = "/test1" style="color: white;text-decoration: none;">Tests</a>
               </button>
   </li>
   
@@ -54,20 +54,22 @@
 		<td align="center" width="50%" height="50px;">
 		</td>
 		<td  align="center" width="50%">
-		</td></tr></table></body></html>
+		</td></tr></table>
 
 <center>
 <form action = '/radio' method="POST">	
 {% for item in lst2 %}
-
+<table width="100%" >
+		<tr><td align="center" width="100%" >
 {% if item == 0 %}
 <label> What is the maximum possible length of an identifier?</label><br>
 	<input type="radio" name="options0" value="a">16<br>
 	<input type="radio" name="options0" value="b">32<br>
 	<input type="radio" name="options0" value="c">64<br>
-	<input type="radio" name="options0" value="d">None of the above<br>
+	<input type="radio" name="options0" value="d">None of the above<br></td></tr>
 
 {% elif item == 1 %}
+		<tr><td align="center" width="100%">
 <label> Who developed the Python language?</label><br>
 	<input type="radio" name="options1" value="a">Zim Den<br>
 	<input type="radio" name="options1" value="b">Guido van Rossum
@@ -77,74 +79,75 @@
 <input type="radio" name="options1" value="c">Wick van Rossum
 
 <br>
-
-
+</td></tr>
+<tr><td align="center" width="100%">
 {% elif item ==2 %}
 <label>In which year was the Python language developed?</label><br>
 	<input type="radio" name="options2" value="a">1995<br>
 	<input type="radio" name="options2" value="b">1972<br>
 	<input type="radio" name="options2" value="c">1981<br>
-	<input type="radio" name="options2" value="d">1989<br>
-
+	<input type="radio" name="options2" value="d">1989<br></td></tr>
+<tr><td align="center" width="100%">
 {% elif item == 3 %}
 <label>In which language is Python written?</label><br>
 	<input type="radio" name="options3" value="a">English<br>
 	<input type="radio" name="options3" value="b">PHP<br>
 	<input type="radio" name="options3" value="c">C<br>
-	<input type="radio" name="options3" value="d">All of the above<br>
-
+	<input type="radio" name="options3" value="d">All of the above<br></td></tr>
+<tr><td align="center" width="100%">
 {% elif item == 4 %}
 <label>Which one of the following is the correct extension of the Python file?</label><br>
 	<input type="radio" name="options4" value="a">.py<br>
 	<input type="radio" name="options4" value="b">.txt<br>
 	<input type="radio" name="options4" value="c">.html<br>
-	<input type="radio" name="options4" value="d">.cpp<br>
-
+	<input type="radio" name="options4" value="d">.cpp<br></td></tr>
+<tr><td align="center" width="100%">
 {% elif item == 5 %}
 <label>In which year was the Python 3.0 version developed?</label><br>
 	<input type="radio" name="options5" value="a">2004<br>
 	<input type="radio" name="options5" value="b">2008<br>
 	<input type="radio" name="options5" value="c">2012<br>
-	<input type="radio" name="options5" value="d">2009<br>
-
+	<input type="radio" name="options5" value="d">2009<br></td></tr>
+<tr><td align="center" width="100%">
 {% elif item == 6 %}
 <label>What do we use to define a block of code in Python language?</label><br>
 	<input type="radio" name="options6" value="a">key<br>
 	<input type="radio" name="options6" value="b">brackets<br>
 	<input type="radio" name="options6" value="c">identation<br>
-	<input type="radio" name="options6" value="d">None of these<br>
-
+	<input type="radio" name="options6" value="d">None of these<br></td></tr>
+<tr><td align="center" width="100%">
 {% elif item == 7 %}
 <label>Which character is used in Python to make a single line comment?</label><br>
 	<input type="radio" name="options7" value="a">/<br>
 	<input type="radio" name="options7" value="b">//<br>
 	<input type="radio" name="options7" value="c">#<br>
-	<input type="radio" name="options7" value="d">!<br>
-
+	<input type="radio" name="options7" value="d">!<br></td></tr>
+<tr><td align="center" width="100%">
 {% elif item == 8 %}
 <label>What is the method inside the class in python language?</label><br>
 	<input type="radio" name="options8" value="a">object<br>
 	<input type="radio" name="options8" value="b">function<br>
 	<input type="radio" name="options8" value="c">attribute<br>
-	<input type="radio" name="options8" value="d">argument<br>
-
+	<input type="radio" name="options8" value="d">argument<br></td></tr>
+<tr><td align="center" width="100%">
 {% elif item == 9 %}
 <label>Which of the following statements is correct regarding the object-oriented programming concept in Python?</label><br>
 	<input type="radio" name="options9" value="a">Classes are real-world entities while objects are not real<br>
 	<input type="radio" name="options9" value="b">Objects are real-world entities while classes are not real<br>
 	<input type="radio" name="options9" value="c">Both objects and classes are real-world entities<br>
-	<input type="radio" name="options9" value="d">All of the above<br>
-
+	<input type="radio" name="options9" value="d">All of the above<br></td></tr>
+<tr><td align="center" width="100%">
 {% elif item == 10 %}
 <label> Which of the following is not a keyword in Python language?</label><br>
 	<input type="radio" name="options10" value="a">val<br>
 	<input type="radio" name="options10" value="b">rise<br>
 	<input type="radio" name="options10" value="c">try<br>
-	<input type="radio" name="options10" value="d">with<br>
+	<input type="radio" name="options10" value="d">with<br></td></tr>
 
 {% endif %}
 
 {% endfor %}
+</table>
 <input type="submit" value=submit></form></center>
 </body>
 </html>
