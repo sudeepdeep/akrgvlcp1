@@ -14,7 +14,7 @@
 <h1>Your score is {{score}}</h1>
 <h2 style="color: {{color}}">{{message}}</h2>
 <h3>Check Your Incorrect questions here!!⬇</h3>
-
+<table>
 <form action = '/radio' method="POST">	
 {% for item in lst2 %}
 {% for dict in wrong1 %}
@@ -23,24 +23,25 @@
 
 {% if item == 0 %}
 {% if key == 0 %}
-
+<table>
+	<tr><td height="15px"></td></tr>
+	<tr><td>
 <label> What is the maximum possible length of an identifier?<b style="color: green;">Correct answer is {{vals}}</b></label><br>
 	<input type="radio" name="options0" value="a">16<br>
 	<input type="radio" name="options0" value="b">32<br>
 	<input type="radio" name="options0" value="c">64<br>
-	<input type="radio" name="options0" value="d">None of the above<br>{% endif %}
-
+	<input type="radio" name="options0" value="d">None of the above<br>{% endif %}</td></tr>
+	<tr><td height="15px"></td></tr>
+<tr><td>
 {% elif item == 1 %}
 {% if key == 1 %}
 <label> Who developed the Python language?<b style="color: green;">Correct answer is {{vals}}</b></label><br>
 	<input type="radio" name="options1" value="a">Zim Den<br>
-	<input type="radio" name="options1" value="b">Guido van Rossum
-<br>
-	<input type="radio" name="options1" value="c">Niene Stom
-<br>
-<input type="radio" name="options1" value="c">Wick van Rossum
-
-<br>{% endif %}
+	<input type="radio" name="options1" value="b">Guido van Rossum<br>
+	<input type="radio" name="options1" value="c">Niene Stom<br>
+<input type="radio" name="options1" value="c">Wick van Rossum<br>{% endif %}</td></tr>
+<tr><td height="15px"></td></tr>
+<tr><td>
 
 
 {% elif item ==2 %}
@@ -49,7 +50,8 @@
 	<input type="radio" name="options2" value="a">1995<br>
 	<input type="radio" name="options2" value="b">1972<br>
 	<input type="radio" name="options2" value="c">1981<br>
-	<input type="radio" name="options2" value="d">1989<br>{% endif %}
+	<input type="radio" name="options2" value="d">1989<br>{% endif %}</td></tr><tr><td height="15px"></td></tr>
+	<tr><td>
 
 {% elif item == 3 %}
 {% if key == 3 %}
@@ -57,7 +59,8 @@
 	<input type="radio" name="options3" value="a">English<br>
 	<input type="radio" name="options3" value="b">PHP<br>
 	<input type="radio" name="options3" value="c">C<br>
-	<input type="radio" name="options3" value="d">All of the above<br>{% endif %}
+	<input type="radio" name="options3" value="d">All of the above<br>{% endif %}</td></tr><tr><td height="15px"></td></tr>
+	<tr><td>
 
 {% elif item == 4 %}
 {% if key == 4 %}
@@ -65,7 +68,8 @@
 	<input type="radio" name="options4" value="a">.py<br>
 	<input type="radio" name="options4" value="b">.txt<br>
 	<input type="radio" name="options4" value="c">.html<br>
-	<input type="radio" name="options4" value="d">.cpp<br>{% endif %}
+	<input type="radio" name="options4" value="d">.cpp<br>{% endif %}</td></tr><tr><td height="15px"></td></tr>
+	<tr><td>
 
 {% elif item == 5 %}
 {% if key == 5 %}
@@ -73,7 +77,8 @@
 	<input type="radio" name="options5" value="a">2004<br>
 	<input type="radio" name="options5" value="b">2008<br>
 	<input type="radio" name="options5" value="c">2012<br>
-	<input type="radio" name="options5" value="d">2009<br>{% endif %}
+	<input type="radio" name="options5" value="d">2009<br>{% endif %}</td></tr><tr><td height="15px"></td></tr>
+	<tr><td>
 
 {% elif item == 6 %}
 {% if key == 6 %}
@@ -81,7 +86,8 @@
 	<input type="radio" name="options6" value="a">key<br>
 	<input type="radio" name="options6" value="b">brackets<br>
 	<input type="radio" name="options6" value="c">identation<br>
-	<input type="radio" name="options6" value="d">None of these<br>{% endif %}
+	<input type="radio" name="options6" value="d">None of these<br>{% endif %}</td></tr><tr><td height="15px"></td></tr>
+	<tr><td>
 
 {% elif item == 7 %}
 {% if key == 7 %}
@@ -89,7 +95,8 @@
 	<input type="radio" name="options7" value="a">/<br>
 	<input type="radio" name="options7" value="b">//<br>
 	<input type="radio" name="options7" value="c">#<br>
-	<input type="radio" name="options7" value="d">!<br>{% endif %}
+	<input type="radio" name="options7" value="d">!<br>{% endif %}</td></tr><tr><td height="15px"></td></tr>
+	<tr><td>
 
 {% elif item == 8 %}
 {% if key == 8 %}
@@ -97,7 +104,8 @@
 	<input type="radio" name="options8" value="a">object<br>
 	<input type="radio" name="options8" value="b">function<br>
 	<input type="radio" name="options8" value="c">attribute<br>
-	<input type="radio" name="options8" value="d">argument<br>{% endif %}
+	<input type="radio" name="options8" value="d">argument<br>{% endif %}</td></tr><tr><td height="15px"></td></tr>
+	<tr><td>
 
 {% elif item == 9 %}
 {% if key == 9 %}
@@ -105,21 +113,22 @@
 	<input type="radio" name="options9" value="a">Classes are real-world entities while objects are not real<br>
 	<input type="radio" name="options9" value="b">Objects are real-world entities while classes are not real<br>
 	<input type="radio" name="options9" value="c">Both objects and classes are real-world entities<br>
-	<input type="radio" name="options9" value="d">All of the above<br>{% endif %}
+	<input type="radio" name="options9" value="d">All of the above<br>{% endif %}</td></tr><tr><td height="15px"></td></tr>
+	<tr><td>
 
 {% elif item == 10 %}
 {% if key == 10 %}
-<label> Which of the following is not a keyword in Python language?</label><b  style="color: green;">Correct answer is {{vals}}</b><br>
+<label> Which of the following is not a keyword in Python language?</label><b style="color: green;">Correct answer is {{vals}}</b><br>
 	<input type="radio" name="options10" value="a">val<br>
 	<input type="radio" name="options10" value="b">rise<br>
 	<input type="radio" name="options10" value="c">try<br>
-	<input type="radio" name="options10" value="d">with<br>{% endif %}
+	<input type="radio" name="options10" value="d">with<br>{% endif %}</td></tr><tr><td height="15px"></td></tr>
 
 
 {% endif %}
 
 {% endfor %}
 {% endfor %}
-{% endfor %}</form></center></div>
+{% endfor %}</form></table></center></div>
 </body>
 </html>
