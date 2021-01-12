@@ -57,7 +57,7 @@ def testpaper():
 	lst2 = [0,1,2,3,4,5,6,7,8,9,10]
 	random.shuffle(lst2)
 	lst3 = lst2[0:5]
-	session['lst2'] = lst3
+	
 	return render_template('testpaper.html',lst2 = lst3)
 
 @app.route('/cnpage')
@@ -65,7 +65,7 @@ def cnpage():
 	lst2 = [0,1,2,3,4,5,6,7,8,9,10]
 	random.shuffle(lst2)
 	lst3 = lst2[0:5]
-	session['lst2'] = lst3
+	
 	return render_template('cnpaper.html',lst2 = lst3)
 
 @app.route('/cnpaper',methods = ['GET','POST'])
@@ -255,7 +255,6 @@ def cppage():
 	lst2 = [0,1,2,3,4,5,6,7,8,9,10]
 	random.shuffle(lst2)
 	lst3 = lst2[0:5]
-	session['lst2'] = lst3
 	return render_template('cppaper.html',lst2 = lst3)
 
 @app.route('/cppaper',methods = ['GET','POST'])
@@ -448,7 +447,7 @@ def dbmspage():
 	lst2 = [0,1,2,3,4,5,6,7,8,9,10]
 	random.shuffle(lst2)
 	lst3 = lst2[0:5]
-	session['lst2'] = lst3
+
 	return render_template('dbmspaper.html',lst2 = lst3)
 
 @app.route('/dbmspaper',methods = ['GET','POST'])
