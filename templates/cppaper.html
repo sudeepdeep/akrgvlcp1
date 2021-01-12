@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Radio Buttons</title>
+	<style type="text/css">
+	body{
+		background-color: white;
+	}
+	.logo img{
+		width:80%;
+		height:120px;
+	}
+</style>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js" integrity="sha384-q2kxQ16AaE6UbzuKqyBE9/u/KzioAlnx2maXQHiDX9d4/zp8Ok3f+M7DPm+Ib6IU" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.min.js" integrity="sha384-pQQkAEnwaBkjpqZ8RU1fF1AKtTcHJwFl3pblpTlHXybJjHpMYo79HY3hIi4NKxyj" crossorigin="anonymous"></script>
+</head>
+<body>
+<table width="100%" >
+	<tr>
+		<td colspan  = "2" align="center" width="100%">
+			<div class = "logo">
+			<img src = "{{url_for('static',filename = 'images/unnamed.png')}}"></div>
+		</td>
+	</tr>
+	<tr>
+		<td align="center" width="50%" height="50px;">
+		</td>
+		<td  align="center" width="50%">
+		</td>
+	</tr>
+	<tr><td colspan="2" align="center" width="100%">
+		<ul class="nav justify-content-center">
+		<ul class="nav nav-pills">
+   <li class="nav-item">
+    <a class="nav-link" href="/">Home</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="/resu">Results</a>
+  </li>
+  <li class="nav-item">
+    <button type="button" class="btn btn-primary">
+               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-graph-up" viewBox="0 0 16 16">
+  <path fill-rule="evenodd" d="M0 0h1v15h15v1H0V0zm10 3.5a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-1 0V4.9l-3.613 4.417a.5.5 0 0 1-.74.037L7.06 6.767l-3.656 5.027a.5.5 0 0 1-.808-.588l4-5.5a.5.5 0 0 1 .758-.06l2.609 2.61L13.445 4H10.5a.5.5 0 0 1-.5-.5z"/>
+</svg>
+                <a href = "/test1" style="color: white;text-decoration: none;">Tests</a>
+              </button>
+  </li>
+  
+</ul></ul>
+	</td></tr>
+	<tr>
+		<td align="center" width="50%" height="50px;">
+		</td>
+		<td  align="center" width="50%">
+		</td></tr></table>
+
+<center>
+<form action = '/cppaper' method="POST">	
+{% for item in lst2 %}
+<table width="100%" >
+		<tr><td align="center" width="100%" >
+{% if item == 0 %}
+<label style="background-color: #0D6EFD;width: 100%;padding: 20px; color: white;">What is the 16-bit compiler allowable range for integer constants?</label><br>
+	<input type="radio" name="options0" value="a">-3.4e38 to 3.4e38<br>
+	<input type="radio" name="options0" value="b">-32767 to 32768
+<br>
+	<input type="radio" name="options0" value="c">-32668 to 32667
+<br>
+	<input type="radio" name="options0" value="d">-32768 to 32767
+<br></td></tr>
+<tr><td height="15px"></td></tr>
+{% elif item == 1 %}
+		<tr><td align="center" width="100%">
+<label style="background-color: #0D6EFD;width: 100%;padding: 20px; color: white;">In the C language, the constant is defined _______.</label><br>
+	<input type="radio" name="options1" value="a">Before main
+<br>
+	<input type="radio" name="options1" value="b">After main
+
+<br>
+	<input type="radio" name="options1" value="c">Anywhere, but starting on a new line.
+
+<br>
+<input type="radio" name="options1" value="d">None of the these.
+
+
+<br>
+</td></tr>
+<tr><td height="15px"></td></tr>
+<tr><td align="center" width="100%">
+{% elif item ==2 %}
+<label style="background-color: #B6D3EF;width:100%; width: 100%">main()<br>  
+{printf("AKRG VL");<br>  
+main();}<br> </label><br>
+<label style="background-color: #0D6EFD;width: 100%;padding: 20px; color: white;">What will be the output of this program?</label><br>
+	<input type="radio" name="options2" value="a">Wrong statement<br>
+	<input type="radio" name="options2" value="b">It will keep on printing AKRG VL<br>
+	<input type="radio" name="options2" value="c">It will Print AKRG VL once
+<br>
+	<input type="radio" name="options2" value="d">None of the these
+<br></td></tr>
+	<tr><td height="15px"></td></tr>
+<tr><td align="center" width="100%">
+{% elif item == 3 %}
+<label style="background-color: #0D6EFD;width: 100%;padding: 20px; color: white;">Which one of the following is a loop construct that will always be executed once?</label><br>
+	<input type="radio" name="options3" value="a">For<br>
+	<input type="radio" name="options3" value="b">Which
+<br>
+	<input type="radio" name="options3" value="c">Switch
+<br>
+	<input type="radio" name="options3" value="d">do while<br></td></tr>
+	<tr><td height="15px"></td></tr>
+<tr><td align="center" width="100%">
+{% elif item == 4 %}
+<label style="background-color: #0D6EFD;width: 100%;padding: 20px; color: white;">How many bytes does "int = D" use?</label><br>
+	<input type="radio" name="options4" value="a">0<br>
+	<input type="radio" name="options4" value="b">1<br>
+	<input type="radio" name="options4" value="c">2 or 4<br>
+	<input type="radio" name="options4" value="d">10<br></td></tr>
+	<tr><td height="15px"></td></tr>
+<tr><td align="center" width="100%">
+{% elif item == 5 %}
+<label style="background-color: #0D6EFD;width: 100%;padding: 20px; color: white;"> A pointer is a memory address. Suppose the pointer variable has p address 1000, and that p is declared to have type int*, and an int is 4 bytes long. What address is represented by expression p + 2?</label><br>
+	<input type="radio" name="options5" value="a">1002<br>
+	<input type="radio" name="options5" value="b">1004
+<br>
+	<input type="radio" name="options5" value="c">1006
+<br>
+	<input type="radio" name="options5" value="d">1008
+<br></td></tr>
+	<tr><td height="15px"></td></tr>
+<tr><td align="center" width="100%">
+{% elif item == 6 %}
+<label style="background-color: #B6D3EF;width:100%;">for(j = 1; j <= 10; j = j-1)
+</label><br>
+<label style="background-color: #0D6EFD;width: 100%;padding: 20px; color: white;">How many times will the above loop execute?
+</label><br>
+	<input type="radio" name="options6" value="a">Forever<br>
+	<input type="radio" name="options6" value="b">Never<br>
+	<input type="radio" name="options6" value="c">0<br>
+	<input type="radio" name="options6" value="d">1<br></td></tr>
+	<tr><td height="15px"></td></tr>
+<tr><td align="center" width="100%">
+{% elif item == 7 %}
+<label style="background-color: #0D6EFD;width: 100%;padding: 20px; color: white;">
+Directives are translated by the</label><br>
+	<input type="radio" name="options7" value="a">Pre-processor
+<br>
+	<input type="radio" name="options7" value="b">Compiler
+<br>
+	<input type="radio" name="options7" value="c">Linker<br>
+	<input type="radio" name="options7" value="d">Editor
+<br></td></tr>
+	<tr><td height="15px"></td></tr>
+<tr><td align="center" width="100%">
+{% elif item == 8 %}
+<label style="background-color: #0D6EFD;width: 100%;padding: 20px; color: white;">Why is a macro used in place of a function?</label><br>
+	<input type="radio" name="options8" value="a">It reduces execution time.
+<br>
+	<input type="radio" name="options8" value="b">It reduces code size.
+<br>
+	<input type="radio" name="options8" value="c">It increases execution time.
+<br>
+	<input type="radio" name="options8" value="d">It increases code size.
+<br></td></tr>
+	<tr><td height="15px"></td></tr>
+<tr><td align="center" width="100%">
+{% elif item == 9 %}
+<label style="background-color: #0D6EFD;width: 100%;padding: 20px; color: white;">What is a lint?</label><br>
+	<input type="radio" name="options9" value="a">C compiler
+	<br>
+	<input type="radio" name="options9" value="b">Interactive debugger
+<br>
+	<input type="radio" name="options9" value="c">Analyzing tool
+<br>
+	<input type="radio" name="options9" value="d">C interpreter
+<br></td></tr>
+	<tr><td height="15px"></td></tr>
+<tr><td align="center" width="100%">
+{% elif item == 10 %}
+<label style="background-color: #B6D3EF;width:100%;">main()<br>
+{  <br>
+  int i = 2;  <br>
+  {  <br>
+    int i = 4, j = 5; <br> 
+     printf("%d %d", i, j);  <br>
+  }    <br>
+  printf("%d %d", i, j);  <br>
+}  </label><br>
+<label style="background-color: #0D6EFD;width: 100%;padding: 20px; color: white;">What will be the output of the program?</label><br>
+	<input type="radio" name="options10" value="a">4525<br>
+	<input type="radio" name="options10" value="b">2525<br>
+	<input type="radio" name="options10" value="c">4545<br>
+	<input type="radio" name="options10" value="d">None of the above<br></td></tr>
+	<tr><td height="15px"></td></tr>
+
+{% endif %}
+
+{% endfor %}
+</table>
+<input type="submit" value=submit style="margin-bottom:  10px;" class="btn btn-primary"></form></center>
+</body>
+</html>

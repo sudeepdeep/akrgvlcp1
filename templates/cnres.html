@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Score</title>
+	<style type="text/css">
+		.container{
+			margin: 30px;
+		}
+	</style>
+</head>
+<body>
+	<div class = 'container'>
+	<center>
+<h1>Your score is {{score}}</h1>
+<h2 style="color: {{color}}">{{message}}</h2>
+<h3>Check Your Incorrect questions here!!⬇</h3>
+<table>
+<form action = '/radio' method="POST">	
+{% for item in lst2 %}
+{% for dict in wrong1 %}
+{% for key,vals in dict.items() %}
+
+
+{% if item == 0 %}
+{% if key == 0 %}
+<table>
+	<tr><td height="15px"></td></tr>
+	<tr><td>
+<label>Which transmission media provides the highest transmission speed in a network?</label><b style="color: green;">Correct answer is {{vals}}</b><br>
+	<input type="radio" name="options0" value="a">Coaxial<br>
+	<input type="radio" name="options0" value="b">Twisted pair<br>
+	<input type="radio" name="options0" value="c">Optical Fibers<br>
+	<input type="radio" name="options0" value="d">Electric Cable<br>{% endif %}</td></tr>
+<tr><td height="15px"></td></tr>
+<tr><td>
+{% elif item == 1 %}
+{% if key == 1 %}
+<label>Bits can be sent over guided and unguided media as analog signal by ___________</label><b style="color: green;">Correct answer is {{vals}}</b><br>
+	<input type="radio" name="options1" value="a">Digital modulation<br>
+	<input type="radio" name="options1" value="b">Amplitude modulation
+<br>
+	<input type="radio" name="options1" value="c">Frequency modulation
+<br>
+<input type="radio" name="options1" value="c">Phase modulation
+
+<br>
+</td>{% endif %}</tr>
+<tr><td height="15px"></td></tr>
+<tr><td>
+
+
+{% elif item ==2 %}
+{% if key == 2 %}
+<label>The data link layer takes the packets from _________ and encapsulates them into frames for transmission.</label><b style="color: green;">Correct answer is {{vals}}</b><br>
+	<input type="radio" name="options2" value="a">Network Layer<br>
+	<input type="radio" name="options2" value="b">Physical Layer<br>
+	<input type="radio" name="options2" value="c">Transport Layer<br>
+	<input type="radio" name="options2" value="d">Application Layer<br>{% endif %}</td></tr>
+	<tr><td height="15px"></td></tr>
+	<tr><td>
+
+{% elif item == 3 %}
+{% if key == 3 %}
+<label>CRC stands for __________</label><b style="color: green;">Correct answer is {{vals}}</b><br>
+	<input type="radio" name="options3" value="a">cyclic redundancy check<br>
+	<input type="radio" name="options3" value="b">code repeat check
+<br>
+	<input type="radio" name="options3" value="c">code redundancy check
+<br>
+	<input type="radio" name="options3" value="d">cyclic repeat check<br>{% endif %}</td></tr>
+	<tr><td height="15px"></td></tr>
+	<tr><td>
+
+{% elif item == 4 %}
+{% if key == 4 %}
+<label>The network layer is concerned with __________ of data.</label><b style="color: green;">Correct answer is {{vals}}</b><br>
+	<input type="radio" name="options4" value="a">Bits<br>
+	<input type="radio" name="options4" value="b">Frames<br>
+	<input type="radio" name="options4" value="c">Packets<br>
+	<input type="radio" name="options4" value="d">Bytes<br>{% endif %}</td></tr>
+	<tr><td height="15px"></td></tr>
+	<tr><td>
+
+{% elif item == 5 %}
+{% if key == 5 %}
+<label>A 4 byte IP address consists of __________</label><b style="color: green;">Correct answer is {{vals}}</b><br>
+	<input type="radio" name="options5" value="a">only network address<br>
+	<input type="radio" name="options5" value="b">only host address
+<br>
+	<input type="radio" name="options5" value="c">network address & host address
+<br>
+	<input type="radio" name="options5" value="d">network address & MAC address
+<br>{% endif %}</td></tr>
+	<tr><td height="15px"></td></tr>
+	<tr><td>
+
+{% elif item == 6 %}
+{% if key == 6 %}
+<label>Transport layer aggregates data from different applications into a single stream before passing it to ____________
+</label><b style="color: green;">Correct answer is {{vals}}</b><br>
+	<input type="radio" name="options6" value="a">Network Layer<br>
+	<input type="radio" name="options6" value="b">DataLink Layer<br>
+	<input type="radio" name="options6" value="c">Application Layer<br>
+	<input type="radio" name="options6" value="d">Physical Layer<br>{% endif %}</td></tr>
+	<tr><td height="15px"></td></tr>
+	<tr><td>
+
+{% elif item == 7 %}
+{% if key == 7 %}
+<label>
+Which of the following are transport layer protocols used in networking?</label><b style="color: green;">Correct answer is {{vals}}</b><br>
+	<input type="radio" name="options7" value="a">TCP and FTP<br>
+	<input type="radio" name="options7" value="b">UDP and HTTP
+<br>
+	<input type="radio" name="options7" value="c">TCP and UDP<br>
+	<input type="radio" name="options7" value="d">HTTP and FTP
+<br>{% endif %}</td></tr>
+	<tr><td height="15px"></td></tr>
+	<tr><td>
+
+{% elif item == 8 %}
+{% if key == 8 %}
+<label>Retransmission of packets must not be done when _______</label><b style="color: green;">Correct answer is {{vals}}</b><br>
+	<input type="radio" name="options8" value="a">Packet is Lost<br>
+	<input type="radio" name="options8" value="b">Packet is corrupt<br>
+	<input type="radio" name="options8" value="c">Packet is Needed<br>
+	<input type="radio" name="options8" value="d">Packet is error free<br>{% endif %}</td></tr>
+	<tr><td height="15px"></td></tr>
+	<tr><td>
+
+{% elif item == 9 %}
+{% if key == 9 %}
+<label>In Go-Back-N window, when the timer of the packet times out, several packets have to be resent even some may have arrived safe. Whereas in Selective Repeat window, the sender resends ___________</label><b style="color: green;">Correct answer is {{vals}}</b><br>
+	<input type="radio" name="options9" value="a">Packet which are not lost<br>
+	<input type="radio" name="options9" value="b">Only those packets which are lost or corrupted<br>
+	<input type="radio" name="options9" value="c">Packet from starting<br>
+	<input type="radio" name="options9" value="d">All the packets<br>{% endif %}</td></tr>
+	<tr><td height="15px"></td></tr>
+	<tr><td>
+
+{% elif item == 10 %}
+{% if key == 10 %}
+<label>Communication between a computer and a keyboard involves ______________ transmission.</label><b style="color: green;">Correct answer is {{vals}}</b><br>
+	<input type="radio" name="options10" value="a">Automatic<br>
+	<input type="radio" name="options10" value="b">Half Duplex<br>
+	<input type="radio" name="options10" value="c">Full Duplex<br>
+	<input type="radio" name="options10" value="d">Simplex<br>{% endif %}</td></tr>
+
+
+{% endif %}
+
+{% endfor %}
+{% endfor %}
+{% endfor %}</form></table></center></div>
+</body>
+</html>

@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Score</title>
+	<style type="text/css">
+		.container{
+			margin: 30px;
+		}
+	</style>
+</head>
+<body>
+	<div class = 'container'>
+	<center>
+<h1>Your score is {{score}}</h1>
+<h2 style="color: {{color}}">{{message}}</h2>
+<h3>Check Your Incorrect questions here!!⬇</h3>
+<table>
+<form action = '/radio' method="POST">	
+{% for item in lst2 %}
+{% for dict in wrong1 %}
+{% for key,vals in dict.items() %}
+
+
+	{% if item == 0 %}
+{% if key == 0 %}
+<table>
+	<tr><td height="15px"></td></tr>
+	<tr><td>
+<label >A relational database consists of a collection of</label><b style="color: green;">Correct answer is {{vals}}</b><br>
+
+	<input type="radio" name="options0" value="a">Tables<br>
+	<input type="radio" name="options0" value="b">Fields<br>
+	<input type="radio" name="options0" value="c">Records<br>
+	<input type="radio" name="options0" value="d">Keys<br>{% endif %}</td></tr>
+<tr><td height="15px"></td></tr>
+
+{% elif item == 1 %}
+{% if key == 1 %}
+<tr><td>
+<label style="background-color: white;width: 100%;padding: 20px; color: black;">The term _______ is used to refer to a row.</label><b style="color: green;">Correct answer is {{vals}}</b><br>
+
+	<input type="radio" name="options1" value="a">Attribute<br>
+	<input type="radio" name="options1" value="b">Tuple
+<br>
+	<input type="radio" name="options1" value="c">Field
+<br>
+<input type="radio" name="options1" value="d">Instance
+
+<br>
+</td>{% endif %}</tr>
+<tr><td height="15px"></td></tr>
+
+
+{% elif item ==2 %}
+{% if key == 2 %}
+<tr><td>
+<label style="background-color: #B6D3EF;width:100%;">Student(ID, name, dept name, tot_cred)</label><br>
+<label>In this query which attributes form the primary key?</label><b style="color: green;">Correct answer is {{vals}}</b><br>
+	<input type="radio" name="options2" value="a">Name<br>
+	<input type="radio" name="options2" value="b">Dept<br>
+	<input type="radio" name="options2" value="c">Tot_Cred<br>
+	<input type="radio" name="options2" value="d">ID<br>{% endif %}</td></tr>
+	<tr><td height="15px"></td></tr>
+	<tr><td>
+
+{% elif item == 3 %}
+{% if key == 3 %}
+<label>Which one of the following is a procedural language?</label><b style="color: green;">Correct answer is {{vals}}</b><br>
+	<input type="radio" name="options3" value="a">Domain relational calculus<br>
+	<input type="radio" name="options3" value="b">Tuple relational calculus
+<br>
+	<input type="radio" name="options3" value="c">Relational algebra
+<br>
+	<input type="radio" name="options3" value="d">Query language<br>{% endif %}</td></tr>
+	<tr><td height="15px"></td></tr>
+	<tr><td>
+
+{% elif item == 4 %}
+{% if key == 4 %}
+<label>An ________ is a set of entities of the same type that share the same properties, or attributes.</label><b style="color: green;">Correct answer is {{vals}}</b><b style="color: green;">Correct answer is {{vals}}</b><br>
+	<input type="radio" name="options4" value="a">Entity Set<br>
+	<input type="radio" name="options4" value="b">Attribute Set<br>
+	<input type="radio" name="options4" value="c">Relation Set<br>
+	<input type="radio" name="options4" value="d">Entity Model<br>{% endif %}</td></tr>
+	<tr><td height="15px"></td></tr>
+	<tr><td>
+
+{% elif item == 5 %}
+{% if key == 5 %}
+<label>Which of the following can be a multivalued attribute?</label><b style="color: green;">Correct answer is {{vals}}</b><br>
+	<input type="radio" name="options5" value="a">Phone Number<br>
+	<input type="radio" name="options5" value="b">Name<br>
+	<input type="radio" name="options5" value="c">Date of Birth<br>
+	<input type="radio" name="options5" value="d">All of the mentioned<br>{% endif %}</td></tr>
+	<tr><td height="15px"></td></tr>
+	<tr><td>
+
+{% elif item == 6 %}
+{% if key == 6 %}
+<label style="background-color: #B6D3EF;width:100%;">SELECT instructor.*<br>
+FROM instructor, teaches<br>
+WHERE instructor.ID= teaches.ID;<br>
+</label><br>
+<label>This query does which of the following operation?
+</label><b style="color: green;">Correct answer is {{vals}}</b><br>
+	<input type="radio" name="options6" value="a">All attributes of instructor and teaches are selected<br>
+	<input type="radio" name="options6" value="b">All attributes of instructor are selected on the given condition<br>
+	<input type="radio" name="options6" value="c">All attributes of teaches are selected on given condition<br>
+	<input type="radio" name="options6" value="d">Only the some attributes from instructed and teaches are selected<br>{% endif %}</td></tr>
+	<tr><td height="15px"></td></tr>
+	<tr><td>
+
+{% elif item == 7 %}
+{% if key == 7 %}
+<label>
+In the __________ normal form, a composite attribute is converted to individual attributes.</label><b style="color: green;">Correct answer is {{vals}}</b><br>
+	<input type="radio" name="options7" value="a">First<br>
+	<input type="radio" name="options7" value="b">Second
+<br>
+	<input type="radio" name="options7" value="c">Third<br>
+	<input type="radio" name="options7" value="d">Fourth
+<br>{% endif %}</td></tr>
+	<tr><td height="15px"></td></tr>
+	<tr><td>
+
+{% elif item == 8 %}
+{% if key == 8 %}
+<label>_____ operator is used for appending two strings.</label><b style="color: green;">Correct answer is {{vals}}</b><br>
+	<input type="radio" name="options8" value="a">&<br>
+	<input type="radio" name="options8" value="b">%<br>
+	<input type="radio" name="options8" value="c">||<br>
+	<input type="radio" name="options8" value="d">-<br>{% endif %}</td></tr>
+	<tr><td height="15px"></td></tr>
+	<tr><td>
+
+{% elif item == 9 %}
+{% if key == 9 %}
+<label>A __________ is the smallest unit of information that can be read from or written to the disk.</label><b style="color: green;">Correct answer is {{vals}}</b><br>
+	<input type="radio" name="options9" value="a">Track<br>
+	<input type="radio" name="options9" value="b">Spindle<br>
+	<input type="radio" name="options9" value="c">Sector<br>
+	<input type="radio" name="options9" value="d">Platter<br>{% endif %}</td></tr>
+	<tr><td height="15px"></td></tr>
+	<tr><td>
+
+{% elif item == 10 %}
+{% if key == 10 %}
+<label>An entity in A is associated with at most one entity in B, and an entity in B is associated with at most one entity in A.This is called</label><b style="color: green;">Correct answer is {{vals}}</b><br>
+	<input type="radio" name="options10" value="a">One-to-Many<br>
+	<input type="radio" name="options10" value="b">One-to-One<br>
+	<input type="radio" name="options10" value="c">Many-to-One<br>
+	<input type="radio" name="options10" value="d">Many-to-Many<br>{% endif %}</td></tr>
+
+
+{% endif %}
+
+{% endfor %}
+{% endfor %}
+{% endfor %}</form></table></center></div>
+</body>
+</html>
