@@ -119,7 +119,7 @@ def delete():
 	return render_template('update.html')
 @app.route('/enter')
 def enter():
-	if if 'loggedin' in session::
+	if 'loggedin' in session:
 		return render_template('s1.html')
 	else:
 		return render_template('logged.html')
@@ -127,7 +127,7 @@ def enter():
 @app.route('/sone',methods = ['GET','POST'])
 def sone():
 	try:
-		if 'loggedin' in session::
+		if 'loggedin' in session:
 			if request.method == 'POST':
 				regno = request.form['regno']
 				sem = request.form['sem']
