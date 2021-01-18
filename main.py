@@ -1,7 +1,405 @@
 from flask import Flask,render_template,url_for
 from flask import *
 import random
+
+import pyrebase
+
+
+config = {
+	"apiKey": "AIzaSyD0fzFslus_LRDNQI022QHTAJ5Ch0vgpZ0",
+    "authDomain": "akrgtesting.firebaseapp.com",
+    "databaseURL": "https://akrgtesting-default-rtdb.firebaseio.com",
+    "projectId": "akrgtesting",
+    "storageBucket": "akrgtesting.appspot.com",
+    "messagingSenderId": "557661419296",
+    "appId": "1:557661419296:web:e0e73026a6e2a2770a4945",
+    "measurementId": "G-Y6P5JBQ7SV"
+}
+
+firebase = pyrebase.initialize_app(config)
+db = firebase.database()
 app = Flask(__name__)
+app.secret_key = "hellosudeep"
+
+
+@app.route("/firebase")
+def firebase():
+	return render_template('firebase.html')
+
+@app.route("/check")
+def check():
+	return render_template('final.html')
+
+@app.route("/final", methods = ['GET','POST'])
+def final():
+	try:
+		if request.method == 'POST':
+			regid = request.form['registerno']
+			semid = request.form['semid']
+			res = db.child(regid).get()
+
+			for task in res.each():
+				if task.val()['Sem'] == semid:
+					if semid == '1-1':
+						res = task.val()
+						return render_template('res.html',marks = res)
+					elif semid == '1-2':
+						res = task.val()
+						return render_template('res1.html',marks = res)
+					elif semid == '2-1':
+						res = task.val()
+						return render_template('res2.html',marks = res)
+					elif semid == '2-2':
+						res = task.val()
+						return render_template('res3.html',marks = res)
+					elif semid == '3-1':
+						res = task.val()
+						return render_template('res4.html',marks = res)
+					elif semid == '3-2':
+						res = task.val()
+						return render_template('res5.html',marks = res)
+					elif semid == '4-1':
+						res = task.val()
+						return render_template('res6.html',marks = res)
+					elif semid == '4-2':
+						res = task.val()
+						return render_template('res7.html',marks = res)
+	except Exception as e:
+		return render_template('error.html')
+
+	return render_template('firebase.html')
+
+@app.route('/validate',methods = ['GET','POST'])
+def validate():
+	if request.method == 'POST':
+		name = request.form.get('name')
+		password = request.form.get('password')
+
+		if name == 'akrg123@gmail.com' and  password == 'akrgadmincp':
+			session['loggedin'] = True
+			return render_template('s1.html')
+	return render_template('firebase.html')
+
+@app.route('/login')
+def login():
+	return render_template('logged.html')
+
+
+@app.route('/delete',methods = ['GET','POST'])
+def delete():
+	try:
+		if session['loggedin']:
+			if request.method == 'POST':
+				regno = request.form['registerno']
+				semid = request.form['semid']
+				del_list = db.child(regno).get()
+				for a in del_list.each():
+					if a.val()['Sem'] == semid:
+						b = a.key()
+				db.child(regno).child(b).remove()
+				return render_template('update.html')
+		else:
+			return render_template('firebase.html')
+	except Exception as e:
+		return render_template('error.html')
+	return render_template('update.html')
+@app.route('/enter')
+def enter():
+	if session['loggedin']:
+		return render_template('s1.html')
+	else:
+		return render_template('logged.html')
+
+@app.route('/sone',methods = ['GET','POST'])
+def sone():
+	try:
+		if session['loggedin']:
+			if request.method == 'POST':
+				regno = request.form['regno']
+				sem = request.form['sem']
+				session['regno'] = regno
+				session['sem'] = sem
+				if sem == '1-1':
+					return render_template('oo.html')
+				elif sem == '1-2':
+					return render_template('ot.html')
+				elif sem == '2-1':
+					return render_template('to.html')
+				elif sem == '2-2':
+					return render_template('tt.html')
+				elif sem == '3-1':
+					return render_template('tho.html')
+				elif sem == '3-2':
+					return render_template('tht.html')
+				elif sem == '4-1':
+					return render_template('fo.html')
+				elif sem == '4-2':
+					return render_template('ft.html')
+		else:
+			return render_template('logged.html')
+	except Exception as e:
+		return render_template('error.html')
+	return render_template('s1.html')
+
+@app.route('/oo', methods = ['GET','POST'])
+def oo():
+
+	if 'loggedin' in session:
+		if request.method == 'POST':
+			regno = session['regno']
+			sem = session['sem']
+			e1 = request.form['e1']
+			m1 = request.form['m1']
+			m2 = request.form['m2']
+			ap = request.form['ap']
+			cp = request.form['cp']
+			ed  = request.form['ed']
+			ecl = request.form['ecl']
+			pl = request.form['pl']
+			cpl = request.form['cpl']
+			data =  { 'Regno': regno,
+	          'Sem': sem,
+	          'english-1': e1,
+	          'mathematics-1':m1,
+	          'mathematics-2':m2,
+	          'applied-physics':ap,
+	          'computer programming':cp,
+	          'engineering drawing':ed,
+	          'englishb communications lab':ecl,
+	          'physics lab':pl,
+	          'computer programming lab':cpl
+	          }
+			result = db.child(regno).push(data)
+			return render_template('sone.html')
+	else:
+		return render_template('logged.html')
+
+@app.route('/ot', methods = ['GET','POST'])
+def ot():
+	try:
+		if request.method == 'POST':
+			regno = session['regno']
+			sem = session['sem']
+			s1 = request.form['s1']
+			s2 = request.form['s2']
+			s3 = request.form['s3']
+			s4 = request.form['s4']
+			s5 = request.form['s5']
+			s6  = request.form['s6']
+			l1 = request.form['l1']
+			l2 = request.form['l2']
+			l3 = request.form['l3']
+			data =  { 'Regno': regno,
+	          'Sem': sem,
+	          'subject-1': s1,
+	          'subject-2':s2,
+	          'subject-3':s3,
+	          'subject-4':s4,
+	          'subject-5':s5,
+	          'subject-6':s6,
+	          'lab-1':l1,
+	          'lab-2':l2,
+	          'lab-3':l3
+	          }
+			result = db.child(regno).push(data)
+		return render_template('sone.html')
+	except Exception as e:
+		return render_template('error.html')
+	return render_template('firebase.html')
+
+@app.route('/to', methods = ['GET','POST'])
+def to():
+	try:
+		if request.method == 'POST':
+			regno = session['regno']
+			sem = session['sem']
+			s1 = request.form['s1']
+			s2 = request.form['s2']
+			s3 = request.form['s3']
+			s4 = request.form['s4']
+			s5 = request.form['s5']
+			l1 = request.form['l1']
+			l2 = request.form['l2']
+			data =  { 'Regno': regno,
+	          'Sem': sem,
+	          'subject-1': s1,
+	          'subject-2':s2,
+	          'subject-3':s3,
+	          'subject-4':s4,
+	          'subject-5':s5,
+	          'lab-1':l1,
+	          'lab-2':l2,
+	         
+	          }
+			result = db.child(regno).push(data)
+		return render_template('sone.html')
+	except Exception as e:
+		return render_template('error.html')
+	return render_template('firebase.html')
+
+@app.route('/tt', methods = ['GET','POST'])
+def tt():
+	try:
+		if request.method == 'POST':
+			regno = session['regno']
+			sem = session['sem']
+			s1 = request.form['s1']
+			s2 = request.form['s2']
+			s3 = request.form['s3']
+			s4 = request.form['s4']
+			s5 = request.form['s5']
+			s6 = request.form['s6']
+			l1 = request.form['l1']
+			l2 = request.form['l2']
+			data =  { 'Regno': regno,
+	          'Sem': sem,
+	          'subject-1': s1,
+	          'subject-2':s2,
+	          'subject-3':s3,
+	          'subject-4':s4,
+	          'subject-5':s5,
+	          'subject-6':s6,
+	          'lab-1':l1,
+	          'lab-2':l2,
+	         
+	          }
+			result = db.child(regno).push(data)
+		return render_template('sone.html')
+	except Exception as e:
+		return render_template('error.html')
+	return render_template('firebase.html')
+
+@app.route('/tho', methods = ['GET','POST'])
+def tho():
+	try:
+		if request.method == 'POST':
+			regno = session['regno']
+			sem = session['sem']
+			s1 = request.form['s1']
+			s2 = request.form['s2']
+			s3 = request.form['s3']
+			s4 = request.form['s4']
+			s5 = request.form['s5']
+			l1 = request.form['l1']
+			l2 = request.form['l2']
+			l3 = request.form['l3']
+			s6 = request.form['s6']
+			data =  { 'Regno': regno,
+	          'Sem': sem,
+	          'subject-1': s1,
+	          'subject-2':s2,
+	          'subject-3':s3,
+	          'subject-4':s4,
+	          'subject-5':s5,
+	          'subject-6':s6,
+	          'lab-1':l1,
+	          'lab-2':l2,
+	          'lab-3':l3,
+	          }
+			result = db.child(regno).push(data)
+		return render_template('sone.html')
+	except Exception as e:
+		return render_template('error.html')
+	return render_template('firebase.html')
+
+
+
+
+@app.route('/tht', methods = ['GET','POST'])
+def tht():
+	try:
+		if request.method == 'POST':
+			regno = session['regno']
+			sem = session['sem']
+			s1 = request.form['s1']
+			s2 = request.form['s2']
+			s3 = request.form['s3']
+			s4 = request.form['s4']
+			s5 = request.form['s5']
+			l1 = request.form['l1']
+			l2 = request.form['l2']
+			l3 = request.form['l3']
+			s6 = request.form['s6']
+			data =  { 'Regno': regno,
+	          'Sem': sem,
+	          'subject-1': s1,
+	          'subject-2':s2,
+	          'subject-3':s3,
+	          'subject-4':s4,
+	          'subject-5':s5,
+	          'subject-6':s6,
+	          'lab-1':l1,
+	          'lab-2':l2,
+	          'lab-3':l3,
+	          }
+			result = db.child(regno).push(data)
+		return render_template('sone.html')
+	except Exception as e:
+		return render_template('error.html')
+	return render_template('firebase.html')
+
+
+
+@app.route('/fo', methods = ['GET','POST'])
+def fo():
+	try:
+		if request.method == 'POST':
+			regno = session['regno']
+			sem = session['sem']
+			s1 = request.form['s1']
+			s2 = request.form['s2']
+			s3 = request.form['s3']
+			s4 = request.form['s4']
+			s5 = request.form['s5']
+			l1 = request.form['l1']
+			l2 = request.form['l2']
+			s6 = request.form['s6']
+			data =  { 'Regno': regno,
+	          'Sem': sem,
+	          'subject-1': s1,
+	          'subject-2':s2,
+	          'subject-3':s3,
+	          'subject-4':s4,
+	          'subject-5':s5,
+	          'subject-6':s6,
+	          'lab-1':l1,
+	          'lab-2':l2,
+	          }
+			result = db.child(regno).push(data)
+		return render_template('sone.html')
+	except Exception as e:
+		return render_template('error.html')
+	return render_template('firebase.html')
+
+
+
+@app.route('/ft', methods = ['GET','POST'])
+def ft():
+	try:
+		if request.method == 'POST':
+			regno = session['regno']
+			sem = session['sem']
+			s1 = request.form['s1']
+			s2 = request.form['s2']
+			s3 = request.form['s3']
+			s4 = request.form['s4']
+			s5 = request.form['s5']
+			s6 = request.form['s6']
+			data =  { 'Regno': regno,
+	          'Sem': sem,
+	          'subject-1': s1,
+	          'subject-2':s2,
+	          'subject-3':s3,
+	          'subject-4':s4,
+	          'subject-5':s5,
+	          'subject-6':s6,
+	          }
+			result = db.child(regno).push(data)
+		return render_template('sone.html')
+	except Exception as e:
+		return render_template('error.html')
+	return render_template('firebase.html')
+
 
 @app.route('/')
 
