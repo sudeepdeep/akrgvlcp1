@@ -2,19 +2,41 @@
 <html>
 <head>
 	<title>Final Page</title>
+	<style type="text/css">
+		table{
+			border-collapse: collapse;
+		}
+	</style>
 </head>
 <body>
+	
 	{% if marks %}
+<table width="100%" align="center">
+	<tr><td colspan="2" align="center">
+<h1 style="color: ">For {{marks['Regno']}} for {{marks['Sem']}}are </h1></td></tr>
+<tr bgcolor="#D4D4D4"><td width="50%" align="center">
+<h2>English</h2></td><td width="50%" align="center"> {{marks['english-1']}}</td></tr>
+<tr><td align="center">
+<h2>Mathematics-1</h2></td><td align="center"> {{marks['mathematics-1']}}</td></tr>
+<tr bgcolor="#D4D4D4" align="center"><td>
+<h2>Mathematics-2 </h2></td><td align="center">{{marks['mathematics-2']}}</td></tr>
+<tr><td align="center">
+<h2>Applied Physics</h2></td><td align="center"> {{marks['applied-physics']}}</td></tr>
+<tr bgcolor="#D4D4D4"><td align="center">
+<h2>Computer Programming</h2></td><td align="center"> {{marks['computer programming']}}</td></tr>
+<tr><td align="center">
+<h2>Engineering Drawing</h2></td><td align="center"> {{marks['engineering drawing']}}</td></tr>
+<tr bgcolor="#D4D4D4"><td align="center">
+<h2>English Communications lab</h2></td><td align="center"> {{marks['englishb communications lab']}}</td></tr>
+<tr><td align="center">
+<h2>Physics Lab</h2></td><td align="center"> {{marks['physics lab']}}</td></tr>
+<tr bgcolor="#D4D4D4"><td align="center">
+<h2>Computer Programming Lab</h2></td><td align="center"> {{marks['computer programming lab']}}</td></tr>{% endif %}
+<tr><td height="10px;"></td></tr>
+<tr><td colspan="2" align="center" height="20px;"><a href = "/delete">Click Here</a> to Delete your marks!!</td></tr>
+<tr><td height="10px;"></td></tr>
+</table>
 
-<h1>For {{marks['Regno']}} for {{marks['Sem']}}are: </h1>
-<h2>English: {{marks['english-1']}}</h2>
-<h2>Mathematics-1: {{marks['mathematics-1']}}</h2>
-<h2>Mathematics-2: {{marks['mathematics-2']}}</h2>
-<h2>Applied physics: {{marks['applied-physics']}}</h2>
-<h2>Computer Programming: {{marks['computer programming']}}</h2>
-<h2>Engineering Drawing: {{marks['engineering drawing']}}</h2>
-<h2>English Communications lab: {{marks['englishb communications lab']}}</h2>
-<h2>Physics Lab: {{marks['physics lab']}}</h2>
-<h2>Computer Programming Lab: {{marks['computer programming lab']}}</h2>{% endif %}
+
 </body>
 </html>
