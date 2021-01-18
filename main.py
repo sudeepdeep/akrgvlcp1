@@ -90,13 +90,13 @@ def validate1():
 			session['loggedin'] = True
 			return render_template('update.html')
 	return render_template('firebase.html')
-
-@app.route('/login')
-def login():
-	return render_template('logged.html')
 @app.route('/login1')
 def login1():
 	return render_template('logged1.html')
+@app.route('/login')
+def login():
+	return render_template('logged.html')
+
 
 @app.route('/delete',methods = ['GET','POST'])
 def delete():
@@ -119,7 +119,7 @@ def delete():
 	return render_template('update.html')
 @app.route('/enter')
 def enter():
-	if 'loggedin' in session::
+	if if 'loggedin' in session::
 		return render_template('s1.html')
 	else:
 		return render_template('logged.html')
@@ -413,6 +413,7 @@ def ft():
 	except Exception as e:
 		return render_template('error.html')
 	return render_template('firebase.html')
+
 
 
 @app.route('/')
