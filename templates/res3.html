@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Final Page</title>
+	<style type="text/css">
+		table{
+			border-collapse:collapse;
+			
+		}
+	</style>
+</head>
+<body>
+	{% if marks %}
+<table width="100%" align="center">
+	<tr><td colspan="2" align="center">
+<h1 style="color: ">For {{marks['Regno']}} for {{marks['Sem']}}are </h1></td></tr>
+<tr bgcolor="#D4D4D4"><td width="50%" align="center">
+<h2>SOFTWARE ENGINEERING</h2></td><td width="50%" align="center"> {{marks['subject-1']}}</td></tr>
+<tr><td align="center">
+<h2>JAVA PROGRAMMING</h2></td><td align="center"> {{marks['subject-2']}}</td></tr>
+<tr bgcolor="#D4D4D4" align="center"><td>
+<h2>ADVANCED DATA STRUCTURES </h2></td><td align="center">{{marks['subject-3']}}</td></tr>
+<tr><td align="center">
+<h2>COMPUTER ORGANIZATION</h2></td><td align="center"> {{marks['subject-4']}}</td></tr>
+<tr bgcolor="#D4D4D4"><td align="center">
+<h2>FORMAL LANGUAGE AND AUTOMATA THEORY</h2></td><td align="center"> {{marks['subject-5']}}</td></tr>
+<tr><td align="center">
+<h2>PRINCIPLES OF PROGRAMMING LANGUAGES</h2></td><td align="center"> {{marks['subject-6']}}</td></tr>
+<tr bgcolor="#D4D4D4"><td align="center">
+<h2>ADVANCED DATA STRUCTURES LAB</h2></td><td align="center"> {{marks['lab-1']}}</td></tr>
+<tr><td align="center">
+<h2>JAVA PROGRAMMING LAB</h2></td><td align="center"> {{marks['lab-2']}}</td></tr>
+{% endif %}
+<tr><td height="10px;"></td></tr>
+<tr><td colspan="2" align="center" height="20px;"><a href = "/delete">Click Here</a> to Delete your marks!!</td></tr>
+<tr><td height="10px;"></td></tr>
+</table>
+</body>
+</html>

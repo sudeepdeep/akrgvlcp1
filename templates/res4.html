@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Final Page</title>
+	<style type="text/css">
+		table{
+			border-collapse:collapse;
+			
+		}
+	</style>
+</head>
+<body>
+	{% if marks %}
+<table width="100%" align="center">
+	<tr><td colspan="2" align="center">
+<h1 style="color: ">For {{marks['Regno']}} for {{marks['Sem']}}are </h1></td></tr>
+<tr bgcolor="#D4D4D4"><td width="50%" align="center">
+<h2>COMPILER DESIGN</h2></td><td width="50%" align="center"> {{marks['subject-1']}}</td></tr>
+<tr><td align="center">
+<h2>UNIX PROGRAMMING</h2></td><td align="center"> {{marks['subject-2']}}</td></tr>
+<tr bgcolor="#D4D4D4" align="center"><td>
+<h2>OBJECT ORIENTED ANALYSIS & DESIGN USING UML</h2></td><td align="center">{{marks['subject-3']}}</td></tr>
+<tr><td align="center">
+<h2>DATA BASE MANAGEMENT SYSTEMS
+</h2></td><td align="center"> {{marks['subject-4']}}</td></tr>
+<tr bgcolor="#D4D4D4"><td align="center">
+<h2>OPERATING SYSTEMS</h2></td><td align="center"> {{marks['subject-5']}}</td></tr>
+<tr><td align="center">
+<h2>UNIFIED MODELING LAB</h2></td><td align="center"> {{marks['lab-1']}}</td></tr>
+<tr bgcolor="#D4D4D4"><td align="center">
+<h2>OPERATING SYSEMS AND LINUX PROGRAMMING LAB
+</h2></td><td align="center"> {{marks['lab-2']}}</td></tr>
+<tr><td align="center">
+<h2>DATA BASE MANAGEMENT SYSTEM LAB</h2></td><td align="center"> {{marks['lab-3']}}</td></tr>
+<tr bgcolor="#D4D4D4"><td align="center">
+<h2>PROFESSIONAL ETHICSAND HUMAN VALUES
+</h2></td><td align="center"> {{marks['subject-6']}}</td></tr>
+{% endif %}
+<tr><td height="10px;"></td></tr>
+<tr><td colspan="2" align="center" height="20px;"><a href = "/delete">Click Here</a> to Delete your marks!!</td></tr>
+<tr><td height="10px;"></td></tr>
+</table>
+</body>
+</html>

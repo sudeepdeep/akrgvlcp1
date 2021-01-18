@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Final Page</title>
+</head>
+<body>
+	{% if marks %}
+
+<h1>For {{marks['Regno']}} for {{marks['Sem']}}are: </h1>
+<h2>English: {{marks['english-1']}}</h2>
+<h2>Mathematics-1: {{marks['mathematics-1']}}</h2>
+<h2>Mathematics-2: {{marks['mathematics-2']}}</h2>
+<h2>Applied physics: {{marks['applied-physics']}}</h2>
+<h2>Computer Programming: {{marks['computer programming']}}</h2>
+<h2>Engineering Drawing: {{marks['engineering drawing']}}</h2>
+<h2>English Communications lab: {{marks['englishb communications lab']}}</h2>
+<h2>Physics Lab: {{marks['physics lab']}}</h2>
+<h2>Computer Programming Lab: {{marks['computer programming lab']}}</h2>{% endif %}
+</body>
+</html>
