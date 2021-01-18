@@ -9,7 +9,12 @@
 <body>
 	<table width="100%" style="margin-top: 120px;">
 <form action="/delete" method="POST">
-	<tr><td align="center">
+	<tr><td align="center" style="color:green;">{%if msg%}
+<h3>{{msg}}</h3>
+{% else %}
+<h3 style="color:red;">No Data Found</h3>
+{% endif %}</td></tr>
+	<tr><td align="center">	
 		<div class="mb-3">
     <label  class="form-label">Delete your Data</label><br>
 	<input class="form-control" type="text" name="registerno" placeholder="Enter regd.no" ></div></td></tr>
@@ -29,6 +34,32 @@
 	<tr><td height="20px;"></td></tr>
 	<tr><td align="center">
 	<button class = "btn btn-danger" type="submit">Delete</button></td></tr>
-</form></table>
+</form>
+</table>
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
