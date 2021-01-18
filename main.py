@@ -80,15 +80,28 @@ def validate():
 			return render_template('s1.html')
 	return render_template('firebase.html')
 
+@app.route('/validate1',methods = ['GET','POST'])
+def validate1():
+	if request.method == 'POST':
+		name = request.form.get('name')
+		password = request.form.get('password')
+
+		if name == 'akrg123@gmail.com' and  password == 'akrgadmincp':
+			session['loggedin'] = True
+			return render_template('update.html')
+	return render_template('firebase.html')
+
 @app.route('/login')
 def login():
 	return render_template('logged.html')
-
+@app.route('/login1')
+def login1():
+	return render_template('logged1.html')
 
 @app.route('/delete',methods = ['GET','POST'])
 def delete():
 	try:
-		if session['loggedin']:
+		if 'loggedin' in session:
 			if request.method == 'POST':
 				regno = request.form['registerno']
 				semid = request.form['semid']
@@ -97,7 +110,8 @@ def delete():
 					if a.val()['Sem'] == semid:
 						b = a.key()
 				db.child(regno).child(b).remove()
-				return render_template('update.html')
+				message = 'Data Deleted Successfully'
+				return render_template('update.html',msg = message)
 		else:
 			return render_template('firebase.html')
 	except Exception as e:
@@ -105,7 +119,7 @@ def delete():
 	return render_template('update.html')
 @app.route('/enter')
 def enter():
-	if session['loggedin']:
+	if 'loggedin' in session::
 		return render_template('s1.html')
 	else:
 		return render_template('logged.html')
@@ -113,7 +127,7 @@ def enter():
 @app.route('/sone',methods = ['GET','POST'])
 def sone():
 	try:
-		if session['loggedin']:
+		if 'loggedin' in session::
 			if request.method == 'POST':
 				regno = request.form['regno']
 				sem = request.form['sem']
