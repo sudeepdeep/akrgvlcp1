@@ -3,9 +3,14 @@
 <head>
 	<title>UNIX LAB MANUAL</title>
 	<style type="text/css">
-	body{
-		background-color: white;
-	}
+	body > #bg{
+	height: 100%;
+	width: 100%;
+	background: rgb(255,231,0);
+background: linear-gradient(217deg, rgba(255,231,0,1) 0%, rgba(255,165,0,1) 38%, rgba(255,231,0,1) 100%);
+	clip-path: polygon(50% 0%, 100% 0, 100% 43%, 55% 68%, 0 100%, 0% 43%, 0 0);
+	position: absolute;
+	z-index: -1;
 	.logo img{
 		width:80%;
 		height:120px;
@@ -126,7 +131,7 @@
 }
 </style>
 </head>
-<body>
+	<body><div id = "bg"></div>
 <table width="100%">
 	<tr>
 		<td align="center">
