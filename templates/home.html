@@ -4,23 +4,41 @@
 	<title>Home Page</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 <style type="text/css">
-	body{
-		background-color: white;
-	}
+
+@import url('https://fonts.googleapis.com/css2?family=Oswald&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Francois+One&family=Lobster&display=swap');
+
+body > #bg{
+	height: 100%;
+	width: 100%;
+	background: rgb(255,231,0);
+background: linear-gradient(217deg, rgba(255,231,0,1) 0%, rgba(255,165,0,1) 38%, rgba(255,231,0,1) 100%);
+	clip-path: polygon(50% 0%, 100% 0, 100% 43%, 55% 68%, 0 100%, 0% 43%, 0 0);
+	position: absolute;
+	z-index: -1;
+}
 	.logo img{
 		width:80%;
 		height:120px;
 	}
 
+
+marquee{
+	background: rgb(255,255,255);
+background: linear-gradient(90deg, rgba(255,255,255,1) 9%, rgba(255,235,42,1) 100%);
+}
+
  .heading{
-		font-family: cursive;
+		font-family: 'Lobster', cursive;
 		background-color: #031458;
 		  color:white;
 		  
 		   
-		    
-	}
-
+		}
+.image2 img{
+	box-shadow: -10px -10px 8px 0 rgba(0, 0, 0, 0.4), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
 	#myBtn {
   display: none;
   position: fixed;
@@ -39,6 +57,7 @@
 }
 
 
+
 @media screen and (max-width: 1060px) {
 .logo img{
 	width: 80%;
@@ -47,6 +66,7 @@
 }
 .heading{
 	color:white;
+	font-family: 'Lobster', cursive;
 	height: 120px;
 }
 }
@@ -64,13 +84,14 @@
 }
 
 .heading1 h1{
+	font-family: 'Lobster', cursive;
 	width: 100%;
 	height: 100%;
 	font-size: 28px;
 	
 }
 .image2 img{
-	
+box-shadow: -10px -10px 8px 0 rgba(0, 0, 0, 0.4), 0 6px 20px 0 rgba(0, 0, 0, 0.19);	
 
 	width: 100%;
 	height: 100%;
@@ -96,11 +117,13 @@ marquee img{
 }
 .heading{
 	color:white;
+
 	height: 120px;
 	
 }
 
 .heading1 h1{
+	font-family: 'Lobster', cursive;
 	width: 100%;
 	height: 100%;
 	font-size: 25px;
@@ -108,7 +131,7 @@ marquee img{
 }
 .image2 img{
 	
-
+box-shadow: -10px -10px 8px 0 rgba(0, 0, 0, 0.4), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 	width: 100%;
 	height: 100%;
 }
@@ -140,11 +163,12 @@ marquee img{
 	width: 100%;
 	height: 100%;
 	font-size: 23px;
+	font-family: 'Lobster', cursive;
 	
 }
 .image2 img{
 	
-
+box-shadow: -10px -10px 8px 0 rgba(0, 0, 0, 0.4), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 	width: 100%;
 	height: 100%;
 }
@@ -181,6 +205,7 @@ marquee img{
 	width: 100%;
 	height: 100%;
 	font-size: 20px;
+	font-family: 'Lobster', cursive;
 	
 }
 #myBtn {
@@ -191,7 +216,7 @@ marquee img{
 }	
 .image2 img{
 	
-
+box-shadow: -10px -10px 8px 0 rgba(0, 0, 0, 0.4), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 	width: 100%;
 	height: 100%;
 }
@@ -224,11 +249,12 @@ marquee img{
 	width: 100%;
 	height: 100%;
 	font-size: 20px;
+	font-family: 'Lobster', cursive;
 	
 }
 .image2 img{
 	
-
+box-shadow: -10px -10px 8px 0 rgba(0, 0, 0, 0.4), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 	width: 100%;
 	height: 100%;
 }
@@ -249,10 +275,14 @@ marquee img{
 
 
 
+
 </style>
+<link href='https://fonts.googleapis.com/css?family=Baloo 2' rel='stylesheet'>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
 	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js" integrity="sha384-q2kxQ16AaE6UbzuKqyBE9/u/KzioAlnx2maXQHiDX9d4/zp8Ok3f+M7DPm+Ib6IU" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.min.js" integrity="sha384-pQQkAEnwaBkjpqZ8RU1fF1AKtTcHJwFl3pblpTlHXybJjHpMYo79HY3hIi4NKxyj" crossorigin="anonymous"></script>
+ <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <script src="jquery-2.1.4.js"></script>
 </head>
 <body>
 	<img src = "{{url_for('static',filename = 'images/arr1.png')}}" width="100px" height="100px" onclick="topFunction()" id="myBtn" title="Go to top">
@@ -260,6 +290,7 @@ marquee img{
 
 
 <script>
+	
 //Get the button
 var mybutton = document.getElementById("myBtn");
 
@@ -279,8 +310,13 @@ function topFunction() {
   document.body.scrollTop = 0;
   document.documentElement.scrollTop = 0;
 }
+
+
 </script>
-<table width="100%">
+
+
+<div id = "bg"></div>
+<table width="100%;">
 	<tr>
 		<td colspan  = "2" align="center" width="100%">
 			<div class = "logo">
@@ -312,7 +348,7 @@ function topFunction() {
               </button>
   </li>
   <li class="nav-item">
-    <a class="nav-link" href="/firebase">Mid Marks</a>
+    <a class="nav-link" href="/resu">Results</a>
   </li>
   <li class="nav-item">
     <a class="nav-link" href="/test1">Tests</a>
@@ -329,7 +365,7 @@ function topFunction() {
 	<tr>
 		<td align="center" width = "40%">
 			<div class = "heading1">
-			<h1 style="font-family:cursive; color:black;">Here you can perform your Lab Works from Home!!
+			<h1 style="font-family: 'Oswald', sans-serif; color:black;">Here you can perform your Lab Works from Home!!
 			We are providing different compilers to work 
 				on your lab assignments and to finish your programs</h1></div>
 		</td>
@@ -340,14 +376,20 @@ function topFunction() {
 		</td>
 
 	</tr>
-
+<tr>
+		<td align="center" width="50%" height="40px;">
+		</td>
+		<td  align="center" width="50%">
+		</td>
+	</tr>
 	<tr>
 		<td colspan="2" align="center">
-			<h1 style="font-family:candara; color:#031458;">Available Compilers</h1>
+			<h1 style="font-family:'Baloo 2'; color:#031458;">Available Compilers</h1>
 		</td>
 	</tr>
 	
-	<tr>
+	<tr style="background: rgb(255,255,255);
+background: linear-gradient(259deg, rgba(255,255,255,1) 34%, rgba(255,235,42,1) 100%);">
 		<div class = "inside">
 		<td align="center" width="50%">
 			<a href = "/c" ><img src = "{{url_for('static',filename = 'images/cc.png')}}" 	width="30%;"></a>
@@ -359,12 +401,13 @@ function topFunction() {
 		</td>
 	</tr>
 	<tr>
-		<td align="center" width="50%" height="100px;">
+		<td align="center" width="50%" height="80px;">
 		</td>
 		<td  align="center" width="50%">
 		</td>
 	</tr>
-	<tr>
+	<tr style="background: rgb(255,255,255);
+background: linear-gradient(90deg, rgba(255,255,255,1) 34%, rgba(255,235,42,1) 100%);">
 		<td align="center" width="50%">
 			<a href = "/python"><img src = "{{url_for('static',filename = 'images/python.png')}}"  width="30%;"></a>
 		</td>
@@ -373,12 +416,13 @@ function topFunction() {
 		</td>
 	</tr>
 <tr>
-		<td align="center" width="50%" height="100px;">
+		<td align="center" width="50%" height="80px;">
 		</td>
 		<td  align="center" width="50%">
 		</td>
 	</tr>
-	<tr>
+	<tr style="background: rgb(255,255,255);
+background: linear-gradient(259deg, rgba(255,255,255,1) 34%, rgba(255,235,42,1) 100%);">
 		<td align="center" width="50%">
 			<a href = "/ds"><img src = "{{url_for('static',filename = 'images/ds.png')}}"  width="40%"></a>
 		</td>
@@ -387,12 +431,13 @@ function topFunction() {
 		</td>
 	</tr>
 	<tr>
-		<td align="center" width="50%" height="100px;">
+		<td align="center" width="50%" height="80px;">
 		</td>
 		<td  align="center" width="50%">
 		</td>
 	</tr>
-	<tr>
+	<tr style="background: rgb(255,255,255);
+background: linear-gradient(90deg, rgba(255,255,255,1) 34%, rgba(255,235,42,1) 100%);">
 		<td align="center" width="50%">
 			<a href = "/htm"><img src = "{{url_for('static',filename = 'images/html.png')}}"  width="30%;"></a>
 		</td>
@@ -401,35 +446,37 @@ function topFunction() {
 		</td>
 	</tr>
 <tr>
-		<td align="center" width="50%" height="100px;">
+		<td align="center" width="50%" height="80px;">
 		</td>
 		<td  align="center" width="50%">
 		</td>
 	</tr>
-	<tr>
+	<tr style="background: rgb(255,255,255);
+background: linear-gradient(259deg, rgba(255,255,255,1) 34%, rgba(255,235,42,1) 100%);">
 		<td align="center" width="50%">
-			<a href = "/ml"><img src = "{{url_for('static',filename = 'images/ml.png')}}"  width="30%;"></a>
+			<a href = "/ml"><img src = "{{url_for('static',filename = 'images/ml.png')}}"  width="30%;" style="padding-top: 20px;padding-bottom: 20px;"></a>
 		</td>
 		<td  align="center" width="50%">
-			<a href = "/rp"><img src = "{{url_for('static',filename = 'images/rp.png')}}"  width="30%;" ></a>
+			<a href = "/rp"><img src = "{{url_for('static',filename = 'images/rp.png')}}"  width="30%;"></a>
 		</td>
 	</tr>
 	<tr>
-		<td align="center" width="50%" height="100px;">
+		<td align="center" width="50%" height="80px;">
 		</td>
 		<td  align="center" width="50%">
 		</td>
 	</tr>
-	<tr>
+	<tr style="background: rgb(255,255,255);
+background: linear-gradient(90deg, rgba(255,255,255,1) 34%, rgba(255,235,42,1) 100%);">
 		<td align="center" width="50%">
-			<a href = "/nix"><img src = "{{url_for('static',filename = 'images/nix.png')}}" width="30%;"></a>
+			<a href = "/nix"><img src = "{{url_for('static',filename = 'images/nix.png')}}" width="30%;" style="padding-top: 20px; padding-bottom: 20px;"></a>
 		</td>
 		<td  align="center" width="50%">
 			<a href = "#"></a>
 		</td>
 	</tr>
 	<tr>
-		<td align="center" width="50%" height="100px;">
+		<td align="center" width="50%" height="80px;">
 		</td>
 		<td  align="center" width="50%">
 		</td>
@@ -444,13 +491,16 @@ function topFunction() {
 <tr><td colspan="2" width="100%">
 <marquee >
 
-	<a href = "https://www.programiz.com/" target="_blank"><img src = "{{url_for('static',filename = 'images/pz.png')}}"></a>
-	<a href = "https://www.javatpoint.com/" target="_blank"><img src = "{{url_for('static',filename = 'images/tp.png')}}" width="300px" height="250px;" style="background-color: black;"></a>
+	<a href = "https://www.programiz.com/" target="_blank"><img src = "{{url_for('static',filename = 'images/pz1.png')}}"></a>
+	<a href = "https://www.javatpoint.com/" target="_blank"><img src = "{{url_for('static',filename = 'images/tp.png')}}" width="300px" height="180px;"></a>
 	<a href = "https://www.onlinegdb.com/" target="_blank"><img src = "{{url_for('static',filename = 'images/online.png')}}" width="300px" height="250px;"></a>
 	<a href = "https://www.tutorialspoint.com/codingground.htm" target="_blank"><img src = "{{url_for('static',filename = 'images/paiza.png')}}" width="300px" height="250px;"></a>
 </marquee></td></tr>
+
+<tr><td colspan="2" style="background-image: url('{{url_for('static',filename = 'images/akrg.jpg')}}') ;background-repeat: no-repeat;
+background-size: cover;background-attachment: fixed; background-position: center;  box-shadow: 0 0 500px rgba(0,0,0,0.9) inset;" height="500px" ><h1 style="color: white; padding-top: 200px; font-family: 'Francois One', sans-serif;">Our College</h1><h1 style="font-family: 'Francois One', sans-serif; color:white;">AKRG COLLEGE OF ENGINEERING & TECHNOLOGY</h1></td></tr>
 <tr><td colspan="2" width="100%" align="center">
 <footer style=" color: white;font-family: candara;font-size: 20px;background-color: #031458; padding-top: 20px; padding-bottom: 20px;">©CopyRight By CSE Students(2k17 - 2021)</footer></td></tr>
-</table>
+</table><div id = "bott"></div>
 </body>
 </html>
