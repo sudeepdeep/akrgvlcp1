@@ -25,7 +25,74 @@ app.secret_key = "hellosudeep"
 @app.route("/firebase")
 def firebase():
 	return render_template('firebase.html')
+@app.route('/select')
+def select():
+	return render_template('files1.html')
+@app.route('/upload', methods = ['GET','POST'])
+def upload():
+	if request.method == 'POST':
+		f = request.files['file']
+		ear = request.form['ear']
+		mid = request.form['mid']
+		f.save(f.filename)
+		with open(f.filename,mode = 'r') as f:
+			csv_list = [[val.strip() for val in r.split(",")] for r in f.readlines()]
 
+		(_, *header), *data = csv_list
+		csv_dict = {}
+		for row in data:
+			key, *values = row
+			csv_dict[key] = {key: value for key, value in zip(header, values)}
+		for a,b in csv_dict.items():
+			db.child(ear).child(a).child(mid).push(b)
+		return "Successfully uploaded"
+		
+	return render_template('files1.html')
+
+@app.route('/checkmarks')
+def checkmarks():
+	return render_template('checkmarks.html')
+
+
+
+@app.route('/checking',methods = ['GET','POST'])
+def checking():
+	if request.method == 'POST':
+		regno = request.form['regno']
+		ear = request.form['ear']
+		try:
+			res1 = db.child(ear).child(regno).child("mid 1").get()
+			res2 = db.child(ear).child(regno).child("mid 2").get()
+			data = {}
+			data1 = {}
+			for task in res1.each():
+				for task1 in res2.each():
+					for a,b in task.val().items():
+						for a2,b2 in task1.val().items():
+							v1 = int(b)
+							v2 = int(b2)
+							if v1 > v2:
+								ep = (v1*80)/100
+								tp = (v2*20)/100
+								data[a2+'1'] = ep
+								data1[a2+'2'] = tp
+								pass
+							elif v1 <= v2:
+								ep = (v2*80)/100
+								tp = (v1*20)/100
+								data[a2+'1'] = ep
+								data1[a2+'2'] = tp
+								pass
+
+
+			return render_template('ress.html',res1=res1, res2 = res2,data = data,data1 = data1)
+
+		except:
+			res1 = db.child(ear).child(regno).child("mid1").get()
+			res2 = "No Data Found"
+			return render_template('ress.html',res1 = res1,res2 = res2)
+	
+	return render_template('checkmarks.html')
 @app.route("/check")
 def check():
 	return render_template('final.html')
@@ -77,7 +144,7 @@ def validate():
 
 		if name == 'akrg123@gmail.com' and  password == 'akrgadmincp':
 			session['loggedin'] = True
-			return render_template('s1.html')
+			return render_template('files1.html')
 	return render_template('firebase.html')
 
 @app.route('/validate1',methods = ['GET','POST'])
