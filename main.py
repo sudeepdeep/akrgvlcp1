@@ -57,8 +57,9 @@ def checkmarks():
 
 @app.route('/checking',methods = ['GET','POST'])
 def checking():
-	try:
-		if request.method == 'POST':
+	if request.method == 'POST':
+		try:
+
 			regno = request.form['regno']
 			ear = request.form['ear']
 			try:
@@ -90,14 +91,15 @@ def checking():
 										data1[a2] = tp
 
 
-				return render_template('ress.html',res1=res1, res2 = res2,data = data,data1 = data1)
+
+				return render_template('ress.html',res1=res1, res2 = res2,data = data,data1 = data1,ft = ft)
 
 			except:
-				res1 = db.child(ear).child(regno).child("mid1").get()
+				res1 = db.child(ear).child(regno).child("mid 1").get()
 				res2 = "No Data Found"
 				return render_template('ress.html',res1 = res1,res2 = res2)
-	except:
-		return "No Data Found/Incorrect Details Entered!!
+		except:
+			return "No data Found/Incorrect Details Entered!!"
 	
 	return render_template('checkmarks.html')
 @app.route("/check")
