@@ -75,13 +75,13 @@ def checking():
 								if v1 > v2:
 									ep = (v1*80)/100
 									tp = (v2*20)/100
-									data[a2+'1'] = ep
-									data1[a2+'2'] = tp
+									data[a2] = ep
+									data1[a2] = tp
 								elif v1 <= v2:
 									ep = (v2*80)/100
 									tp = (v1*20)/100
-									data[a2+'1'] = ep
-									data1[a2+'2'] = tp
+									data[a2] = ep
+									data1[a2] = tp
 
 
 			return render_template('ress.html',res1=res1, res2 = res2,data = data,data1 = data1)
