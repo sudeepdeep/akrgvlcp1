@@ -65,6 +65,7 @@ def checking():
 			res2 = db.child(ear).child(regno).child("mid 2").get()
 			data = {}
 			data1 = {}
+			ft = {}
 			for task in res1.each():
 				for task1 in res2.each():
 					for a,b in task.val().items():
@@ -75,11 +76,15 @@ def checking():
 								if v1 > v2:
 									ep = (v1*80)/100
 									tp = (v2*20)/100
+									fp = ep+tp
+									ft[a2] = fp
 									data[a2] = ep
 									data1[a2] = tp
 								elif v1 <= v2:
 									ep = (v2*80)/100
 									tp = (v1*20)/100
+									fp = ep+tp
+									ft[a2] = fp
 									data[a2] = ep
 									data1[a2] = tp
 
