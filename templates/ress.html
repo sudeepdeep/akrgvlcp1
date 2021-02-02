@@ -11,35 +11,72 @@
 	</style>
 </head>
 <body>
-	<table width="100%">
-		<tr><td align="center" width="25%" style="background: rgb(255,255,255);
-background: linear-gradient(270deg, rgba(255,255,255,0) 0%, rgba(244,221,39,1) 99%);"><h1>Mid-I</h1>
-{% if res1 == "No Data Found"%}
-<h1>No Data Found</h1>
-{% elif res2 == "No Data Found" %}
-<h1>No Data Found</h1>
+{% if res2 == "No Data Found"%}
+<h1 style="color:green;">Mid-I</h1>
+
+	{% for task in res1.each() %}
+{% for a,b in task.val().items() %}
+
+<h1>{{a}} : {{b}}/30</h1><br>
+{% endfor %}
+
+<h1 style="color: green;">Mid-II</h1>
+<h4>No Data Found</h4>
+{% endfor %}
 {% else %}
+	<table width="100%" border="2px solid black">
+<tr>
+	<td align="center" style="background: rgb(255,255,255);
+background: linear-gradient(270deg, rgba(255,255,255,0) 0%, rgba(244,221,39,1) 99%);" colspan="2">
+	<h3>Mid-I</h3>
 {% for task in res1.each() %}
 {% for a,b in task.val().items() %}
-<h4>{{a}} : {{b}}</h4><br>{% endfor %}{% endfor %}</td>
-<td align="center" width="25%" style="background: rgb(255,255,255);
-background: linear-gradient(270deg, rgba(255,255,255,0) 0%, rgba(244,221,39,1) 99%);"><h1>Mid-II</h1>
+
+<h3>{{a}} : {{b}}</h3><br>{% endfor %}{% endfor %}</td>
+<td align="center" width="20%" style="background: rgb(255,255,255);
+background: linear-gradient(270deg, rgba(255,255,255,0) 0%, rgba(244,221,39,1) 99%);" colspan="2">
+
+<h3>Mid-II</h3>
 {% for task1 in res2.each() %}
 {% for k,v in task1.val().items() %}
-<h4>{{k}} : {{v}}</h4><br>{% endfor %}{% endfor %}</td>
-<td align="center" width="25%" style="background: rgb(255,255,255);
-background: linear-gradient(270deg, rgba(255,255,255,0) 0%, rgba(244,221,39,1) 99%);"><h3>80%</h3>
-	{% for i,j in data.items() %}
-	<h4>{{j}}</h4><br>{% endfor %}
+
+<h3>{{k}} : {{v}}</h3><br>{% endfor %}{% endfor %}</td></tr>
+<tr>
+	<td align="center" width="25%" style="background: rgb(255,255,255);
+background: linear-gradient(270deg, rgba(255,255,255,0) 0%, rgba(244,221,39,1) 99%);" >
+<h3>80%</h3>
+{% for i,j in data.items() %}
+{{i}}: {{j}}<br>
+{% endfor %}
+</td>
+	<td align="center" width="25%" style="background: rgb(255,255,255);
+background: linear-gradient(270deg, rgba(255,255,255,0) 0%, rgba(244,221,39,1) 99%);" >
+<h3>20%</h3>
+{% for i,j in data1.items() %}
+{{i}}: {{j}}<br>
+{% endfor %}
+</td>
+
+
+	<td align="center" width="25%" style="background: rgb(255,255,255);
+background: linear-gradient(270deg, rgba(255,255,255,0) 0%, rgba(244,221,39,1) 99%);" >
+<h3>FINAL TOTAL</h3>
+{% for i,j in ft.items() %}
+{{i}}: {{j}}<br>
+{% endfor %}
 </td>
 <td align="center" width="25%" style="background: rgb(255,255,255);
-background: linear-gradient(270deg, rgba(255,255,255,0) 0%, rgba(244,221,39,1) 99%);"><h3>20%</h3>
-	{% for i,j in data1.items() %}
-	<h4>{{j}}</h4><br>{% endfor %}
-</td>
+background: linear-gradient(270deg, rgba(255,255,255,0) 0%, rgba(244,221,39,1) 99%);" >
+<h3>Result</h3>
+{% for i,j in ft.items() %}
+{% if j >= 10.0 %}
+{{i}} : <img src= "{{url_for('static',filename = 'images/gt.png')}}" width="20px" height="20px"><br>
+{% else %}
+{{i}} : <img src = "{{url_for('static',filename = 'images/ri.png')}}" width="20px" height="20px"><br>
+{% endif %}
+{% endfor %}</td>
 </tr>
 {% endif %}
-
 </table>
 </body>
 </html>
