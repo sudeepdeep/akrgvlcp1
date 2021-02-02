@@ -170,13 +170,10 @@ def delete():
 	try:
 		if 'loggedin' in session:
 			if request.method == 'POST':
+				mid = request.form['mid']
 				regno = request.form['registerno']
 				semid = request.form['semid']
-				del_list = db.child(regno).get()
-				for a in del_list.each():
-					if a.val()['Sem'] == semid:
-						b = a.key()
-				db.child(regno).child(b).remove()
+				db.child(semid).child(regno).child(mid).remove()
 				message = 'Data Deleted Successfully'
 				return render_template('update.html',msg = message)
 		else:
