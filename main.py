@@ -57,44 +57,47 @@ def checkmarks():
 
 @app.route('/checking',methods = ['GET','POST'])
 def checking():
-	if request.method == 'POST':
-		regno = request.form['regno']
-		ear = request.form['ear']
-		try:
-			res1 = db.child(ear).child(regno).child("mid 1").get()
-			res2 = db.child(ear).child(regno).child("mid 2").get()
-			data = {}
-			data1 = {}
-			ft = {}
-			for task in res1.each():
-				for task1 in res2.each():
-					for a,b in task.val().items():
-						for a2,b2 in task1.val().items():
-							if a == a2:
-								v1 = int(b)
-								v2 = int(b2)
-								if v1 > v2:
-									ep = (v1*80)/100
-									tp = (v2*20)/100
-									fp = ep+tp
-									ft[a2] = fp
-									data[a2] = ep
-									data1[a2] = tp
-								elif v1 <= v2:
-									ep = (v2*80)/100
-									tp = (v1*20)/100
-									fp = ep+tp
-									ft[a2] = fp
-									data[a2] = ep
-									data1[a2] = tp
+	try:
+		if request.method == 'POST':
+			regno = request.form['regno']
+			ear = request.form['ear']
+			try:
+				res1 = db.child(ear).child(regno).child("mid 1").get()
+				res2 = db.child(ear).child(regno).child("mid 2").get()
+				data = {}
+				data1 = {}
+				ft = {}
+				for task in res1.each():
+					for task1 in res2.each():
+						for a,b in task.val().items():
+							for a2,b2 in task1.val().items():
+								if a == a2:
+									v1 = int(b)
+									v2 = int(b2)
+									if v1 > v2:
+										ep = (v1*80)/100
+										tp = (v2*20)/100
+										fp = ep+tp
+										ft[a2] = fp
+										data[a2] = ep
+										data1[a2] = tp
+									elif v1 <= v2:
+										ep = (v2*80)/100
+										tp = (v1*20)/100
+										fp = ep+tp
+										ft[a2] = fp
+										data[a2] = ep
+										data1[a2] = tp
 
 
-			return render_template('ress.html',res1=res1, res2 = res2,data = data,data1 = data1)
+				return render_template('ress.html',res1=res1, res2 = res2,data = data,data1 = data1)
 
-		except:
-			res1 = db.child(ear).child(regno).child("mid1").get()
-			res2 = "No Data Found"
-			return render_template('ress.html',res1 = res1,res2 = res2)
+			except:
+				res1 = db.child(ear).child(regno).child("mid1").get()
+				res2 = "No Data Found"
+				return render_template('ress.html',res1 = res1,res2 = res2)
+	except:
+		return "No Data Found/Incorrect Details Entered!!
 	
 	return render_template('checkmarks.html')
 @app.route("/check")
