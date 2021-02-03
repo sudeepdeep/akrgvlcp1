@@ -1295,7 +1295,6 @@ def radio():
 		else:
 			message = "You're Poor in this subject!!"
 			color = 'red'
-		slist = session['lst2']
 		wrong1 = [wrong_dict]
 		return render_template('register.html',score = i,color=color,message = message,wrong1 = wrong1,ca = correct_ans,wa = wrong_ans,lst2 = wrong_qstn)
 	return render_template('testpaper.html')
