@@ -19,6 +19,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Francois+One&family=Lobster&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Righteous&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Contrail+One&family=Fugaz+One&family=Leckerli+One&family=Marcellus+SC&family=Righteous&family=Rubik+Mono+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Varela+Round&display=swap');
 body > #bg{
 	height: 100%;
 	width: 100%;
@@ -307,7 +308,17 @@ marquee img{
 
 }
 
+div.btn{
+	width: 60%;
+}
 
+div.btn button{
+	transition: transform .2s;
+}
+
+div.btn button:hover{
+	transform: scale(1.2);
+}
 
 
 </style>
@@ -375,7 +386,7 @@ function topFunction() {
 		<ul class="nav justify-content-center">
 		<ul class="nav nav-pills">
   <li class="nav-item">
-  	<button type="button" class="btn btn-primary" style="box-shadow: -8px -8px 8px 0 rgba(0, 0, 0, 0.4), 0 6px 20px 0 rgba(0, 0, 0, 0.19); border: 0px solid black; background-color: #0D6EFD; color: white;border-radius: 50px;  ">
+  	<button type="button" class="btn btn-primary" style="box-shadow: -8px -8px 8px 0 rgba(0, 0, 0, 0.4), 0 6px 20px 0 rgba(0, 0, 0, 0.19); border: 0px solid black; background-color: #0D6EFD; color: white;border-radius: 50px; ">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-house-fill" viewBox="0 0 16 16">
   <path fill-rule="evenodd" d="M8 3.293l6 6V13.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 13.5V9.293l6-6zm5-.793V6l-2-2V2.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5z"></path>
   <path fill-rule="evenodd" d="M7.293 1.5a1 1 0 0 1 1.414 0l6.647 6.646a.5.5 0 0 1-.708.708L8 2.207 1.354 8.854a.5.5 0 1 1-.708-.708L7.293 1.5z"></path>
@@ -434,15 +445,24 @@ function topFunction() {
 		</td>
 	</tr>
 	
-	<tr style="background: #37517E;
-background: linear-gradient(259deg, rgba(255,255,255,1) 34%, rgba(255,235,42,1) 100%);">
+	<tr>
 		<div class = "inside">
+			<tr>
+		<td align="center" width="50%" height="40px;">
+		</td>
+		<td  align="center" width="50%">
+		</td>
+	</tr>
 		<td align="center" width="50%">
-			<a href = "/c" ><img src = "{{url_for('static',filename = 'images/cc.png')}}" 	width="30%;"></a>
+			<div class = "btn">
+			<button style="background-image: url({{url_for('static',filename = 'images/bgm1.jpg')}}); border-radius: 10px; border-color: black; height: 200px; width: 100%;font-family: 'Varela Round', sans-serif; color: black;box-shadow: -15px -12px 8px rgba(0, 0, 0, 0.4); ">
+				<a href = "/c" style="color: white; text-decoration: none;"><img src = "{{url_for('static',filename = 'images/cc.png')}}" height="45px" width="45px"><br><b>C Programming</b></a></button></div>
 
 		</td>
 		<td  align="center" width="50%">
-			<a href = "/c1"><img src = "{{url_for('static',filename = 'images/c+++.png')}}" width="25%;" ></a>
+			<div class = "btn">
+			<button style="background-image: url({{url_for('static',filename = 'images/bgm1.jpg')}}); border-radius: 10px; border-color: black; height: 200px; width: 100%;font-family: 'Varela Round', sans-serif; color: black;box-shadow: -15px -12px 8px rgba(0, 0, 0, 0.4); ">
+				<a href = "/c1" style="color: white; text-decoration: none;"><img src = "{{url_for('static',filename = 'images/c+++.png')}}" height="40px" width="40px"><br><b>C++ Programming</b></a></button></div>
 			
 		</td>
 	</tr>
@@ -452,13 +472,16 @@ background: linear-gradient(259deg, rgba(255,255,255,1) 34%, rgba(255,235,42,1) 
 		<td  align="center" width="50%">
 		</td>
 	</tr>
-	<tr style="background: #37517E;
-background: linear-gradient(90deg, rgba(255,255,255,1) 34%, rgba(255,235,42,1) 100%);">
+	<tr>
 		<td align="center" width="50%">
-			<a href = "/python"><img src = "{{url_for('static',filename = 'images/python.png')}}"  width="30%;"></a>
+			<div class = "btn">
+			<button style="background-image: url({{url_for('static',filename = 'images/bgm1.jpg')}}); border-radius: 10px; border-color: black; height: 200px; width: 100%;font-family: 'Varela Round', sans-serif; color: black;box-shadow: -15px -12px 8px rgba(0, 0, 0, 0.4); ">
+				<a href = "/python" style="color: white; text-decoration: none;"><img src = "{{url_for('static',filename = 'images/python.png')}}" height="40px" width="40px"><br><b>Python Programming</b></a></button></div>
 		</td>
 		<td  align="center" width="50%">
-			<a href = "/java"><img src = "{{url_for('static',filename = 'images/java1.png')}}" width="30%;" ></a>
+			<div class = "btn">
+			<button style="background-image: url({{url_for('static',filename = 'images/bgm1.jpg')}}); border-radius: 10px; border-color: black; height: 200px; width: 100%;font-family: 'Varela Round', sans-serif; color: black;box-shadow: -15px -12px 8px rgba(0, 0, 0, 0.4); ">
+				<a href = "/java" style="color: white; text-decoration: none;"><img src = "{{url_for('static',filename = 'images/java1.png')}}" height="40px" width="40px"><br><b>Java Programming</b></a></button></div>
 		</td>
 	</tr>
 <tr>
@@ -467,13 +490,16 @@ background: linear-gradient(90deg, rgba(255,255,255,1) 34%, rgba(255,235,42,1) 1
 		<td  align="center" width="50%">
 		</td>
 	</tr>
-	<tr style="background: #37517E;
-background: linear-gradient(259deg, rgba(255,255,255,1) 34%, rgba(255,235,42,1) 100%);">
+	<tr>
 		<td align="center" width="50%">
-			<a href = "/ds"><img src = "{{url_for('static',filename = 'images/ds.png')}}"  width="40%"></a>
+			<div class = "btn">
+			<button style="background-image: url({{url_for('static',filename = 'images/bgm1.jpg')}}); border-radius: 10px; border-color: black; height: 200px; width: 100%;font-family: 'Varela Round', sans-serif; color: black;box-shadow: -15px -12px 8px rgba(0, 0, 0, 0.4); ">
+				<a href = "/ds" style="color: white; text-decoration: none;"><img src = "{{url_for('static',filename = 'images/ds.png')}}" height="60px" width="60px"><br><b>Data Structures</b></a></button></div>
 		</td>
 		<td  align="center" width="50%">
-			<a href = "/ads"><img src = "{{url_for('static',filename = 'images/ads.png')}}" width="30%;" ></a>
+			<div class = "btn">
+			<button style="background-image: url({{url_for('static',filename = 'images/bgm1.jpg')}}); border-radius: 10px; border-color: black; height: 200px; width: 100%;font-family: 'Varela Round', sans-serif; color: black;box-shadow: -15px -12px 8px rgba(0, 0, 0, 0.4); ">
+				<a href = "/ads" style="color: white; text-decoration: none;"><img src = "{{url_for('static',filename = 'images/ads.png')}}" height="40px" width="40px"><br><b>Advance Data Structures</b></a></button></div>
 		</td>
 	</tr>
 	<tr>
@@ -482,13 +508,16 @@ background: linear-gradient(259deg, rgba(255,255,255,1) 34%, rgba(255,235,42,1) 
 		<td  align="center" width="50%">
 		</td>
 	</tr>
-	<tr style="background: #37517E;
-background: linear-gradient(90deg, rgba(255,255,255,1) 34%, rgba(255,235,42,1) 100%);">
+	<tr>
 		<td align="center" width="50%">
-			<a href = "/htm"><img src = "{{url_for('static',filename = 'images/html.png')}}"  width="30%;"></a>
+			<div class = "btn">
+			<button style="background-image: url({{url_for('static',filename = 'images/bgm1.jpg')}}); border-radius: 10px; border-color: black; height: 200px; width: 100%;font-family: 'Varela Round', sans-serif; color: black;box-shadow: -15px -12px 8px rgba(0, 0, 0, 0.4); ">
+				<a href = "/htm" style="color: white; text-decoration: none;"><img src = "{{url_for('static',filename = 'images/html.png')}}" height="40px" width="40px"><br><b>Web Technologies</b></a></button></div>
 		</td>
 		<td  align="center" width="50%">
-			<a href = "/sql"><img src = "{{url_for('static',filename = 'images/sql2.png')}}" width="30%;" ></a>
+			<div class = "btn">
+			<button style="background-image: url({{url_for('static',filename = 'images/bgm1.jpg')}}); border-radius: 10px; border-color: black; height: 200px; width: 100%;font-family: 'Varela Round', sans-serif; color: black;box-shadow: -15px -12px 8px rgba(0, 0, 0, 0.4); ">
+				<a href = "/sql" style="color: white; text-decoration: none;"><img src = "{{url_for('static',filename = 'images/sql2.png')}}" height="45px" width="45px"><br><b>SQL Programming</b></a></button></div>
 		</td>
 	</tr>
 <tr>
@@ -497,13 +526,16 @@ background: linear-gradient(90deg, rgba(255,255,255,1) 34%, rgba(255,235,42,1) 1
 		<td  align="center" width="50%">
 		</td>
 	</tr>
-	<tr style="background: #37517E;
-background: linear-gradient(259deg, rgba(255,255,255,1) 34%, rgba(255,235,42,1) 100%);">
+	<tr>
 		<td align="center" width="50%">
-			<a href = "/ml"><img src = "{{url_for('static',filename = 'images/ml.png')}}"  width="30%;" style="padding-top: 20px;padding-bottom: 20px;"></a>
+			<div class = "btn">
+			<button style="background-image: url({{url_for('static',filename = 'images/bgm1.jpg')}}); border-radius: 10px; border-color: black; height: 200px; width: 100%;font-family: 'Varela Round', sans-serif; color: black;box-shadow: -15px -12px 8px rgba(0, 0, 0, 0.4); ">
+				<a href = "/ml" style="color: white; text-decoration: none;"><img src = "{{url_for('static',filename = 'images/ml.png')}}" height="40px" width="40px"><br><b>Unified Model Language</b></a></button></div>
 		</td>
 		<td  align="center" width="50%">
-			<a href = "/rp"><img src = "{{url_for('static',filename = 'images/rp.png')}}"  width="30%;"></a>
+			<div class = "btn">
+			<button style="background-image: url({{url_for('static',filename = 'images/bgm1.jpg')}}); border-radius: 10px; border-color: black; height: 200px; width: 100%;font-family: 'Varela Round', sans-serif; color: black;box-shadow: -15px -12px 8px rgba(0, 0, 0, 0.4); ">
+				<a href = "/rp" style="color: white; text-decoration: none;"><img src = "{{url_for('static',filename = 'images/rp.png')}}" height="40px" width="40px"><br><b>R Programming</b></a></button></div>
 		</td>
 	</tr>
 	<tr>
@@ -512,10 +544,11 @@ background: linear-gradient(259deg, rgba(255,255,255,1) 34%, rgba(255,235,42,1) 
 		<td  align="center" width="50%">
 		</td>
 	</tr>
-	<tr style="background: #37517E;
-background: linear-gradient(90deg, rgba(255,255,255,1) 34%, rgba(255,235,42,1) 100%);">
+	<tr>
 		<td align="center" width="50%">
-			<a href = "/nix"><img src = "{{url_for('static',filename = 'images/nix.png')}}" width="30%;" style="padding-top: 20px; padding-bottom: 20px;"></a>
+			<div class = "btn">
+			<button style="background-image: url({{url_for('static',filename = 'images/bgm1.jpg')}}); border-radius: 10px; border-color: black; height: 200px; width: 100%;font-family: 'Varela Round', sans-serif; color: black;box-shadow: -15px -12px 8px rgba(0, 0, 0, 0.4); ">
+				<a href = "/nix" style="color: white; text-decoration: none;"><img src = "{{url_for('static',filename = 'images/nix.png')}}" height="30px" width="40px"><br><b>Unix Programming</b></a></button></div>
 		</td>
 		<td  align="center" width="50%">
 			<a href = "#"></a>
