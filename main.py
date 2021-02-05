@@ -154,7 +154,7 @@ def download():
 	pdf.output(filen)
 	storage.child(f"pdf/{filen}").put(filen)
 	url1 = storage.child(f'pdf/{filen}').get_url(None)
-	webbrowser.open(url1)
+	webbrowser.open(url1,new = 2)
 	return redirect(url_for('downloading'))
 @app.route('/downloading')
 def downloading():
