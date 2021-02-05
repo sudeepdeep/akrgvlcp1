@@ -4,6 +4,7 @@ import random
 import string
 from fpdf import FPDF
 import pyrebase
+import os
 
 
 config = {
@@ -128,6 +129,7 @@ def download():
 				mid2 = mid2 + f"{a} --> {b}\n"
 	except:
 		res1 = db.child(ear).child(regno).child("mid 1").get()
+		mid2 = mid2+"No Data Found"
 		for marks in res1.each():
 			for a,b in marks.val().items():
 				a = str(a)
@@ -146,7 +148,9 @@ def download():
 	pdf.cell(200, 10, txt = mid2,ln = 2, align = 'C')
 	random1 = ''.join([random.choice(string.ascii_letters 
             + string.digits) for n in range(10)]) 
-	pdf.output(f'{regno}-{ear}-{random1}.pdf')
+	filen = f'{regno}-{ear}-{random1}.pdf'
+	pdf.output(filen)
+	os.startfile(filen)
 	return render_template('download.html')
 
 @app.route("/check")
