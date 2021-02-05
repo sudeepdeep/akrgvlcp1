@@ -1,7 +1,8 @@
 from flask import Flask,render_template,url_for
 from flask import *
 import random
-
+import string
+from fpdf import FPDF
 import pyrebase
 
 
@@ -62,6 +63,8 @@ def checking():
 
 			regno = request.form['regno']
 			ear = request.form['ear']
+			session['ear'] = ear
+			session['regno'] = regno
 			try:
 				res1 = db.child(ear).child(regno).child("mid 1").get()
 				res2 = db.child(ear).child(regno).child("mid 2").get()
@@ -102,6 +105,50 @@ def checking():
 			return "No data Found/Incorrect Details Entered!!"
 	
 	return render_template('checkmarks.html')
+@app.route('/download')
+def download():
+	mid1 = ""
+	mid2 = ""
+	regno = session['regno']
+	ear = session['ear']
+	regno = str(regno)
+	ear = str(ear)
+	try:
+		res1 = db.child(ear).child(regno).child("mid 1").get()
+		res2 = db.child(ear).child(regno).child("mid 2").get()
+		for marks in res1.each():
+			for a,b in marks.val().items():
+				a = str(a)
+				b = str(b)
+				mid1 = mid1 + f"{a} --> {b}\n"
+		for marks1 in res2.each():
+			for a,b in marks1.val().items():
+				a = str(a)
+				b = str(b)
+				mid2 = mid2 + f"{a} --> {b}\n"
+	except:
+		res1 = db.child(ear).child(regno).child("mid 1").get()
+		for marks in res1.each():
+			for a,b in marks.val().items():
+				a = str(a)
+				b = str(b)
+				mid1 = mid1 + f"{a} --> {b}\n"
+
+
+	pdf = FPDF()
+
+	pdf.add_page() 
+
+	pdf.set_font("Arial", size = 15)
+	pdf.cell(200, 10, txt = "mid 1",ln = 1, align = 'C')
+	pdf.cell(200, 10, txt = mid1,ln = 1, align = 'C')
+	pdf.cell(200, 10, txt = "mid 2",ln = 1, align = 'C')
+	pdf.cell(200, 10, txt = mid2,ln = 2, align = 'C')
+	random1 = ''.join([random.choice(string.ascii_letters 
+            + string.digits) for n in range(10)]) 
+	pdf.output(f'{regno}-{ear}-{random1}.pdf')
+	return render_template('download.html')
+
 @app.route("/check")
 def check():
 	return render_template('final.html')
