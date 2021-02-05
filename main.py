@@ -4,7 +4,7 @@ import random
 import string
 from fpdf import FPDF
 import pyrebase
-import os
+import webbrowser
 
 
 config = {
@@ -19,6 +19,7 @@ config = {
 }
 
 firebase = pyrebase.initialize_app(config)
+storage = firebase.storage()
 db = firebase.database()
 app = Flask(__name__)
 app.secret_key = "hellosudeep"
@@ -149,9 +150,16 @@ def download():
 	random1 = ''.join([random.choice(string.ascii_letters 
             + string.digits) for n in range(10)]) 
 	filen = f'{regno}-{ear}-{random1}.pdf'
+	session['filen'] = filen
 	pdf.output(filen)
-	os.startfile(filen)
-	return render_template('download.html')
+	storage.child(f"pdf/{filen}").put(filen)
+	url1 = storage.child(f'pdf/{filen}').get_url(None)
+	webbrowser.open(url1)
+	return redirect(url_for('downloading'))
+@app.route('/downloading')
+def downloading():
+	
+	return render_template('downloading.html')
 
 @app.route("/check")
 def check():
