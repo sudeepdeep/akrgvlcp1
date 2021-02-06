@@ -70,9 +70,21 @@ def checking():
 			try:
 				res1 = db.child(ear).child(regno).child("mid 1").get()
 				res2 = db.child(ear).child(regno).child("mid 2").get()
+				mid1 = ""
+				mid2 = ""
 				data = {}
 				data1 = {}
 				ft = {}
+				for marks in res1.each():
+					for a,b in marks.val().items():
+						a = str(a)
+						b = str(b)
+						mid1 =  mid1 + f" {a} --> {b} ||"
+				for marks1 in res2.each():
+					for a,b in  marks1.val().items():
+						a = str(a)
+						b = str(b)
+						mid2 = mid2 + f" {a} --> {b} ||"
 				for task in res1.each():
 					for task1 in res2.each():
 						for a,b in task.val().items():
@@ -96,70 +108,57 @@ def checking():
 										data1[a2] = tp
 
 
+				pdf = FPDF()
 
-				return render_template('ress.html',res1=res1, res2 = res2,data = data,data1 = data1,ft = ft)
+				pdf.add_page() 
+
+				pdf.set_font("Arial", size = 15)
+				pdf.cell(200, 10, txt = "mid 1",ln = 1, align = 'C')
+				pdf.cell(200, 10, txt = mid1,ln = 1, align = 'C')
+				pdf.cell(200, 10, txt = "mid 2",ln = 1, align = 'C')
+				pdf.cell(200, 10, txt = mid2,ln = 2, align = 'C')
+				random1 = ''.join([random.choice(string.ascii_letters 
+			            + string.digits) for n in range(10)]) 
+				filen = f'{regno}-{ear}-{random1}.pdf'
+				session['filen'] = filen
+				pdf.output(filen)
+				storage.child(f"pdf/{filen}").put(filen)
+				url1 = storage.child(f'pdf/{filen}').get_url(None)
+				return render_template('ress.html',res1=res1, res2 = res2,data = data,data1 = data1,ft = ft,url = url1)
 
 			except:
+				mid1 = ""
+				mid2 = "No Data Found"
 				res1 = db.child(ear).child(regno).child("mid 1").get()
 				res2 = "No Data Found"
-				return render_template('ress.html',res1 = res1,res2 = res2)
+				for marks in res1.each():
+					for a,b in marks.val().items():
+						a = str(a)
+						b = str(b)
+						mid1 = mid1 + f" {a} --> {b} ||"
+				pdf = FPDF()
+
+				pdf.add_page() 
+
+				pdf.set_font("Arial", size = 15)
+				pdf.cell(200, 10, txt = "mid 1",ln = 1, align = 'C')
+				pdf.cell(200, 10, txt = mid1,ln = 1, align = 'C')
+				pdf.cell(200, 10, txt = "mid 2",ln = 1, align = 'C')
+				pdf.cell(200, 10, txt = mid2,ln = 2, align = 'C')
+				random1 = ''.join([random.choice(string.ascii_letters 
+			            + string.digits) for n in range(10)]) 
+				filen = f'{regno}-{ear}-{random1}.pdf'
+				session['filen'] = filen
+				pdf.output(filen)
+				storage.child(f"pdf/{filen}").put(filen)
+				url1 = storage.child(f'pdf/{filen}').get_url(None)
+				return render_template('ress.html',res1 = res1,res2 = res2,url = url1)
+	
 		except:
 			return "No data Found/Incorrect Details Entered!!"
 	
 	return render_template('checkmarks.html')
-@app.route('/download')
-def download():
-	mid1 = ""
-	mid2 = ""
-	regno = session['regno']
-	ear = session['ear']
-	regno = str(regno)
-	ear = str(ear)
-	try:
-		res1 = db.child(ear).child(regno).child("mid 1").get()
-		res2 = db.child(ear).child(regno).child("mid 2").get()
-		for marks in res1.each():
-			for a,b in marks.val().items():
-				a = str(a)
-				b = str(b)
-				mid1 = mid1 + f"{a} --> {b}\n"
-		for marks1 in res2.each():
-			for a,b in marks1.val().items():
-				a = str(a)
-				b = str(b)
-				mid2 = mid2 + f"{a} --> {b}\n"
-	except:
-		res1 = db.child(ear).child(regno).child("mid 1").get()
-		mid2 = mid2+"No Data Found"
-		for marks in res1.each():
-			for a,b in marks.val().items():
-				a = str(a)
-				b = str(b)
-				mid1 = mid1 + f"{a} --> {b}\n"
 
-
-	pdf = FPDF()
-
-	pdf.add_page() 
-
-	pdf.set_font("Arial", size = 15)
-	pdf.cell(200, 10, txt = "mid 1",ln = 1, align = 'C')
-	pdf.cell(200, 10, txt = mid1,ln = 1, align = 'C')
-	pdf.cell(200, 10, txt = "mid 2",ln = 1, align = 'C')
-	pdf.cell(200, 10, txt = mid2,ln = 2, align = 'C')
-	random1 = ''.join([random.choice(string.ascii_letters 
-            + string.digits) for n in range(10)]) 
-	filen = f'{regno}-{ear}-{random1}.pdf'
-	session['filen'] = filen
-	pdf.output(filen)
-	storage.child(f"pdf/{filen}").put(filen)
-	url1 = storage.child(f'pdf/{filen}').get_url(None)
-	webbrowser.open(url1,new = 2)
-	return redirect(url_for('downloading'))
-@app.route('/downloading')
-def downloading():
-	
-	return render_template('downloading.html')
 
 @app.route("/check")
 def check():
