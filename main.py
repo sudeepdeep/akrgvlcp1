@@ -5,6 +5,8 @@ import string
 from fpdf import FPDF
 import pyrebase
 import webbrowser
+from datetime import datetime
+import json
 
 
 config = {
@@ -23,6 +25,227 @@ storage = firebase.storage()
 db = firebase.database()
 app = Flask(__name__)
 app.secret_key = "hellosudeep"
+
+@app.route('/register')
+def register():
+	return render_template('register.html')
+
+@app.route('/signin')
+def signin():
+	if 'loggedin' in session:
+		return render_template('checkmarks.html')
+	else:
+		return render_template('login.html')
+
+
+
+
+@app.route('/authentication',methods = ['GET','POST'])
+def authentication():
+	if request.method == 'POST':
+		regno = request.form['regno']
+		password = request.form['password']
+		repassword = request.form['re-password']
+		if password == repassword:
+			data = {'regno':regno,'password':password}
+			db.child(regno).push(data)
+			return render_template('login.html')
+	return render_template('register.html')
+@app.route('/auth',methods = ['GET','POST'])
+def auth():
+	if request.method == 'POST':
+		regno = request.form['regno']
+		password = request.form['password']
+		try:
+			user = db.child(regno).get()
+			if user:
+				for details in user.each():
+					for a,b in details.val().items():
+						if a == 'password':
+							if b == password:
+								session['loggedin'] = True
+								session['reg'] = regno
+								return render_template('checkmarks.html',reg = regno)
+							else:
+								return "password incorrect"
+
+		except:
+			return "Incorrect Details....."
+	return render_template('login.html')
+@app.route('/logout')
+def logout():
+	session.pop('loggedin', None)
+	session.pop('reg', None)
+	return render_template('login.html')
+
+@app.route('/fees')
+def fees():
+	return render_template('feeselect.html')
+
+@app.route('/feesdetails',methods = ['GET','POST'])
+def feesdetails():
+	if request.method == 'POST':
+		f = request.files['file']
+		sem = request.form['sem']
+		
+		f.save(f.filename)
+		with open(f.filename,mode = 'r') as f:
+			csv_list = [[val.strip() for val in r.split(",")] for r in f.readlines()]
+
+		(_, *header), *data = csv_list
+		csv_dict = {}
+		for row in data:
+			key, *values = row
+			csv_dict[key] = {key: value for key, value in zip(header, values)}
+		for a,b in csv_dict.items():
+			db.child("fees").child(a).child(sem).push(b)
+		return "Successfully uploaded"
+		
+
+	return render_template('checkmarks.html')
+
+
+@app.route('/feescheck')
+def feescheck():
+	if 'loggedin' in session:
+		return render_template('feescheck.html',reg = regno)
+	else:
+		return render_template('login.html')
+
+@app.route('/fee',methods = ['GET','POST'])
+def fee():
+	if 'loggedin' in session:
+		if request.method == "POST":
+			regno = session['reg']
+			sem = request.form['sem']
+			fee_det = db.child("fees").child(regno).child(sem).order_by_key().limit_to_last(1).get()
+			return render_template('feeres.html',fee = fee_det,reg = regno,sem = sem)
+	else:
+		return render_template('login.html')
+
+	return render_template('feescheck.html')
+@app.route('/selectattendence')
+def selectattendence():
+	return render_template('selectattendence.html')
+
+@app.route('/attendenceupdate',methods = ['GET','POST'])
+def attendenceupdate():
+	if 'loggedin' in session:
+		if request.method == 'POST':
+			regno  =session['reg']
+			ac = 0
+			pc = 0
+			months = ['Jan','Feb','Mar','Apr','May','June','Jul','Aug','Sept','Oct','Nov','Dec']
+			today = datetime.today()
+			a = today.month - 1
+			curr_month = months[a]
+			f = request.files['file']
+			date = today.date()
+			f.save(f.filename)
+			with open(f.filename,mode = 'r') as f:
+				csv_list = [[val.strip() for val in r.split(",")] for r in f.readlines()]
+
+			(_, *header), *data = csv_list
+			csv_dict = {}
+			for row in data:
+				key, *values = row
+				csv_dict[key] = {key: value for key, value in zip(header, values)}
+			for a,b in csv_dict.items():
+				db.child("attendence").child(curr_month).child(date).child(a).push(b)
+			for a1,b1 in csv_dict.items():
+				data = db.child("attendence").child(curr_month).child(date).child(a1).get()
+				for att in data.each():
+					for a in att.val().items():
+
+						if a[1] == "1":
+			
+							pc = pc+1
+						elif a[1] == "0":
+							ac = ac+1
+
+				b = {
+				'total absent':ac,
+				'total present':pc
+				}
+
+				ac = 0
+				pc =0
+
+				data = db.child("attendence").child(curr_month).child(a1).push(b)
+			return "Successfully uploaded"
+
+	else:
+		return render_template('login.html')
+	return render_template('attendcheck.html')
+
+
+@app.route('/attendfirst')
+def attendfirst():
+	if 'loggedin' in session:
+		regno = session['reg']
+		hour = []
+		status = []
+		main_data = []
+		no = 0
+		months = ['Jan','Feb','Mar','Apr','May','June','Jul','Aug','Sept','Oct','Nov','Dec']
+		today = datetime.today()
+		a = today.month - 1
+		curr_month = months[a]
+		date = today.date()
+		data = db.child("attendence").child(curr_month).child(date).child(regno).order_by_key().limit_to_last(1).get()
+		for att in data.each():
+			for a in att.val().items():
+				hour.append(a[0])
+				if a[1] == "1":
+
+					status.append('Present')
+					no = no+1
+					
+				elif a[1] == "0":
+			
+					status.append('Absent')
+		per = int((no/7)*100)
+		
+		ac = []
+		pc =[]
+		data1 =  db.child("attendence").child(curr_month).child(regno).order_by_key().limit_to_last(1).get()
+		for att in data1.each():
+			for m,n in att.val().items():
+				
+				ac.append(m)
+				pc.append(n)
+		return render_template('attendcheck.html',hour = hour,status = status,reg = regno,per = per,ac = ac,pc = pc)
+	else:
+		return render_template('login.html')
+
+@app.route('/attendcheck')
+def attendcheck():
+	if 'loggedin' in session:
+		regno = session['reg']
+		hour = []
+		status = []
+		main_data = []
+		months = ['Jan','Feb','Mar','Apr','May','June','Jul','Aug','Sept','Oct','Nov','Dec']
+		today = datetime.today()
+		a = today.month - 1
+		curr_month = months[a]
+		date = today.date()
+		data = db.child("attendence").child(curr_month).child(date).child(regno).order_by_key().limit_to_last(1).get()
+		for att in data.each():
+			for a in att.val().items():
+				hour.append(a[0])
+				status.append(a[1])
+
+		data = {
+		"status":status
+		}
+	
+
+		return data
+
+	else:
+		return render_template('login.html')
+
 
 
 @app.route("/firebase")
