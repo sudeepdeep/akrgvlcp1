@@ -50,17 +50,17 @@ def authentication():
 			return render_template('home.html',btn = 'logout')
 		else:
 			regno = request.form['regno']
-			data1 = db.child(regno).get()
-			if data1:
-				return render_template('userregister.html,msg = "username already taken")
-			else:
-				
+			try:
+				data2 = db.child(regno).get()
+				if data2:
+					return render_template('userregister.html',msg = "Username already taken...")
+			except:
 				password = request.form['password']
 				repassword = request.form['re-password']
 				if password == repassword:
 					data = {'regno':regno,'password':password}
 					db.child(regno).push(data)
-					return render_template('userlogin.html',msg = "Register Successfull...")
+					return render_template('userlogin.html',msg = "Registration Successfull..")
 	return render_template('register.html')
 
 @app.route('/signin')
@@ -88,7 +88,7 @@ def auth():
 									session['reg'] = regno
 									return render_template('home.html',btn = 'logout')
 								else:
-									return "password incorrect"
+									return render_template('userlogin.html',msg = "Credentials Incorrect")
 
 			except:
 				return "Incorrect Details....."
