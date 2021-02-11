@@ -222,7 +222,7 @@ def fee():
 		if request.method == "POST":
 			regno = request.form['regno']
 			sem = request.form['sem']
-			fee_det = db.child("fees").child(regno).child(sem).order_by_key().limit_to_last(1).get()
+			fee_det = db.child("fees").child(regno).child(sem).get()
 			return render_template('feeres.html',fee = fee_det,reg = regno,sem = sem)
 	else:
 		return render_template('userlogin.html')
@@ -244,7 +244,7 @@ def attendfirst():
 		a = today.month - 1
 		curr_month = months[a]
 		date = today.date()
-		data = db.child("attendence").child(curr_month).child(date).child(regno).order_by_key().limit_to_last(1).get()
+		data = db.child("attendence").child(curr_month).child(date).child(regno).get()
 		print(data.each())
 		for att in data.each():
 			for a in att.val().items():
@@ -285,7 +285,7 @@ def attendcheck():
 	a = today.month - 1
 	curr_month = months[a]
 	date = today.date()
-	data = db.child("attendence").child(curr_month).child(date).child(regno).order_by_key().limit_to_last(1).get()
+	data = db.child("attendence").child(curr_month).child(date).child(regno).get()
 	for att in data.each():
 		for a in att.val().items():
 			hour.append(a[0])
