@@ -413,6 +413,37 @@ def feesdetails():
 
 	return render_template('feeselect.html')
 
+@app.route('/updatefees')
+def updatefees():
+	return render_template('selectupdatef.html')
+@app.route('/feeupdation',methods = ['GET','POST'])
+def feeupdation():
+	if request.method == 'POST':
+		f = request.files['file']
+		sem = request.form['sem']
+		
+		f.save(f.filename)
+		with open(f.filename,mode = 'r') as f:
+			csv_list = [[val.strip() for val in r.split(",")] for r in f.readlines()]
+
+		(_, *header), *data = csv_list
+		csv_dict = {}
+		for row in data:
+			key, *values = row
+			csv_dict[key] = {key: value for key, value in zip(header, values)}
+		for a,b in csv_dict.items():
+			data = db.child("fees").child(a).child(sem).get()
+			main_data = db.child("fees").child(a).child(sem).get()
+			db.child("fees").child(a).child(sem).remove()
+		for a,b in csv_dict.items():
+			db.child("fees").child(a).child(sem).push(b)
+			msg = "Successfully updated....."
+		return render_template("selectupdatef.html",msg = msg)
+
+	return render_template('feeupdation.html')
+
+
+
 @app.route('/selectattendence')
 def selectattendence():
 	if 'adminlogin' in session:
