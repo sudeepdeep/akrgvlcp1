@@ -26,13 +26,13 @@
 {% else %}
 	<table width="100%" border="2px solid black">
 <tr>
-	<td align="center" style="background-color:#37517e;color:white;" colspan="2">
+	<td align="center" style="background-color:#white;color:black;" colspan="2">
 	<h3>Mid-I</h3>
 {% for task in res1.each() %}
 {% for a,b in task.val().items() %}
 
-<h3 style="color: white">{{a}} : {{b}}</h3><br>{% endfor %}{% endfor %}</td>
-<td align="center" width="20%" style="background-color:#37517e;color:white;" colspan="2">
+<h3 style="color: black">{{a}} : {{b}}</h3><br>{% endfor %}{% endfor %}</td>
+<td align="center" width="20%" style="background-color:#white;color:black;" colspan="2">
 
 <h3>Mid-II</h3>
 {% for task1 in res2.each() %}
@@ -40,13 +40,13 @@
 
 <h3>{{k}} : {{v}}</h3><br>{% endfor %}{% endfor %}</td></tr>
 <tr>
-	<td align="center" width="25%" style="background-color:#37517e;color:white;">
+	<td align="center" width="25%" style="background-color:#white;color:black;">
 <h3>80%</h3>
 {% for i,j in data.items() %}
 {{i}}: {{j}}<br>
 {% endfor %}
 </td>
-	<td align="center" width="25%" style="background-color:#37517e;color:white;">
+	<td align="center" width="25%" style="background-color:#white;color:black;">
 <h3>20%</h3>
 {% for i,j in data1.items() %}
 {{i}}: {{j}}<br>
@@ -54,13 +54,13 @@
 </td>
 
 
-	<td align="center" width="25%" style="background-color:#37517e;color:white;">
+	<td align="center" width="25%" style="background-color:#white;color:black;">
 <h3>FINAL TOTAL</h3>
 {% for i,j in ft.items() %}
 {{i}}: {{j}}<br>
 {% endfor %}
 </td>
-<td align="center" width="25%" style="background-color:#37517e;color:white;" >
+<td align="center" width="25%" style="background-color:#white;color:black;" >
 <h3>Result</h3>
 {% for i,j in ft.items() %}
 {% if j >= 10.0 %}
