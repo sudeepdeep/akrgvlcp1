@@ -2,15 +2,6 @@
 <html>
 <head>
 	<title>Home Page</title>
-<script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async=""></script>
-<script>
-  window.OneSignal = window.OneSignal || [];
-  OneSignal.push(function() {
-    OneSignal.init({
-      appId: "3e023ee7-9d57-4bec-9d80-1a900fd78099",
-    });
-  });
-</script>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 <style type="text/css">
 
@@ -309,7 +300,7 @@ marquee img{
 }
 
 div.btn{
-	width: 70%;
+	width: 60%;
 }
 
 div.btn button{
@@ -374,6 +365,8 @@ function topFunction() {
 		<td colspan  = "2" align="center" width="100%" >
 			<div class = "heading">
 			<h1>Welcome to the Virtual lab of <br>AKRG CET</h1></div>
+			<button type="button" class="btn btn-primary" style="box-shadow: -8px -8px 8px 0 rgba(0, 0, 0, 0.4), 0 6px 20px 0 rgba(0, 0, 0, 0.19); border: 0px solid black; background-color: #0D6EFD; color: white;border-radius: 50px; "><a href = "/signin" style="color:white; text-decoration: none; font-size: 12px;">Student Login</a></button>
+			<button type="button" class="btn btn-primary" style="box-shadow: -8px -8px 8px 0 rgba(0, 0, 0, 0.4), 0 6px 20px 0 rgba(0, 0, 0, 0.19); border: 0px solid black; background-color: #0D6EFD; color: white;border-radius: 50px; "><a href = "/adminlogin" style="color: white; text-decoration: none; font-size: 12px;">Admin Login</a></button>
 		</td>
 	</tr>
 	<tr>
@@ -395,12 +388,14 @@ function topFunction() {
               </button>
   </li>
   <li class="nav-item">
-    <a class="nav-link" href="/firebase" style="color: white;">Mid Marks</a>
+    <a class="nav-link" href="/checkmarks" style="color: white;">Mid Marks</a>
   </li>
   <li class="nav-item">
-    <a class="nav-link" href="/test1" style="color: white;">Tests</a>
+    <a class="nav-link" href="/dashboard" style="color: white;">Dashboard</a>
   </li>
-  
+   <li class="nav-item">
+    <a class="nav-link" href="/logout" style="color: white;">{{btn}}</a>
+  </li>
 </ul></ul>
 	</td></tr>
 	<tr>
@@ -456,13 +451,13 @@ function topFunction() {
 		<td align="center" width="50%">
 			<div class = "btn">
 			<button style="background-image: url({{url_for('static',filename = 'images/bgm1.jpg')}}); border-radius: 10px; border-color: black; height: 200px; width: 100%;font-family: 'Varela Round', sans-serif; color: black;box-shadow: -15px -12px 8px rgba(0, 0, 0, 0.4); ">
-				<a href = "/c" style="color: white; text-decoration: none;"><img src = "{{url_for('static',filename = 'images/cc.png')}}" height="45px" width="45px"><br><b style="width: 100% ;text-align: justify-all; text-justify:inter-word;">CPP</b></a></button></div>
+				<a href = "/c" style="color: white; text-decoration: none;"><img src = "{{url_for('static',filename = 'images/cc.png')}}" height="45px" width="45px"><br><b style="text-align: justify-all; text-justify:inter-word;">C Programming</b></a></button></div>
 
 		</td>
 		<td  align="center" width="50%">
 			<div class = "btn">
 			<button style="background-image: url({{url_for('static',filename = 'images/bgm1.jpg')}}); border-radius: 10px; border-color: black; height: 200px; width: 100%;font-family: 'Varela Round', sans-serif; color: black;box-shadow: -15px -12px 8px rgba(0, 0, 0, 0.4); ">
-				<a href = "/c1" style="color: white; text-decoration: none;"><img src = "{{url_for('static',filename = 'images/c+++.png')}}" height="40px" width="40px"><br><b style="width: 100%;text-align: justify-all; text-justify:inter-word;">C++</b></a></button></div>
+				<a href = "/c1" style="color: white; text-decoration: none;"><img src = "{{url_for('static',filename = 'images/c+++.png')}}" height="40px" width="40px"><br><b>C++ Programming</b></a></button></div>
 			
 		</td>
 	</tr>
@@ -476,12 +471,12 @@ function topFunction() {
 		<td align="center" width="50%">
 			<div class = "btn">
 			<button style="background-image: url({{url_for('static',filename = 'images/bgm1.jpg')}}); border-radius: 10px; border-color: black; height: 200px; width: 100%;font-family: 'Varela Round', sans-serif; color: black;box-shadow: -15px -12px 8px rgba(0, 0, 0, 0.4); ">
-				<a href = "/python" style="color: white; text-decoration: none;"><img src = "{{url_for('static',filename = 'images/python.png')}}" height="40px" width="40px"><br><b style="width: 100%;text-align: justify-all; text-justify:inter-word;">Python</b></a></button></div>
+				<a href = "/python" style="color: white; text-decoration: none;"><img src = "{{url_for('static',filename = 'images/python.png')}}" height="40px" width="40px"><br><b>Python Programming</b></a></button></div>
 		</td>
 		<td  align="center" width="50%">
 			<div class = "btn">
 			<button style="background-image: url({{url_for('static',filename = 'images/bgm1.jpg')}}); border-radius: 10px; border-color: black; height: 200px; width: 100%;font-family: 'Varela Round', sans-serif; color: black;box-shadow: -15px -12px 8px rgba(0, 0, 0, 0.4); ">
-				<a href = "/java" style="color: white; text-decoration: none;"><img src = "{{url_for('static',filename = 'images/java1.png')}}" height="40px" width="40px"><br><b style="width: 100%;text-align: justify-all; text-justify:inter-word;">Java</b></a></button></div>
+				<a href = "/java" style="color: white; text-decoration: none;"><img src = "{{url_for('static',filename = 'images/java1.png')}}" height="40px" width="40px"><br><b>Java Programming</b></a></button></div>
 		</td>
 	</tr>
 <tr>
@@ -494,12 +489,12 @@ function topFunction() {
 		<td align="center" width="50%">
 			<div class = "btn">
 			<button style="background-image: url({{url_for('static',filename = 'images/bgm1.jpg')}}); border-radius: 10px; border-color: black; height: 200px; width: 100%;font-family: 'Varela Round', sans-serif; color: black;box-shadow: -15px -12px 8px rgba(0, 0, 0, 0.4); ">
-				<a href = "/ds" style="color: white; text-decoration: none;"><img src = "{{url_for('static',filename = 'images/ds.png')}}" height="60px" width="60px"><br><b style="width: 100%;text-align: justify-all; text-justify:inter-word;">Data Structures</b></a></button></div>
+				<a href = "/ds" style="color: white; text-decoration: none;"><img src = "{{url_for('static',filename = 'images/ds.png')}}" height="60px" width="60px"><br><b>Data Structures</b></a></button></div>
 		</td>
 		<td  align="center" width="50%">
 			<div class = "btn">
 			<button style="background-image: url({{url_for('static',filename = 'images/bgm1.jpg')}}); border-radius: 10px; border-color: black; height: 200px; width: 100%;font-family: 'Varela Round', sans-serif; color: black;box-shadow: -15px -12px 8px rgba(0, 0, 0, 0.4); ">
-				<a href = "/ads" style="color: white; text-decoration: none;"><img src = "{{url_for('static',filename = 'images/ads.png')}}" height="40px" width="40px"><br><b style="width: 100%;text-align: justify-all; text-justify:inter-word;">Advance Data Structures</b></a></button></div>
+				<a href = "/ads" style="color: white; text-decoration: none;"><img src = "{{url_for('static',filename = 'images/ads.png')}}" height="40px" width="40px"><br><b>Advance Data Structures</b></a></button></div>
 		</td>
 	</tr>
 	<tr>
@@ -512,12 +507,12 @@ function topFunction() {
 		<td align="center" width="50%">
 			<div class = "btn">
 			<button style="background-image: url({{url_for('static',filename = 'images/bgm1.jpg')}}); border-radius: 10px; border-color: black; height: 200px; width: 100%;font-family: 'Varela Round', sans-serif; color: black;box-shadow: -15px -12px 8px rgba(0, 0, 0, 0.4); ">
-				<a href = "/htm" style="color: white; text-decoration: none;"><img src = "{{url_for('static',filename = 'images/html.png')}}" height="40px" width="40px"><br><b style="width: 100%;text-align: justify-all; text-justify:inter-word;">HTML</b></a></button></div>
+				<a href = "/htm" style="color: white; text-decoration: none;"><img src = "{{url_for('static',filename = 'images/html.png')}}" height="40px" width="40px"><br><b>Web Technologies</b></a></button></div>
 		</td>
 		<td  align="center" width="50%">
 			<div class = "btn">
 			<button style="background-image: url({{url_for('static',filename = 'images/bgm1.jpg')}}); border-radius: 10px; border-color: black; height: 200px; width: 100%;font-family: 'Varela Round', sans-serif; color: black;box-shadow: -15px -12px 8px rgba(0, 0, 0, 0.4); ">
-				<a href = "/sql" style="color: white; text-decoration: none;"><img src = "{{url_for('static',filename = 'images/sql2.png')}}" height="45px" width="45px"><br><b style="width: 100%;text-align: justify-all; text-justify:inter-word;">SQL/<br>DBMS</b></a></button></div>
+				<a href = "/sql" style="color: white; text-decoration: none;"><img src = "{{url_for('static',filename = 'images/sql2.png')}}" height="45px" width="45px"><br><b>SQL Programming</b></a></button></div>
 		</td>
 	</tr>
 <tr>
@@ -530,12 +525,12 @@ function topFunction() {
 		<td align="center" width="50%">
 			<div class = "btn">
 			<button style="background-image: url({{url_for('static',filename = 'images/bgm1.jpg')}}); border-radius: 10px; border-color: black; height: 200px; width: 100%;font-family: 'Varela Round', sans-serif; color: black;box-shadow: -15px -12px 8px rgba(0, 0, 0, 0.4); ">
-				<a href = "/ml" style="color: white; text-decoration: none;"><img src = "{{url_for('static',filename = 'images/ml.png')}}" height="40px" width="40px"><br><b style="width: 100%;text-align: justify-all; text-justify:inter-word;">UML</b></a></button></div>
+				<a href = "/ml" style="color: white; text-decoration: none;"><img src = "{{url_for('static',filename = 'images/ml.png')}}" height="40px" width="40px"><br><b>Unified Model Language</b></a></button></div>
 		</td>
 		<td  align="center" width="50%">
 			<div class = "btn">
 			<button style="background-image: url({{url_for('static',filename = 'images/bgm1.jpg')}}); border-radius: 10px; border-color: black; height: 200px; width: 100%;font-family: 'Varela Round', sans-serif; color: black;box-shadow: -15px -12px 8px rgba(0, 0, 0, 0.4); ">
-				<a href = "/rp" style="color: white; text-decoration: none;"><img src = "{{url_for('static',filename = 'images/rp.png')}}" height="40px" width="40px"><br><b style="width: 100%;text-align: justify-all; text-justify:inter-word;">RP</b></a></button></div>
+				<a href = "/rp" style="color: white; text-decoration: none;"><img src = "{{url_for('static',filename = 'images/rp.png')}}" height="40px" width="40px"><br><b>R Programming</b></a></button></div>
 		</td>
 	</tr>
 	<tr>
@@ -548,7 +543,7 @@ function topFunction() {
 		<td align="center" width="50%">
 			<div class = "btn">
 			<button style="background-image: url({{url_for('static',filename = 'images/bgm1.jpg')}}); border-radius: 10px; border-color: black; height: 200px; width: 100%;font-family: 'Varela Round', sans-serif; color: black;box-shadow: -15px -12px 8px rgba(0, 0, 0, 0.4); ">
-				<a href = "/nix" style="color: white; text-decoration: none;"><img src = "{{url_for('static',filename = 'images/nix.png')}}" height="30px" width="40px"><br><b style="width: 100%;text-align: justify-all; text-justify:inter-word;">Unix/<br>Linux</b></a></button></div>
+				<a href = "/nix" style="color: white; text-decoration: none;"><img src = "{{url_for('static',filename = 'images/nix.png')}}" height="30px" width="40px"><br><b>Unix Programming</b></a></button></div>
 		</td>
 		<td  align="center" width="50%">
 			<a href = "#"></a>
