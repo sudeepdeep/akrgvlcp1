@@ -211,7 +211,8 @@ def dashboard():
 @app.route('/feescheck')
 def feescheck():
 	if 'loggedin' in session:
-		return render_template('feescheck.html')
+		regno = session['reg']
+		return render_template('feescheck.html',regno = regno)
 	else:
 		return render_template('userlogin.html')
 
@@ -219,14 +220,14 @@ def feescheck():
 def fee():
 	if 'loggedin' in session:
 		if request.method == "POST":
-			regno = session['reg']
+			regno = request.form['regno']
 			sem = request.form['sem']
 			fee_det = db.child("fees").child(regno).child(sem).order_by_key().limit_to_last(1).get()
 			return render_template('feeres.html',fee = fee_det,reg = regno,sem = sem)
 	else:
 		return render_template('userlogin.html')
 
-	return render_template('feescheck.html')
+	return render_template('home.html')
 
 
 
