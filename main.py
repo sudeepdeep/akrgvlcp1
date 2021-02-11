@@ -58,7 +58,7 @@ def authentication():
 				db.child(regno).push(data)
 				return render_template('userlogin.html',msg = "Registration Successfull..")
 			else:
-				return render_template('userregister.html',msg = "Password incorrect)
+				return render_template('userregister.html',msg = "Password incorrect")
 			
 	return render_template('userregister.html')
 	
