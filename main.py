@@ -1,298 +1,105 @@
 from flask import Flask,render_template,url_for
 from flask import *
+from pandas import *
+import random
+import pyrebase
+from fpdf import FPDF
+import json
 import random
 import string
-from fpdf import FPDF
-import pyrebase
-import webbrowser
+import os
 from datetime import datetime
-import json
-
-
 config = {
 	"apiKey": "AIzaSyD0fzFslus_LRDNQI022QHTAJ5Ch0vgpZ0",
-    "authDomain": "akrgtesting.firebaseapp.com",
-    "databaseURL": "https://akrgtesting-default-rtdb.firebaseio.com",
-    "projectId": "akrgtesting",
-    "storageBucket": "akrgtesting.appspot.com",
-    "messagingSenderId": "557661419296",
-    "appId": "1:557661419296:web:e0e73026a6e2a2770a4945",
-    "measurementId": "G-Y6P5JBQ7SV"
+	"authDomain": "akrgtesting.firebaseapp.com",
+	"databaseURL": "https://akrgtesting-default-rtdb.firebaseio.com",
+	"projectId": "akrgtesting",
+	"storageBucket": "akrgtesting.appspot.com",
+	"messagingSenderId": "557661419296",
+	"appId": "1:557661419296:web:e0e73026a6e2a2770a4945",
+	"measurementId": "G-Y6P5JBQ7SV"
 }
 
 firebase = pyrebase.initialize_app(config)
 storage = firebase.storage()
+authen = firebase.auth()
 db = firebase.database()
-app = Flask(__name__)
-app.secret_key = "hellosudeep"
 
-@app.route('/register')
-def register():
-	return render_template('register.html')
+app = Flask(__name__)
+
+app.secret_key = "hellosudeep"
+@app.route('/')
+
+def home():
+	if 'loggedin' in session:
+		return render_template('home.html',btn = 'logout')
+	else:
+		return render_template('home.html')
+
+
+@app.route('/register1')
+def register1():
+	if 'loggedin' in session:
+		return render_template('home.html')
+	else:
+		return render_template('register1.html')
 
 @app.route('/signin')
 def signin():
 	if 'loggedin' in session:
-		return render_template('checkmarks.html')
+		return render_template('home.html')
 	else:
-		return render_template('login.html')
-
-
-
-
-@app.route('/authentication',methods = ['GET','POST'])
-def authentication():
-	if request.method == 'POST':
-		regno = request.form['regno']
-		password = request.form['password']
-		repassword = request.form['re-password']
-		if password == repassword:
-			data = {'regno':regno,'password':password}
-			db.child(regno).push(data)
-			return render_template('login.html')
-	return render_template('register.html')
+		return render_template('userlogin.html')
 @app.route('/auth',methods = ['GET','POST'])
 def auth():
 	if request.method == 'POST':
-		regno = request.form['regno']
-		password = request.form['password']
-		try:
-			user = db.child(regno).get()
-			if user:
-				for details in user.each():
-					for a,b in details.val().items():
-						if a == 'password':
-							if b == password:
-								session['loggedin'] = True
-								session['reg'] = regno
-								return render_template('checkmarks.html',reg = regno)
-							else:
-								return "password incorrect"
+		if 'loggedin' in session:
+			return render_template('home.html', btn = 'logout')
+		else:
+			regno = request.form['regno']
+			password = request.form['password']
+			try:
+				user = db.child(regno).get()
+				if user:
+					for details in user.each():
+						for a,b in details.val().items():
+							if a == 'password':
+								if b == password:
+									session['loggedin'] = True
+									session['reg'] = regno
+									return render_template('home.html',btn = 'logout')
+								else:
+									return "password incorrect"
 
-		except:
-			return "Incorrect Details....."
-	return render_template('login.html')
+			except:
+				return "Incorrect Details....."
+	return render_template('home.html',btn = 'logout')
 @app.route('/logout')
 def logout():
 	session.pop('loggedin', None)
 	session.pop('reg', None)
-	return render_template('login.html')
+	return render_template('home.html')
 
-@app.route('/fees')
-def fees():
-	return render_template('feeselect.html')
-
-@app.route('/feesdetails',methods = ['GET','POST'])
-def feesdetails():
-	if request.method == 'POST':
-		f = request.files['file']
-		sem = request.form['sem']
-		
-		f.save(f.filename)
-		with open(f.filename,mode = 'r') as f:
-			csv_list = [[val.strip() for val in r.split(",")] for r in f.readlines()]
-
-		(_, *header), *data = csv_list
-		csv_dict = {}
-		for row in data:
-			key, *values = row
-			csv_dict[key] = {key: value for key, value in zip(header, values)}
-		for a,b in csv_dict.items():
-			db.child("fees").child(a).child(sem).push(b)
-		return "Successfully uploaded"
-		
-
-	return render_template('checkmarks.html')
-
-
-@app.route('/feescheck')
-def feescheck():
-	if 'loggedin' in session:
-		return render_template('feescheck.html',reg = regno)
-	else:
-		return render_template('login.html')
-
-@app.route('/fee',methods = ['GET','POST'])
-def fee():
-	if 'loggedin' in session:
-		if request.method == "POST":
-			regno = session['reg']
-			sem = request.form['sem']
-			fee_det = db.child("fees").child(regno).child(sem).order_by_key().limit_to_last(1).get()
-			return render_template('feeres.html',fee = fee_det,reg = regno,sem = sem)
-	else:
-		return render_template('login.html')
-
-	return render_template('feescheck.html')
-@app.route('/selectattendence')
-def selectattendence():
-	return render_template('selectattendence.html')
-
-@app.route('/attendenceupdate',methods = ['GET','POST'])
-def attendenceupdate():
-	if 'loggedin' in session:
-		if request.method == 'POST':
-			regno  =session['reg']
-			ac = 0
-			pc = 0
-			months = ['Jan','Feb','Mar','Apr','May','June','Jul','Aug','Sept','Oct','Nov','Dec']
-			today = datetime.today()
-			a = today.month - 1
-			curr_month = months[a]
-			f = request.files['file']
-			date = today.date()
-			f.save(f.filename)
-			with open(f.filename,mode = 'r') as f:
-				csv_list = [[val.strip() for val in r.split(",")] for r in f.readlines()]
-
-			(_, *header), *data = csv_list
-			csv_dict = {}
-			for row in data:
-				key, *values = row
-				csv_dict[key] = {key: value for key, value in zip(header, values)}
-			for a,b in csv_dict.items():
-				db.child("attendence").child(curr_month).child(date).child(a).push(b)
-			for a1,b1 in csv_dict.items():
-				data = db.child("attendence").child(curr_month).child(date).child(a1).get()
-				for att in data.each():
-					for a in att.val().items():
-
-						if a[1] == "1":
-			
-							pc = pc+1
-						elif a[1] == "0":
-							ac = ac+1
-
-				b = {
-				'total absent':ac,
-				'total present':pc
-				}
-
-				ac = 0
-				pc =0
-
-				data = db.child("attendence").child(curr_month).child(a1).push(b)
-			return "Successfully uploaded"
-
-	else:
-		return render_template('login.html')
-	return render_template('attendcheck.html')
-
-
-@app.route('/attendfirst')
-def attendfirst():
-	if 'loggedin' in session:
-		regno = session['reg']
-		hour = []
-		status = []
-		main_data = []
-		no = 0
-		months = ['Jan','Feb','Mar','Apr','May','June','Jul','Aug','Sept','Oct','Nov','Dec']
-		today = datetime.today()
-		a = today.month - 1
-		curr_month = months[a]
-		date = today.date()
-		data = db.child("attendence").child(curr_month).child(date).child(regno).order_by_key().limit_to_last(1).get()
-		for att in data.each():
-			for a in att.val().items():
-				hour.append(a[0])
-				if a[1] == "1":
-
-					status.append('Present')
-					no = no+1
-					
-				elif a[1] == "0":
-			
-					status.append('Absent')
-		per = int((no/7)*100)
-		
-		ac = []
-		pc =[]
-		data1 =  db.child("attendence").child(curr_month).child(regno).order_by_key().limit_to_last(1).get()
-		for att in data1.each():
-			for m,n in att.val().items():
-				
-				ac.append(m)
-				pc.append(n)
-		return render_template('attendcheck.html',hour = hour,status = status,reg = regno,per = per,ac = ac,pc = pc)
-	else:
-		return render_template('login.html')
-
-@app.route('/attendcheck')
-def attendcheck():
-	if 'loggedin' in session:
-		regno = session['reg']
-		hour = []
-		status = []
-		main_data = []
-		months = ['Jan','Feb','Mar','Apr','May','June','Jul','Aug','Sept','Oct','Nov','Dec']
-		today = datetime.today()
-		a = today.month - 1
-		curr_month = months[a]
-		date = today.date()
-		data = db.child("attendence").child(curr_month).child(date).child(regno).order_by_key().limit_to_last(1).get()
-		for att in data.each():
-			for a in att.val().items():
-				hour.append(a[0])
-				status.append(a[1])
-
-		data = {
-		"status":status
-		}
-	
-
-		return data
-
-	else:
-		return render_template('login.html')
-
-
-
-@app.route("/firebase")
-def firebase():
-	return render_template('firebase.html')
-@app.route('/select')
-def select():
-	return render_template('files1.html')
-@app.route('/upload', methods = ['GET','POST'])
-def upload():
-	if request.method == 'POST':
-		f = request.files['file']
-		ear = request.form['ear']
-		mid = request.form['mid']
-		f.save(f.filename)
-		with open(f.filename,mode = 'r') as f:
-			csv_list = [[val.strip() for val in r.split(",")] for r in f.readlines()]
-
-		(_, *header), *data = csv_list
-		csv_dict = {}
-		for row in data:
-			key, *values = row
-			csv_dict[key] = {key: value for key, value in zip(header, values)}
-		for a,b in csv_dict.items():
-			db.child(ear).child(a).child(mid).push(b)
-		return "Successfully uploaded"
-		
-	return render_template('files1.html')
 
 @app.route('/checkmarks')
 def checkmarks():
-	return render_template('checkmarks.html')
-
+	if 'loggedin' in session:
+		reg = session['reg']
+		return render_template('checkmarks.html',reg = reg)
+	else:
+		return redirect(url_for('signin'))
 
 
 @app.route('/checking',methods = ['GET','POST'])
 def checking():
-	if request.method == 'POST':
-		try:
-
-			regno = request.form['regno']
+	if 'loggedin' in session:
+		if request.method == 'POST':
+			reg = session['reg']
 			ear = request.form['ear']
-			session['ear'] = ear
-			session['regno'] = regno
+
 			try:
-				res1 = db.child(ear).child(regno).child("mid 1").get()
-				res2 = db.child(ear).child(regno).child("mid 2").get()
+				res1 = db.child(ear).child(reg).child("mid 1").get()
+				res2 = db.child(ear).child(reg).child("mid 2").get()
 				mid1 = ""
 				mid2 = ""
 				data = {}
@@ -329,8 +136,6 @@ def checking():
 										ft[a2] = fp
 										data[a2] = ep
 										data1[a2] = tp
-
-
 				pdf = FPDF()
 
 				pdf.add_page() 
@@ -342,7 +147,7 @@ def checking():
 				pdf.cell(200, 10, txt = mid2,ln = 2, align = 'C')
 				random1 = ''.join([random.choice(string.ascii_letters 
 			            + string.digits) for n in range(10)]) 
-				filen = f'{regno}-{ear}-{random1}.pdf'
+				filen = f'{reg}-{ear}-{random1}.pdf'
 				session['filen'] = filen
 				pdf.output(filen)
 				storage.child(f"pdf/{filen}").put(filen)
@@ -352,7 +157,7 @@ def checking():
 			except:
 				mid1 = ""
 				mid2 = "No Data Found"
-				res1 = db.child(ear).child(regno).child("mid 1").get()
+				res1 = db.child(ear).child(reg).child("mid 1").get()
 				res2 = "No Data Found"
 				for marks in res1.each():
 					for a,b in marks.val().items():
@@ -370,418 +175,326 @@ def checking():
 				pdf.cell(200, 10, txt = mid2,ln = 2, align = 'C')
 				random1 = ''.join([random.choice(string.ascii_letters 
 			            + string.digits) for n in range(10)]) 
-				filen = f'{regno}-{ear}-{random1}.pdf'
+				filen = f'{reg}-{ear}-{random1}.pdf'
 				session['filen'] = filen
 				pdf.output(filen)
 				storage.child(f"pdf/{filen}").put(filen)
 				url1 = storage.child(f'pdf/{filen}').get_url(None)
 				return render_template('ress.html',res1 = res1,res2 = res2,url = url1)
-	
-		except:
-			return "No data Found/Incorrect Details Entered!!"
+	else:
+		return render_template('userlogin.html')
 	
 	return render_template('checkmarks.html')
 
+@app.route('/dashboard')
+def dashboard():
+	if 'loggedin' in session:
+		return render_template('dashboard.html')
+	else:
+		return render_template('userlogin.html')
 
-@app.route("/check")
-def check():
-	return render_template('final.html')
 
-@app.route("/final", methods = ['GET','POST'])
-def final():
-	try:
-		if request.method == 'POST':
-			regid = request.form['registerno']
-			semid = request.form['semid']
-			res = db.child(regid).get()
+@app.route('/feescheck')
+def feescheck():
+	if 'loggedin' in session:
+		return render_template('feescheck.html')
+	else:
+		return render_template('userlogin.html')
 
-			for task in res.each():
-				if task.val()['Sem'] == semid:
-					if semid == '1-1':
-						res = task.val()
-						return render_template('res.html',marks = res)
-					elif semid == '1-2':
-						res = task.val()
-						return render_template('res1.html',marks = res)
-					elif semid == '2-1':
-						res = task.val()
-						return render_template('res2.html',marks = res)
-					elif semid == '2-2':
-						res = task.val()
-						return render_template('res3.html',marks = res)
-					elif semid == '3-1':
-						res = task.val()
-						return render_template('res4.html',marks = res)
-					elif semid == '3-2':
-						res = task.val()
-						return render_template('res5.html',marks = res)
-					elif semid == '4-1':
-						res = task.val()
-						return render_template('res6.html',marks = res)
-					elif semid == '4-2':
-						res = task.val()
-						return render_template('res7.html',marks = res)
-	except Exception as e:
-		return render_template('error.html')
+@app.route('/fee',methods = ['GET','POST'])
+def fee():
+	if 'loggedin' in session:
+		if request.method == "POST":
+			regno = session['reg']
+			sem = request.form['sem']
+			fee_det = db.child("fees").child(regno).child(sem).order_by_key().limit_to_last(1).get()
+			return render_template('feeres.html',fee = fee_det,reg = regno,sem = sem)
+	else:
+		return render_template('userlogin.html')
 
-	return render_template('firebase.html')
+	return render_template('feescheck.html')
 
+
+
+@app.route('/attendfirst')
+def attendfirst():
+	if 'loggedin' in session:
+		regno = session['reg']
+		hour = []
+		status = []
+		main_data = []
+		no = 0
+		months = ['Jan','Feb','Mar','Apr','May','June','Jul','Aug','Sept','Oct','Nov','Dec']
+		today = datetime.today()
+		a = today.month - 1
+		curr_month = months[a]
+		date = today.date()
+		data = db.child("attendence").child(curr_month).child(date).child(regno).get()
+		print(data.each())
+		for att in data.each():
+			for a in att.val().items():
+				hour.append(a[0])
+				if a[1] == "1":
+
+					status.append('Present')
+					no = no+1
+					
+				elif a[1] == "0":
+			
+					status.append('Absent')
+		per = int((no/7)*100)
+		
+		ac = []
+		pc =[]
+		data1 =  db.child("attendence").child(curr_month).child(regno).get()
+		for att in data1.each():
+			for m,n in att.val().items():
+				
+				ac.append(m)
+				pc.append(n)
+		return render_template('attendcheck.html',hour = hour,status = status,reg = regno,per = per,ac = ac,pc = pc)
+	else:
+		return render_template('login.html')
+
+	return render_template('attendcheck.html')
+
+@app.route('/attendcheck')
+def attendcheck():
+	
+	regno = session['reg']
+	hour = []
+	status = []
+	main_data = []
+	months = ['Jan','Feb','Mar','Apr','May','June','Jul','Aug','Sept','Oct','Nov','Dec']
+	today = datetime.today()
+	a = today.month - 1
+	curr_month = months[a]
+	date = today.date()
+	data = db.child("attendence").child(curr_month).child(date).child(regno).get()
+	for att in data.each():
+		for a in att.val().items():
+			hour.append(a[0])
+			status.append(a[1])
+
+	data = {
+	"status":status
+	}
+
+
+	return data
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@app.route('/adminlogin')
+def adminlogin():
+	if 'adminlogin' in session:
+		return render_template('adminpage.html')
+	else:
+		return render_template('adminlogin1.html')
 @app.route('/validate',methods = ['GET','POST'])
 def validate():
+	
 	if request.method == 'POST':
 		name = request.form.get('name')
 		password = request.form.get('password')
 
 		if name == 'akrg123@gmail.com' and  password == 'akrgadmincp':
-			session['loggedin'] = True
-			return render_template('files1.html')
-	return render_template('firebase.html')
+			session['adminlogin'] = True
+			return render_template('adminpage.html')
+		else:
+			return render_template('adminlogin1.html')
+	return render_template('home.html')
 
-@app.route('/validate1',methods = ['GET','POST'])
-def validate1():
+@app.route('/select')
+def select():
+	if 'adminlogin' in session:
+		return render_template('files1.html')
+	else:
+		return render_template('adminlogin1.html')
+@app.route('/upload', methods = ['GET','POST'])
+def upload():
 	if request.method == 'POST':
-		name = request.form.get('name')
-		password = request.form.get('password')
+		f = request.files['file']
+		ear = request.form['ear']
+		mid = request.form['mid']
+		f.save(f.filename)
+		with open(f.filename,mode = 'r') as f:
+			csv_list = [[val.strip() for val in r.split(",")] for r in f.readlines()]
 
-		if name == 'akrg123@gmail.com' and  password == 'akrgadmincp':
-			session['loggedin'] = True
-			return render_template('update.html')
-	return render_template('firebase.html')
-@app.route('/login1')
-def login1():
-	return render_template('logged1.html')
-@app.route('/login')
-def login():
-	return render_template('logged.html')
+		(_, *header), *data = csv_list
+		csv_dict = {}
+		for row in data:
+			key, *values = row
+			csv_dict[key] = {key: value for key, value in zip(header, values)}
+		for a,b in csv_dict.items():
+			db.child(ear).child(a).child(mid).push(b)
+			msg =  "Successfully uploaded"
+		return render_template('files1.html',msg = msg)
+		
+	return render_template('files1.html')
 
-
+@app.route('/deletefile')
+def deletefile():
+	if 'adminlogin' in session:
+		return render_template('deletefile.html')
+	else:
+		return render_template('adminlogin1.html')
 @app.route('/delete',methods = ['GET','POST'])
 def delete():
-	try:
-		if 'loggedin' in session:
-			if request.method == 'POST':
-				mid = request.form['mid']
-				regno = request.form['registerno']
-				semid = request.form['semid']
-				db.child(semid).child(regno).child(mid).remove()
-				message = 'Data Deleted Successfully'
-				return render_template('update.html',msg = message)
+	if 'adminlogin' in session:
+		if request.method == 'POST':
+			regno = request.form['registerno']
+			mid = request.form['mid']
+			semid = request.form['semid']
+			db.child(semid).child(regno).child(mid).remove()
+			message = 'Data Deleted Successfully'
+			return render_template('deletefile.html',msg = message)
 		else:
-			return render_template('firebase.html')
-	except Exception as e:
-		return render_template('error.html')
-	return render_template('update.html')
-@app.route('/enter')
-def enter():
-	if 'loggedin' in session:
-		return render_template('s1.html')
+			return "OOPSS....No Data Found...!!"
 	else:
-		return render_template('logged.html')
+		return render_template('adminlogin1.html')
+	return render_template('deletefile.html')
 
-@app.route('/sone',methods = ['GET','POST'])
-def sone():
-	try:
-		if 'loggedin' in session:
-			if request.method == 'POST':
-				regno = request.form['regno']
-				sem = request.form['sem']
-				session['regno'] = regno
-				session['sem'] = sem
-				if sem == '1-1':
-					return render_template('oo.html')
-				elif sem == '1-2':
-					return render_template('ot.html')
-				elif sem == '2-1':
-					return render_template('to.html')
-				elif sem == '2-2':
-					return render_template('tt.html')
-				elif sem == '3-1':
-					return render_template('tho.html')
-				elif sem == '3-2':
-					return render_template('tht.html')
-				elif sem == '4-1':
-					return render_template('fo.html')
-				elif sem == '4-2':
-					return render_template('ft.html')
-		else:
-			return render_template('logged.html')
-	except Exception as e:
-		return render_template('error.html')
-	return render_template('s1.html')
-
-@app.route('/oo', methods = ['GET','POST'])
-def oo():
-
-	if 'loggedin' in session:
-		if request.method == 'POST':
-			regno = session['regno']
-			sem = session['sem']
-			e1 = request.form['e1']
-			m1 = request.form['m1']
-			m2 = request.form['m2']
-			ap = request.form['ap']
-			cp = request.form['cp']
-			ed  = request.form['ed']
-			ecl = request.form['ecl']
-			pl = request.form['pl']
-			cpl = request.form['cpl']
-			data =  { 'Regno': regno,
-	          'Sem': sem,
-	          'english-1': e1,
-	          'mathematics-1':m1,
-	          'mathematics-2':m2,
-	          'applied-physics':ap,
-	          'computer programming':cp,
-	          'engineering drawing':ed,
-	          'englishb communications lab':ecl,
-	          'physics lab':pl,
-	          'computer programming lab':cpl
-	          }
-			result = db.child(regno).push(data)
-			return render_template('sone.html')
+@app.route('/fees')
+def fees():
+	if 'adminlogin' in session:
+		return render_template('feeselect.html')
 	else:
-		return render_template('logged.html')
+		return render_template('adminlogin1.html')
 
-@app.route('/ot', methods = ['GET','POST'])
-def ot():
-	try:
-		if request.method == 'POST':
-			regno = session['regno']
-			sem = session['sem']
-			s1 = request.form['s1']
-			s2 = request.form['s2']
-			s3 = request.form['s3']
-			s4 = request.form['s4']
-			s5 = request.form['s5']
-			s6  = request.form['s6']
-			l1 = request.form['l1']
-			l2 = request.form['l2']
-			l3 = request.form['l3']
-			data =  { 'Regno': regno,
-	          'Sem': sem,
-	          'subject-1': s1,
-	          'subject-2':s2,
-	          'subject-3':s3,
-	          'subject-4':s4,
-	          'subject-5':s5,
-	          'subject-6':s6,
-	          'lab-1':l1,
-	          'lab-2':l2,
-	          'lab-3':l3
-	          }
-			result = db.child(regno).push(data)
-		return render_template('sone.html')
-	except Exception as e:
-		return render_template('error.html')
-	return render_template('firebase.html')
+@app.route('/feesdetails',methods = ['GET','POST'])
+def feesdetails():
+	if request.method == 'POST':
+		f = request.files['file']
+		sem = request.form['sem']
+		
+		f.save(f.filename)
+		with open(f.filename,mode = 'r') as f:
+			csv_list = [[val.strip() for val in r.split(",")] for r in f.readlines()]
 
-@app.route('/to', methods = ['GET','POST'])
-def to():
-	try:
-		if request.method == 'POST':
-			regno = session['regno']
-			sem = session['sem']
-			s1 = request.form['s1']
-			s2 = request.form['s2']
-			s3 = request.form['s3']
-			s4 = request.form['s4']
-			s5 = request.form['s5']
-			l1 = request.form['l1']
-			l2 = request.form['l2']
-			data =  { 'Regno': regno,
-	          'Sem': sem,
-	          'subject-1': s1,
-	          'subject-2':s2,
-	          'subject-3':s3,
-	          'subject-4':s4,
-	          'subject-5':s5,
-	          'lab-1':l1,
-	          'lab-2':l2,
-	         
-	          }
-			result = db.child(regno).push(data)
-		return render_template('sone.html')
-	except Exception as e:
-		return render_template('error.html')
-	return render_template('firebase.html')
+		(_, *header), *data = csv_list
+		csv_dict = {}
+		for row in data:
+			key, *values = row
+			csv_dict[key] = {key: value for key, value in zip(header, values)}
+		for a,b in csv_dict.items():
+			db.child("fees").child(a).child(sem).push(b)
+		msg =  "Successfully uploaded"
+		return render_template('feeselect.html',msg = msg)
+		
 
-@app.route('/tt', methods = ['GET','POST'])
-def tt():
-	try:
-		if request.method == 'POST':
-			regno = session['regno']
-			sem = session['sem']
-			s1 = request.form['s1']
-			s2 = request.form['s2']
-			s3 = request.form['s3']
-			s4 = request.form['s4']
-			s5 = request.form['s5']
-			s6 = request.form['s6']
-			l1 = request.form['l1']
-			l2 = request.form['l2']
-			data =  { 'Regno': regno,
-	          'Sem': sem,
-	          'subject-1': s1,
-	          'subject-2':s2,
-	          'subject-3':s3,
-	          'subject-4':s4,
-	          'subject-5':s5,
-	          'subject-6':s6,
-	          'lab-1':l1,
-	          'lab-2':l2,
-	         
-	          }
-			result = db.child(regno).push(data)
-		return render_template('sone.html')
-	except Exception as e:
-		return render_template('error.html')
-	return render_template('firebase.html')
+	return render_template('feeselect.html')
 
-@app.route('/tho', methods = ['GET','POST'])
-def tho():
-	try:
-		if request.method == 'POST':
-			regno = session['regno']
-			sem = session['sem']
-			s1 = request.form['s1']
-			s2 = request.form['s2']
-			s3 = request.form['s3']
-			s4 = request.form['s4']
-			s5 = request.form['s5']
-			l1 = request.form['l1']
-			l2 = request.form['l2']
-			l3 = request.form['l3']
-			s6 = request.form['s6']
-			data =  { 'Regno': regno,
-	          'Sem': sem,
-	          'subject-1': s1,
-	          'subject-2':s2,
-	          'subject-3':s3,
-	          'subject-4':s4,
-	          'subject-5':s5,
-	          'subject-6':s6,
-	          'lab-1':l1,
-	          'lab-2':l2,
-	          'lab-3':l3,
-	          }
-			result = db.child(regno).push(data)
-		return render_template('sone.html')
-	except Exception as e:
-		return render_template('error.html')
-	return render_template('firebase.html')
+@app.route('/selectattendence')
+def selectattendence():
+	if 'adminlogin' in session:
+		return render_template('selectattendence.html')
+	else:
+		return render_template('adminlogin1.html')
 
+@app.route('/attendenceupdate',methods = ['GET','POST'])
+def attendenceupdate():
+	if request.method == 'POST':
+		ac = 0
+		pc = 0
+		months = ['Jan','Feb','Mar','Apr','May','June','Jul','Aug','Sept','Oct','Nov','Dec']
+		today = datetime.today()
+		a = today.month - 1
+		curr_month = months[a]
+		f = request.files['file']
+		date = today.date()
+		f.save(f.filename)
+		with open(f.filename,mode = 'r') as f:
+			csv_list = [[val.strip() for val in r.split(",")] for r in f.readlines()]
 
+		(_, *header), *data = csv_list
+		csv_dict = {}
+		for row in data:
+			key, *values = row
+			csv_dict[key] = {key: value for key, value in zip(header, values)}
+		for a,b in csv_dict.items():
+			db.child("attendence").child(curr_month).child(date).child(a).push(b)
+		for a1,b1 in csv_dict.items():
+			data = db.child("attendence").child(curr_month).child(date).child(a1).get()
+			for att in data.each():
+				for a in att.val().items():
 
+					if a[1] == "1":
+		
+						pc = pc+1
+					elif a[1] == "0":
+						ac = ac+1
 
-@app.route('/tht', methods = ['GET','POST'])
-def tht():
-	try:
-		if request.method == 'POST':
-			regno = session['regno']
-			sem = session['sem']
-			s1 = request.form['s1']
-			s2 = request.form['s2']
-			s3 = request.form['s3']
-			s4 = request.form['s4']
-			s5 = request.form['s5']
-			l1 = request.form['l1']
-			l2 = request.form['l2']
-			l3 = request.form['l3']
-			s6 = request.form['s6']
-			data =  { 'Regno': regno,
-	          'Sem': sem,
-	          'subject-1': s1,
-	          'subject-2':s2,
-	          'subject-3':s3,
-	          'subject-4':s4,
-	          'subject-5':s5,
-	          'subject-6':s6,
-	          'lab-1':l1,
-	          'lab-2':l2,
-	          'lab-3':l3,
-	          }
-			result = db.child(regno).push(data)
-		return render_template('sone.html')
-	except Exception as e:
-		return render_template('error.html')
-	return render_template('firebase.html')
+			b = {
+			'total absent':ac,
+			'total present':pc
+			}
 
+			ac = 0
+			pc =0
 
+			data = db.child("attendence").child(curr_month).child(a1).push(b)
+			msg =  "Successfully uploaded"
+		return render_template('selectattendence.html',msg = msg)
 
-@app.route('/fo', methods = ['GET','POST'])
-def fo():
-	try:
-		if request.method == 'POST':
-			regno = session['regno']
-			sem = session['sem']
-			s1 = request.form['s1']
-			s2 = request.form['s2']
-			s3 = request.form['s3']
-			s4 = request.form['s4']
-			s5 = request.form['s5']
-			l1 = request.form['l1']
-			l2 = request.form['l2']
-			s6 = request.form['s6']
-			data =  { 'Regno': regno,
-	          'Sem': sem,
-	          'subject-1': s1,
-	          'subject-2':s2,
-	          'subject-3':s3,
-	          'subject-4':s4,
-	          'subject-5':s5,
-	          'subject-6':s6,
-	          'lab-1':l1,
-	          'lab-2':l2,
-	          }
-			result = db.child(regno).push(data)
-		return render_template('sone.html')
-	except Exception as e:
-		return render_template('error.html')
-	return render_template('firebase.html')
+	return render_template('selectattendence.html')
 
-
-
-@app.route('/ft', methods = ['GET','POST'])
-def ft():
-	try:
-		if request.method == 'POST':
-			regno = session['regno']
-			sem = session['sem']
-			s1 = request.form['s1']
-			s2 = request.form['s2']
-			s3 = request.form['s3']
-			s4 = request.form['s4']
-			s5 = request.form['s5']
-			s6 = request.form['s6']
-			data =  { 'Regno': regno,
-	          'Sem': sem,
-	          'subject-1': s1,
-	          'subject-2':s2,
-	          'subject-3':s3,
-	          'subject-4':s4,
-	          'subject-5':s5,
-	          'subject-6':s6,
-	          }
-			result = db.child(regno).push(data)
-		return render_template('sone.html')
-	except Exception as e:
-		return render_template('error.html')
-	return render_template('firebase.html')
-
-
-
-@app.route('/')
-
-def home():
+@app.route('/adminout')
+def adminout():
+	session.pop('adminlogin',None)
 	return render_template('home.html')
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 @app.route('/resu')
 def resu():
 	
 	return render_template('resu.html')
+@app.route('/home')
+
+
+@app.route('/sd')
+def sd():
+	if 'loggedin' in session:
+		return render_template('sd.html')
+	else:
+		return render_template('login.html')
+
 
 @app.route('/nodata')
 def nodata():
-	return render_template('nodata.html')
+	return render_template('noda	ta.html')
 @app.route('/res')
 def res():
 	return render_template('res.html')
@@ -824,7 +537,7 @@ def testpaper():
 	lst2 = [0,1,2,3,4,5,6,7,8,9,10]
 	random.shuffle(lst2)
 	lst3 = lst2[0:5]
-	
+	session['lst2'] = lst3
 	return render_template('testpaper.html',lst2 = lst3)
 
 @app.route('/cnpage')
@@ -832,7 +545,7 @@ def cnpage():
 	lst2 = [0,1,2,3,4,5,6,7,8,9,10]
 	random.shuffle(lst2)
 	lst3 = lst2[0:5]
-	
+	session['lst2'] = lst3
 	return render_template('cnpaper.html',lst2 = lst3)
 
 @app.route('/cnpaper',methods = ['GET','POST'])
@@ -1022,6 +735,7 @@ def cppage():
 	lst2 = [0,1,2,3,4,5,6,7,8,9,10]
 	random.shuffle(lst2)
 	lst3 = lst2[0:5]
+	session['lst2'] = lst3
 	return render_template('cppaper.html',lst2 = lst3)
 
 @app.route('/cppaper',methods = ['GET','POST'])
@@ -1214,7 +928,7 @@ def dbmspage():
 	lst2 = [0,1,2,3,4,5,6,7,8,9,10]
 	random.shuffle(lst2)
 	lst3 = lst2[0:5]
-
+	session['lst2'] = lst3
 	return render_template('dbmspaper.html',lst2 = lst3)
 
 @app.route('/dbmspaper',methods = ['GET','POST'])
@@ -1576,6 +1290,7 @@ def radio():
 		else:
 			message = "You're Poor in this subject!!"
 			color = 'red'
+		slist = session['lst2']
 		wrong1 = [wrong_dict]
 		return render_template('register.html',score = i,color=color,message = message,wrong1 = wrong1,ca = correct_ans,wa = wrong_ans,lst2 = wrong_qstn)
 	return render_template('testpaper.html')
