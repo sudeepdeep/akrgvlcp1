@@ -42,7 +42,21 @@ def register1():
 	if 'loggedin' in session:
 		return render_template('home.html')
 	else:
-		return render_template('register1.html')
+		return render_template('userregister.html')
+@app.route('/authentication',methods = ['GET','POST'])
+def authentication():
+	if request.method == 'POST':
+		if 'loggedin' in session:
+			return render_template('home.html',btn = 'logout')
+		else:
+			regno = request.form['regno']
+			password = request.form['password']
+			repassword = request.form['re-password']
+			if password == repassword:
+				data = {'regno':regno,'password':password}
+				db.child(regno).push(data)
+				return render_template('userlogin.html')
+	return render_template('register.html')
 
 @app.route('/signin')
 def signin():
@@ -254,7 +268,7 @@ def attendfirst():
 				pc.append(n)
 		return render_template('attendcheck.html',hour = hour,status = status,reg = regno,per = per,ac = ac,pc = pc)
 	else:
-		return render_template('login.html')
+		return render_template('userlogin.html')
 
 	return render_template('attendcheck.html')
 
