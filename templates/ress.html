@@ -11,7 +11,11 @@
 	</style>
 </head>
 <body>
+	<center>
+	
 {% if res2 == "No Data Found"%}
+<h4>Reg.No: {{reg}}</h4>
+	<h4>Sem: {{ear}}</h4>
 <h1 style="color:green;">Mid-I</h1>
 
 	{% for task in res1.each() %}
@@ -22,9 +26,13 @@
 
 <h1 style="color: green;">Mid-II</h1>
 <h4>No Data Found</h4>
-{% endfor %}
+{% endfor %}</center>
 {% else %}
 	<table width="100%" border="2px solid black">
+		<tr><td colspan="4">
+			<h4>Reg.No: {{reg}}</h4><br>
+			<h4>Sem: {{ear}}</h4>
+		</td></tr>
 <tr>
 	<td align="center" style="background-color:#white;color:black;" colspan="2">
 	<h3>Mid-I</h3>
