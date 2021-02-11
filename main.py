@@ -243,7 +243,7 @@ def attendfirst():
 		a = today.month - 1
 		curr_month = months[a]
 		date = today.date()
-		data = db.child("attendence").child(curr_month).child(date).child(regno).get()
+		data = db.child("attendence").child(curr_month).child(date).child(regno).order_by_key().limit_to_last(1).get()
 		print(data.each())
 		for att in data.each():
 			for a in att.val().items():
@@ -260,7 +260,7 @@ def attendfirst():
 		
 		ac = []
 		pc =[]
-		data1 =  db.child("attendence").child(curr_month).child(regno).get()
+		data1 =  db.child("attendence").child(curr_month).child(regno).order_by_key().limit_to_last(1).get()
 		for att in data1.each():
 			for m,n in att.val().items():
 				
@@ -284,7 +284,7 @@ def attendcheck():
 	a = today.month - 1
 	curr_month = months[a]
 	date = today.date()
-	data = db.child("attendence").child(curr_month).child(date).child(regno).get()
+	data = db.child("attendence").child(curr_month).child(date).child(regno).order_by_key().limit_to_last(1).get()
 	for att in data.each():
 		for a in att.val().items():
 			hour.append(a[0])
