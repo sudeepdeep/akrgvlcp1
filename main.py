@@ -166,7 +166,7 @@ def checking():
 				pdf.output(filen)
 				storage.child(f"pdf/{filen}").put(filen)
 				url1 = storage.child(f'pdf/{filen}').get_url(None)
-				return render_template('ress.html',res1=res1, res2 = res2,data = data,data1 = data1,ft = ft,url = url1)
+				return render_template('ress.html',res1=res1, res2 = res2,data = data,data1 = data1,ft = ft,url = url1,reg = reg,ear = ear)
 
 			except:
 				mid1 = ""
@@ -194,7 +194,7 @@ def checking():
 				pdf.output(filen)
 				storage.child(f"pdf/{filen}").put(filen)
 				url1 = storage.child(f'pdf/{filen}').get_url(None)
-				return render_template('ress.html',res1 = res1,res2 = res2,url = url1)
+				return render_template('ress.html',res1 = res1,res2 = res2,url = url1,reg = reg,ear = ear)
 	else:
 		return render_template('userlogin.html')
 	
