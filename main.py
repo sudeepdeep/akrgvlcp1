@@ -50,12 +50,17 @@ def authentication():
 			return render_template('home.html',btn = 'logout')
 		else:
 			regno = request.form['regno']
-			password = request.form['password']
-			repassword = request.form['re-password']
-			if password == repassword:
-				data = {'regno':regno,'password':password}
-				db.child(regno).push(data)
-				return render_template('userlogin.html')
+			data1 = db.child(regno).get()
+			if data1:
+				return render_template('userregister.html,msg = "username already taken")
+			else:
+				
+				password = request.form['password']
+				repassword = request.form['re-password']
+				if password == repassword:
+					data = {'regno':regno,'password':password}
+					db.child(regno).push(data)
+					return render_template('userlogin.html',msg = "Register Successfull...")
 	return render_template('register.html')
 
 @app.route('/signin')
