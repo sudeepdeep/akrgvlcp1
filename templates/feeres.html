@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Fees Details</title>
+	<style type="text/css">
+		table{
+			border-collapse: collapse;
+		}
+	</style>
+</head>
+<body>
+	<table width = "100%" border="2px solid black">
+		
+<tr><td colspan="2" align="center">
+	HallTicket No: {{reg}}<br>
+	Year: {{sem}}
+</td></tr>
+{% for fees in fee.each()%}
+{% for i,j in fees.val().items() %}
+<tr><td align="center" width="50%">{{i}}</td>
+
+<td align="center">
+{% if j == "paid"%}
+<h4 style="color:green;">{{j}}</h4>
+{% elif j == "not paid" %}
+<h4 style="color: red; ">{{j}}</h4>
+{% else %}
+<p style="color: black; ">{{j}}</p>
+</td>
+</tr>
+{% endif %}
+
+{% endfor %}
+
+{% endfor %}</table>
+</body>
+</html>

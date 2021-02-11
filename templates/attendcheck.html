@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html  lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    
+    <title>Flask App </title>
+
+    <!-- Charlist-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/chartist.js/latest/chartist.min.css">
+    <script src="https://cdn.jsdelivr.net/chartist.js/latest/chartist.min.js"></script>
+
+    <!-- Bootstraps Java Scipts Links -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+
+
+    <!-- JQuery links  -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+<style type="text/css">
+	.circular-chart {
+  display: block;
+  margin: 10px auto;
+  max-width: 80%;
+  max-height: 250px;
+}
+
+.circle {
+  stroke: #4CC790;
+  fill: none;
+  stroke-width: 2.8;
+  stroke-linecap: round;
+  animation: progress 1s ease-out forwards;
+}
+
+@keyframes progress {
+  0% {
+    stroke-dasharray: 0 100;
+  }
+}
+</style>
+  </head>
+<body>
+	<table border="2px solid black" width="100%">
+		<tr><td colspan="2" width="100%" align="center"><h2>Today Attendence Details for {{reg}}</h2></td></tr>
+		<tr><td width="50%" align="center">
+			{% for i in hour %}
+			{{i}}<br>
+			{% endfor %}
+
+		</td>
+		<td width="50%" align="center">
+			{% for j in status %}
+			{{j}}<br>
+			{% endfor %}
+		</td>
+	</tr>
+	<tr>
+		<td width="50%" align="center"><h4>Today Attendence Percentage</h4></td>
+		<td width="50%">
+			<svg viewBox="0 0 36 36" class="circular-chart">
+  <path class="circle"
+    stroke-dasharray="{{per}}, 100"
+    d="M18 2.0845
+      a 15.9155 15.9155 0 0 1 0 31.831
+      a 15.9155 15.9155 0 0 1 0 -31.831"
+  />
+  <text x="8.5" y="20" class="percentage" style = "font-size: 10px;">{{per}}%</text>
+</svg>
+		</td>
+	</tr>
+	<tr>
+		<td align="center">
+			{% for i in ac %}
+			{{i}} in this month/hour<br>
+			{% endfor %}
+		</td>
+		<td>
+			{% for j in pc %}
+			{{j}}<br>
+			{% endfor %}
+		</td>
+
+	</tr>
+	<tr><td colspan="2" width="100%" >
+		<h3>Graphical Representation</h3>
+<div class="ct-chart ct-perfect-fourth" style="height: 300px;"></div>
+  <script>
+    class MyCharts{
+
+      constructor(xData, YData)
+      {
+        this.XData = XData;
+        this.YData = YData;
+      }
+
+      createGraph()
+      {
+        var data =
+                {
+                  labels: this.XData,
+                  series:[
+                          this.YData
+                  ]
+                }
+        new Chartist.Bar('.ct-chart', data);
+      }
+    }
+
+  var XData= ['1st hr', '2nd hr', '3rd hr', '4th hr', '5th hr', '6th hr', '7th hr'];
+    var YData = [5, 2, 4, 2, 0];
+    var data = $.get('/attendcheck');
+    var tm = data.done(function (resp) {
+      console.log("JSON DATA", resp.status);
+      var obj = new MyCharts(XData, resp.status);
+      obj.createGraph();
+
+    })
+
+
+  </script>
+</td></tr></table>
+</body>
+</html>

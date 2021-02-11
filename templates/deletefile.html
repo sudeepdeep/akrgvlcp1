@@ -1,0 +1,70 @@
+	<!DOCTYPE html>
+	<html>
+	<head>
+		<title>Delete</title>
+		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+		<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js" integrity="sha384-q2kxQ16AaE6UbzuKqyBE9/u/KzioAlnx2maXQHiDX9d4/zp8Ok3f+M7DPm+Ib6IU" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.min.js" integrity="sha384-pQQkAEnwaBkjpqZ8RU1fF1AKtTcHJwFl3pblpTlHXybJjHpMYo79HY3hIi4NKxyj" crossorigin="anonymous"></script>
+	</head>
+	<body>
+		<table width="100%" style="margin-top: 120px;">
+	<form action="/delete" method="POST">
+		<tr><td align="center" style="color:green;">{%if msg%}
+	<h3>{{msg}}</h3>
+	{% else %}
+	<h3 style="color:red;">No Data Found</h3>
+	{% endif %}</td></tr>
+		<tr><td align="center">	
+			<div class="mb-3">
+	    <label  class="form-label">Delete your Data</label><br>
+		<input class="form-control" type="text" name="registerno" placeholder="Enter regd.no" ></div></td></tr>
+
+		<tr><td height="20px;"></td></tr>
+		<tr><td align="center">
+		<select name  = 'semid'>
+			<option value="1-1">1-1</option>
+			<option value="1-2">1-2</option>
+			<option value="2-1">2-1</option>
+			<option value="2-2">2-2</option>
+			<option value="3-1">3-1</option>
+			<option value="3-2">3-2</option>
+			<option value="4-1">4-1</option>
+			<option value="4-2">4-2</option>
+		</select></td></tr>
+		<tr><td height="20px;"></td></tr>
+		<tr><td align="center">
+		<select name  = 'mid'>
+			<option value="mid 1">mid1</option>
+			<option value="mid 2">mid2</option>
+		</select></td></tr>
+		<tr><td align="center">
+		<button class = "btn btn-danger" type="submit">Delete</button></td></tr>
+	</form>
+	</table>
+	</body>
+	</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

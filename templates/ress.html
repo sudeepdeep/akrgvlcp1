@@ -26,15 +26,13 @@
 {% else %}
 	<table width="100%" border="2px solid black">
 <tr>
-	<td align="center" style="background: #37517E;
-background: linear-gradient(259deg, rgba(255,255,255,1) 34%, rgba(255,235,42,1) 100%);" colspan="2">
+	<td align="center" style="background-color:#37517e;color:white;" colspan="2">
 	<h3>Mid-I</h3>
 {% for task in res1.each() %}
 {% for a,b in task.val().items() %}
 
-<h3>{{a}} : {{b}}</h3><br>{% endfor %}{% endfor %}</td>
-<td align="center" width="20%" style="background: #37517E;
-background: linear-gradient(259deg, rgba(255,255,255,1) 34%, rgba(255,235,42,1) 100%);" colspan="2">
+<h3 style="color: white">{{a}} : {{b}}</h3><br>{% endfor %}{% endfor %}</td>
+<td align="center" width="20%" style="background-color:#37517e;color:white;" colspan="2">
 
 <h3>Mid-II</h3>
 {% for task1 in res2.each() %}
@@ -42,15 +40,13 @@ background: linear-gradient(259deg, rgba(255,255,255,1) 34%, rgba(255,235,42,1) 
 
 <h3>{{k}} : {{v}}</h3><br>{% endfor %}{% endfor %}</td></tr>
 <tr>
-	<td align="center" width="25%" style="background: #37517E;
-background: linear-gradient(259deg, rgba(255,255,255,1) 34%, rgba(255,235,42,1) 100%);" >
+	<td align="center" width="25%" style="background-color:#37517e;color:white;">
 <h3>80%</h3>
 {% for i,j in data.items() %}
 {{i}}: {{j}}<br>
 {% endfor %}
 </td>
-	<td align="center" width="25%" style="background: #37517E;
-background: linear-gradient(259deg, rgba(255,255,255,1) 34%, rgba(255,235,42,1) 100%);" >
+	<td align="center" width="25%" style="background-color:#37517e;color:white;">
 <h3>20%</h3>
 {% for i,j in data1.items() %}
 {{i}}: {{j}}<br>
@@ -58,15 +54,13 @@ background: linear-gradient(259deg, rgba(255,255,255,1) 34%, rgba(255,235,42,1) 
 </td>
 
 
-	<td align="center" width="25%" style="background: #37517E;
-background: linear-gradient(259deg, rgba(255,255,255,1) 34%, rgba(255,235,42,1) 100%);" >
+	<td align="center" width="25%" style="background-color:#37517e;color:white;">
 <h3>FINAL TOTAL</h3>
 {% for i,j in ft.items() %}
 {{i}}: {{j}}<br>
 {% endfor %}
 </td>
-<td align="center" width="25%" style="background: #37517E;
-background: linear-gradient(259deg, rgba(255,255,255,1) 34%, rgba(255,235,42,1) 100%);" >
+<td align="center" width="25%" style="background-color:#37517e;color:white;" >
 <h3>Result</h3>
 {% for i,j in ft.items() %}
 {% if j >= 10.0 %}
@@ -77,8 +71,8 @@ background: linear-gradient(259deg, rgba(255,255,255,1) 34%, rgba(255,235,42,1) 
 {% endfor %}</td>
 </tr>
 {% endif %}
-		<tr><td align="center" colspan="4" height = "50px">
-<button><a href = "{{url}}" target = "_blank">Download PDF</a></button></td></tr>
+<tr><td align="center" colspan="4">
+<button><a href = "{{url}}" target="_blank">Download PDF</a></button></td></tr>
 </table>
 </body>
 </html>
