@@ -261,7 +261,7 @@ def attendfirst():
 		
 		ac = []
 		pc =[]
-		data1 =  db.child("attendence").child(curr_month).child(regno).order_by_key().limit_to_last(1).get()
+		data1 =  db.child("attendence").child(curr_month).child(regno).get()
 		for att in data1.each():
 			for m,n in att.val().items():
 				
