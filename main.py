@@ -54,13 +54,13 @@ def authentication():
 				data2 = db.child(regno).get()
 				if data2:
 					return render_template('userregister.html',msg = "Username already taken...")
-			except:
-				password = request.form['password']
-				repassword = request.form['re-password']
-				if password == repassword:
-					data = {'regno':regno,'password':password}
-					db.child(regno).push(data)
-					return render_template('userlogin.html',msg = "Registration Successfull..")
+				else:
+					password = request.form['password']
+					repassword = request.form['re-password']
+					if password == repassword:
+						data = {'regno':regno,'password':password}
+						db.child(regno).push(data)
+						return render_template('userlogin.html',msg = "Registration Successfull..")
 	return render_template('register.html')
 
 @app.route('/signin')
