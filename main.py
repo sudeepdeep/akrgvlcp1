@@ -250,29 +250,31 @@ def attendfirst():
 		curr_month = months[a]
 		date = today.date()
 		data = db.child("attendence").child(curr_month).child(date).child(regno).get()
-		print(data.each())
-		for att in data.each():
-			for a in att.val().items():
-				hour.append(a[0])
-				if a[1] == "1":
+		if data:
+			for att in data.each():
+				for a in att.val().items():
+					hour.append(a[0])
+					if a[1] == "1":
 
-					status.append('Present')
-					no = no+1
-					
-				elif a[1] == "0":
-			
-					status.append('Absent')
-		per = int((no/7)*100)
-		
-		ac = []
-		pc =[]
-		data1 =  db.child("attendence").child(curr_month).child(regno).get()
-		for att in data1.each():
-			for m,n in att.val().items():
-				
-				ac.append(m)
-				pc.append(n)
-		return render_template('attendcheck.html',hour = hour,status = status,reg = regno,per = per,ac = ac,pc = pc)
+						status.append('Present')
+						no = no+1
+
+					elif a[1] == "0":
+
+						status.append('Absent')
+			per = int((no/7)*100)
+
+			ac = []
+			pc =[]
+			data1 =  db.child("attendence").child(curr_month).child(regno).get()
+			for att in data1.each():
+				for m,n in att.val().items():
+
+					ac.append(m)
+					pc.append(n)
+			return render_template('attendcheck.html',hour = hour,status = status,reg = regno,per = per,ac = ac,pc = pc)
+		else:
+			return "No Data Found :( "
 	else:
 		return render_template('userlogin.html')
 
