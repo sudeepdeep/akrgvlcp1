@@ -8,7 +8,7 @@ import json
 import random
 import string
 import os
-from datetime import datetime
+from datetime import datetime,date
 config = {
 	"apiKey": "AIzaSyD0fzFslus_LRDNQI022QHTAJ5Ch0vgpZ0",
 	"authDomain": "akrgtesting.firebaseapp.com",
@@ -259,7 +259,7 @@ def attendfirst():
 		today = datetime.today()
 		a = today.month - 1
 		curr_month = months[a]
-		date = today.date()
+		date = date.today()
 		year = today.year
 		try:
 			data = db.child("attendence").child(year).child(curr_month).child(date).child(regno).get()
@@ -303,7 +303,7 @@ def attendcheck():
 	today = datetime.today()
 	a = today.month - 1
 	curr_month = months[a]
-	date = today.date()
+	date = date.today()
 	year = today.year
 	data = db.child("attendence").child(year).child(curr_month).child(date).child(regno).get()
 	for att in data.each():
