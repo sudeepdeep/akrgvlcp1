@@ -46,8 +46,14 @@ def register1():
 @app.route('/authentication',methods = ['GET','POST'])
 def authentication():
 	if request.method == 'POST':
-		if 'loggedin' in session:
-			return render_template('home.html',btn = 'logout')
+		reg = request.form['regno']
+		check_data = db.child(reg).get()
+		for data in check_data.each():
+			for i,j in data.val().items():
+				if i == "regno":
+					if j == reg:
+						return render_template('userregister.html',msg = "User already exists!!")
+
 		else:
 			regno = request.form['regno']
 
@@ -61,36 +67,37 @@ def authentication():
 				return render_template('userregister.html',msg = "Password incorrect")
 			
 	return render_template('userregister.html')
-	
+
+
 
 @app.route('/signin')
 def signin():
-	if 'loggedin' in session:
-		return render_template('home.html')
+	if 'reg' in session:
+		return redirect(url_for('home'))
 	else:
 		return render_template('userlogin.html')
 @app.route('/auth',methods = ['GET','POST'])
 def auth():
 	if request.method == 'POST':
-		if 'loggedin' in session:
-			return render_template('home.html', btn = 'logout')
+		if 'reg' in session:
+			return redirect(url_for("home"))
 		else:
 			regno = request.form['regno']
 			password = request.form['password']
-			try:
-				user = db.child(regno).get()
-				if user:
-					for details in user.each():
-						for a,b in details.val().items():
-							if a == 'password':
-								if b == password:
-									session['loggedin'] = True
-									session['reg'] = regno
-									return render_template('home.html',btn = 'logout')
-								else:
-									return render_template('userlogin.html',msg = "Credentials Incorrect")
+			user = db.child(regno).get()
+			if user:
 
-			except:
+				for details in user.each():
+					for a,b in details.val().items():
+						if a == 'password':
+							if b == password:
+								session['loggedin'] = True
+								session['reg'] = regno
+								return redirect(url_for('home'))
+						else:
+							return "password incorrect"
+
+			else:
 				return "Incorrect Details....."
 	return render_template('home.html',btn = 'logout')
 @app.route('/logout')
@@ -217,7 +224,7 @@ def dashboard():
 def feescheck():
 	if 'loggedin' in session:
 		regno = session['reg']
-		return render_template('feescheck.html',regno = regno)
+		return render_template('feescheck.html',regno  = regno)
 	else:
 		return render_template('userlogin.html')
 
@@ -225,14 +232,18 @@ def feescheck():
 def fee():
 	if 'loggedin' in session:
 		if request.method == "POST":
-			regno = request.form['regno']
 			sem = request.form['sem']
-			fee_det = db.child("fees").child(regno).child(sem).get()
-			return render_template('feeres.html',fee = fee_det,reg = regno,sem = sem)
+			try:
+				regno = request.form['regno']
+				fee_det = db.child("fees").child(regno).child(sem).get()
+				return render_template('feeres.html',fee = fee_det,reg = regno,sem = sem)
+			except:
+				return "No Data Found :("
+
 	else:
 		return render_template('userlogin.html')
 
-	return render_template('home.html')
+	return render_template('feescheck.html')
 
 
 
@@ -249,8 +260,9 @@ def attendfirst():
 		a = today.month - 1
 		curr_month = months[a]
 		date = today.date()
-		data = db.child("attendence").child(curr_month).child(date).child(regno).get()
-		if data:
+		year = today.year
+		try:
+			data = db.child("attendence").child(year).child(curr_month).child(date).child(regno).get()
 			for att in data.each():
 				for a in att.val().items():
 					hour.append(a[0])
@@ -266,14 +278,14 @@ def attendfirst():
 
 			ac = []
 			pc =[]
-			data1 =  db.child("attendence").child(curr_month).child(regno).get()
+			data1 =  db.child("attendence").child(year).child(curr_month).child(regno).get()
 			for att in data1.each():
 				for m,n in att.val().items():
 
 					ac.append(m)
 					pc.append(n)
 			return render_template('attendcheck.html',hour = hour,status = status,reg = regno,per = per,ac = ac,pc = pc)
-		else:
+		except:
 			return "No Data Found :( "
 	else:
 		return render_template('userlogin.html')
@@ -292,7 +304,8 @@ def attendcheck():
 	a = today.month - 1
 	curr_month = months[a]
 	date = today.date()
-	data = db.child("attendence").child(curr_month).child(date).child(regno).get()
+	year = today.year
+	data = db.child("attendence").child(year).child(curr_month).child(date).child(regno).get()
 	for att in data.each():
 		for a in att.val().items():
 			hour.append(a[0])
@@ -413,13 +426,22 @@ def feesdetails():
 			key, *values = row
 			csv_dict[key] = {key: value for key, value in zip(header, values)}
 		for a,b in csv_dict.items():
-			db.child("fees").child(a).child(sem).push(b)
-		msg =  "Successfully uploaded"
-		return render_template('feeselect.html',msg = msg)
+			data = db.child("fees").child(a).child(sem).get()
+			if data:
+				main_data = db.child("fees").child(a).child(sem).get()
+				for task in main_data.each():
+					key1 = task.key()
+				for i,j in b.items():
+					db.child("fees").child(a).child(sem).child(key1).update({i:j})
+					msg = "Successfully updated..."
+					return render_template('feeselect.html',msg = msg)
+			else:
+				db.child("fees").child(a).child(sem).push(b)
+				msg =  "Successfully uploaded"
+				return render_template('feeselect.html',msg = msg)
 		
 
 	return render_template('feeselect.html')
-
 @app.route('/updatefees')
 def updatefees():
 	return render_template('selectupdatef.html')
@@ -451,6 +473,7 @@ def feeupdation():
 
 
 
+
 @app.route('/selectattendence')
 def selectattendence():
 	if 'adminlogin' in session:
@@ -463,12 +486,19 @@ def attendenceupdate():
 	if request.method == 'POST':
 		ac = 0
 		pc = 0
+		temp_ac = 0
+		temp_pc = 0
+		ac1 = 0
+		pc1 = 0
+		final_ac = 0
+		final_pc = 0
 		months = ['Jan','Feb','Mar','Apr','May','June','Jul','Aug','Sept','Oct','Nov','Dec']
 		today = datetime.today()
 		a = today.month - 1
 		curr_month = months[a]
 		f = request.files['file']
 		date = today.date()
+		year = today.year
 		f.save(f.filename)
 		with open(f.filename,mode = 'r') as f:
 			csv_list = [[val.strip() for val in r.split(",")] for r in f.readlines()]
@@ -479,29 +509,78 @@ def attendenceupdate():
 			key, *values = row
 			csv_dict[key] = {key: value for key, value in zip(header, values)}
 		for a,b in csv_dict.items():
-			db.child("attendence").child(curr_month).child(date).child(a).push(b)
-		for a1,b1 in csv_dict.items():
-			data = db.child("attendence").child(curr_month).child(date).child(a1).get()
-			for att in data.each():
-				for a in att.val().items():
+			db.child("attendence").child(year).child(curr_month).child(date).child(a).push(b)
+		try:
+			
+			for a1,b1 in csv_dict.items():
 
-					if a[1] == "1":
-		
-						pc = pc+1
-					elif a[1] == "0":
-						ac = ac+1
+				data = db.child("attendence").child(year).child(curr_month).child(date).child(a1).get()
+				check_per = db.child("attendence").child(year).child(curr_month).child(a1).get()
+				for task in check_per.each():
+					for a in task.val().items():
+						if a[0] == "present class":
+							a[1] = int(a[1])
+							temp_pc =temp_pc+ a[1]
+						elif a[0] == "absent class":
+							a[1] = int(a[1])
+							temp_ac =temp_ac+ a[1]
+				db.child("attendence").child(year).child(curr_month).child(a1).remove()
+				for att1 in data.each():
+					for i in att1.val().items():
+						if i[1] == "0":
+							ac1 = ac1+1
+						elif i[1] == "1":
+							pc1 = pc1+1
+				final_ac = ac1 + temp_ac
+				final_pc = pc1 + temp_pc
 
-			b = {
-			'total absent':ac,
-			'total present':pc
-			}
+				data = {
+				"total absent":final_ac,
+				"total present": final_pc
+				}
 
-			ac = 0
-			pc =0
+				temp_ac = 0
+				temp_pc = 0
+				ac1 = 0
+				pc1 = 0
+				final_ac = 0
+				final_pc = 0
+				db.child("attendence").child(year).child(curr_month).child(a1).push(data)
+				msg = "Updated Successfully"
 
-			data = db.child("attendence").child(curr_month).child(a1).push(b)
-			msg =  "Successfully uploaded"
-		return render_template('selectattendence.html',msg = msg)
+			return render_template('selectattendence.html',msg = msg)
+
+		except:
+
+			for a1,b1 in csv_dict.items():
+
+
+
+				data = db.child("attendence").child(year).child(curr_month).child(date).child(a1).get()	
+
+				for att in data.each():
+					for a in att.val().items():
+
+						if a[1] == "1":
+			
+							pc = pc+1
+						elif a[1] == "0":
+							ac = ac+1
+
+				b = {
+				'total absent':ac,
+				'total present':pc
+				}
+
+				ac = 0
+				pc =0
+
+
+
+
+				data = db.child("attendence").child(year).child(curr_month).child(a1).push(b)
+				msg =  "Successfully uploaded"
+			return render_template('selectattendence.html',msg = msg)
 
 	return render_template('selectattendence.html')
 
