@@ -21,6 +21,8 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
 <style type="text/css">
+ @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100&display=swap');
+  
 	.circular-chart {
   display: block;
   margin: 10px auto;
@@ -41,26 +43,75 @@
     stroke-dasharray: 0 100;
   }
 }
+body > #bg{
+  height: 100%;
+  width: 100%;
+  background: #37517E;
+    clip-path: polygon(100% 0, 100% 23%, 0 76%, 0 0);
+
+  position: absolute;
+  z-index: -1;
+}
+.logo img{
+    width:80%;
+    height:120px;
+  }
 </style>
   </head>
 <body>
-	<table border="2px solid black" width="100%">
-		<tr><td colspan="2" width="100%" align="center"><h2>Today Attendence Details for {{reg}}</h2></td></tr>
-		<tr><td width="50%" align="center">
+
+<table width="100%">
+    <tr>
+    <td colspan  = "8" align="center" width="100%">
+      <div class = "logo">
+      <img src = "{{url_for('static',filename = 'images/unnamed.png')}}"></div>
+    </td>
+  </tr>
+  <tr>
+    <td align="center" width="50%" height="50px;" colspan="4">
+    </td>
+    <td  align="center" width="50%" colspan="4">
+    </td>
+  </tr>
+  <tr><td colspan="8" align="center" width="100%">
+    <ul class="nav justify-content-center">
+    <ul class="nav nav-pills">
+   <li class="nav-item">
+    <a class="nav-link" href="/" style=" color: black;">Home</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="/checkmarks" style=" color: black;">Mid Marks</a>
+  </li>
+  <li class="nav-item">
+    <button type="button" class="btn btn-primary">
+               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-graph-up" viewBox="0 0 16 16">
+  <path fill-rule="evenodd" d="M0 0h1v15h15v1H0V0zm10 3.5a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-1 0V4.9l-3.613 4.417a.5.5 0 0 1-.74.037L7.06 6.767l-3.656 5.027a.5.5 0 0 1-.808-.588l4-5.5a.5.5 0 0 1 .758-.06l2.609 2.61L13.445 4H10.5a.5.5 0 0 1-.5-.5z"/>
+</svg>
+                <a href = "/dashboard" style="color: white;text-decoration: none;">Dashboard</a>
+              </button>
+  </li>
+  
+</ul></ul>
+  </td></tr></table>
+
+  <tr><td colspan="8"  height="20px;"></td></tr>
+    <table  width="100%" border="2px solid black">
+		<tr><td colspan="8" width="100%" align="center"><h2 style="font-family: 'Poppins', sans-serif;"><b>Today Attendence Details for {{reg}}</b></h2></td></tr>
+		<tr><td width="50%" align="center" colspan="4" style="font-family: 'Poppins', sans-serif;">
 			{% for i in hour %}
-			{{i}}<br>
+			<b>{{i}}</b><br>
 			{% endfor %}
 
 		</td>
-		<td width="50%" align="center">
+		<td width="50%"  colspan="4" style="font-family: 'Poppins', sans-serif;">
 			{% for j in status %}
-			{{j}}<br>
+			<b>{{j}}</b><br>
 			{% endfor %}
 		</td>
 	</tr>
 	<tr>
-		<td width="50%" align="center"><h4>Today Attendence Percentage</h4></td>
-		<td width="50%">
+		<td width="50%" align="center" colspan="4"><h4 style="font-family: 'Poppins', sans-serif;"><b>Today Attendence Percentage</h4></td>
+		<td width="50%" colspan="4">
 			<svg viewBox="0 0 36 36" class="circular-chart">
   <path class="circle"
     stroke-dasharray="{{per}}, 100"
@@ -73,20 +124,24 @@
 		</td>
 	</tr>
 	<tr>
-		<td align="center">
+		<td align="center" colspan="4" style="font-family: 'Poppins', sans-serif;">
 			{% for i in ac %}
-			{{i}} in this month/hour<br>
+			<b>{{i}} in this month/hour<br>
 			{% endfor %}
 		</td>
-		<td>
+		<td colspan="4" style="font-family: 'Poppins', sans-serif;">
 			{% for j in pc %}
-			{{j}}<br>
+			<b>{{j}}<br>
 			{% endfor %}
 		</td>
 
 	</tr>
-	<tr><td colspan="2" width="100%" >
-		<h3>Graphical Representation</h3>
+
+
+
+
+<tr><td colspan="8" width="100%" style="font-family: 'Poppins', sans-serif;">
+		<h3><b>Graphical Representation</h3>
 <div class="ct-chart ct-perfect-fourth" style="height: 300px;"></div>
   <script>
     class MyCharts{
@@ -122,6 +177,8 @@
 
 
   </script>
-</td></tr></table>
+</td></tr>
+
+</table>
 </body>
 </html>
