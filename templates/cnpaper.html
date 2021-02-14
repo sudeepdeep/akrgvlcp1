@@ -30,7 +30,26 @@
 		<td  align="center" width="50%">
 		</td>
 	</tr>
-
+	<tr><td colspan="2" align="center" width="100%">
+		<ul class="nav justify-content-center">
+		<ul class="nav nav-pills">
+   <li class="nav-item">
+    <a class="nav-link" href="/" >Home</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="/checkmarks">Mid Marks</a>
+  </li>
+  <li class="nav-item">
+    <button type="button" class="btn btn-primary">
+               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-graph-up" viewBox="0 0 16 16">
+  <path fill-rule="evenodd" d="M0 0h1v15h15v1H0V0zm10 3.5a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-1 0V4.9l-3.613 4.417a.5.5 0 0 1-.74.037L7.06 6.767l-3.656 5.027a.5.5 0 0 1-.808-.588l4-5.5a.5.5 0 0 1 .758-.06l2.609 2.61L13.445 4H10.5a.5.5 0 0 1-.5-.5z"/>
+</svg>
+                <a href = "/dashboard" style="color: white;text-decoration: none;">Dashboard</a>
+              </button>
+  </li>
+  
+</ul></ul>
+	</td></tr>
 	<tr>
 		<td align="center" width="50%" height="50px;">
 		</td>
@@ -38,110 +57,142 @@
 		</td></tr></table>
 
 <center>
-<form action = '/cnpaper' method="POST">	
+<form action = '/cppaper' method="POST">	
 {% for item in lst2 %}
 <table width="100%" >
 		<tr><td align="center" width="100%" >
 {% if item == 0 %}
-<label style="background-color: #0D6EFD;width: 100%;padding: 20px; color: white;">Which transmission media provides the highest transmission speed in a network?</label><br>
-	<input type="radio" name="options0" value="a">Coaxial<br>
-	<input type="radio" name="options0" value="b">Twisted pair<br>
-	<input type="radio" name="options0" value="c">Optical Fibers<br>
-	<input type="radio" name="options0" value="d">Electric Cable<br></td></tr>
+<label style="background-color: #0D6EFD;width: 100%;padding: 20px; color: white;">What is the 16-bit compiler allowable range for integer constants?</label><br>
+	<input type="radio" name="options0" value="a">-3.4e38 to 3.4e38<br>
+	<input type="radio" name="options0" value="b">-32767 to 32768
+<br>
+	<input type="radio" name="options0" value="c">-32668 to 32667
+<br>
+	<input type="radio" name="options0" value="d">-32768 to 32767
+<br></td></tr>
 <tr><td height="15px"></td></tr>
 {% elif item == 1 %}
 		<tr><td align="center" width="100%">
-<label style="background-color: #0D6EFD;width: 100%;padding: 20px; color: white;">Bits can be sent over guided and unguided media as analog signal by ___________</label><br>
-	<input type="radio" name="options1" value="a">Digital modulation<br>
-	<input type="radio" name="options1" value="b">Amplitude modulation
+<label style="background-color: #0D6EFD;width: 100%;padding: 20px; color: white;">In the C language, the constant is defined _______.</label><br>
+	<input type="radio" name="options1" value="a">Before main
 <br>
-	<input type="radio" name="options1" value="c">Frequency modulation
+	<input type="radio" name="options1" value="b">After main
+
 <br>
-<input type="radio" name="options1" value="c">Phase modulation
+	<input type="radio" name="options1" value="c">Anywhere, but starting on a new line.
+
+<br>
+<input type="radio" name="options1" value="d">None of the these.
+
 
 <br>
 </td></tr>
 <tr><td height="15px"></td></tr>
 <tr><td align="center" width="100%">
 {% elif item ==2 %}
-<label style="background-color: #0D6EFD;width: 100%;padding: 20px; color: white;">The data link layer takes the packets from _________ and encapsulates them into frames for transmission.</label><br>
-	<input type="radio" name="options2" value="a">Network Layer<br>
-	<input type="radio" name="options2" value="b">Physical Layer<br>
-	<input type="radio" name="options2" value="c">Transport Layer<br>
-	<input type="radio" name="options2" value="d">Application Layer<br></td></tr>
+<label style="background-color: #B6D3EF;width:100%; width: 100%">main()<br>  
+{printf("AKRG VL");<br>  
+main();}<br> </label><br>
+<label style="background-color: #0D6EFD;width: 100%;padding: 20px; color: white;">What will be the output of this program?</label><br>
+	<input type="radio" name="options2" value="a">Wrong statement<br>
+	<input type="radio" name="options2" value="b">It will keep on printing AKRG VL<br>
+	<input type="radio" name="options2" value="c">It will Print AKRG VL once
+<br>
+	<input type="radio" name="options2" value="d">None of the these
+<br></td></tr>
 	<tr><td height="15px"></td></tr>
 <tr><td align="center" width="100%">
 {% elif item == 3 %}
-<label style="background-color: #0D6EFD;width: 100%;padding: 20px; color: white;">CRC stands for __________</label><br>
-	<input type="radio" name="options3" value="a">cyclic redundancy check-<br>
-	<input type="radio" name="options3" value="b">code repeat check
+<label style="background-color: #0D6EFD;width: 100%;padding: 20px; color: white;">Which one of the following is a loop construct that will always be executed once?</label><br>
+	<input type="radio" name="options3" value="a">For<br>
+	<input type="radio" name="options3" value="b">Which
 <br>
-	<input type="radio" name="options3" value="c">code redundancy check
+	<input type="radio" name="options3" value="c">Switch
 <br>
-	<input type="radio" name="options3" value="d">cyclic repeat check<br></td></tr>
+	<input type="radio" name="options3" value="d">do while<br></td></tr>
 	<tr><td height="15px"></td></tr>
 <tr><td align="center" width="100%">
 {% elif item == 4 %}
-<label style="background-color: #0D6EFD;width: 100%;padding: 20px; color: white;">The network layer is concerned with __________ of data.</label><br>
-	<input type="radio" name="options4" value="a">Bits<br>
-	<input type="radio" name="options4" value="b">Frames<br>
-	<input type="radio" name="options4" value="c">Packets<br>
-	<input type="radio" name="options4" value="d">Bytes<br></td></tr>
+<label style="background-color: #0D6EFD;width: 100%;padding: 20px; color: white;">How many bytes does "int = D" use?</label><br>
+	<input type="radio" name="options4" value="a">0<br>
+	<input type="radio" name="options4" value="b">1<br>
+	<input type="radio" name="options4" value="c">2 or 4<br>
+	<input type="radio" name="options4" value="d">10<br></td></tr>
 	<tr><td height="15px"></td></tr>
 <tr><td align="center" width="100%">
 {% elif item == 5 %}
-<label style="background-color: #0D6EFD;width: 100%;padding: 20px; color: white;">A 4 byte IP address consists of __________</label><br>
-	<input type="radio" name="options5" value="a">only network address<br>
-	<input type="radio" name="options5" value="b">only host address
+<label style="background-color: #0D6EFD;width: 100%;padding: 20px; color: white;"> A pointer is a memory address. Suppose the pointer variable has p address 1000, and that p is declared to have type int*, and an int is 4 bytes long. What address is represented by expression p + 2?</label><br>
+	<input type="radio" name="options5" value="a">1002<br>
+	<input type="radio" name="options5" value="b">1004
 <br>
-	<input type="radio" name="options5" value="c">network address & host address-
+	<input type="radio" name="options5" value="c">1006
 <br>
-	<input type="radio" name="options5" value="d">network address & MAC address
+	<input type="radio" name="options5" value="d">1008
 <br></td></tr>
 	<tr><td height="15px"></td></tr>
 <tr><td align="center" width="100%">
 {% elif item == 6 %}
-<label style="background-color: #0D6EFD;width: 100%;padding: 20px; color: white;">Transport layer aggregates data from different applications into a single stream before passing it to ____________
+<label style="background-color: #B6D3EF;width:100%;">for(j = 1; j <= 10; j = j-1)
 </label><br>
-	<input type="radio" name="options6" value="a">Network Layer<br>
-	<input type="radio" name="options6" value="b">DataLink Layer<br>
-	<input type="radio" name="options6" value="c">Application Layer<br>
-	<input type="radio" name="options6" value="d">Physical Layer<br></td></tr>
+<label style="background-color: #0D6EFD;width: 100%;padding: 20px; color: white;">How many times will the above loop execute?
+</label><br>
+	<input type="radio" name="options6" value="a">Forever<br>
+	<input type="radio" name="options6" value="b">Never<br>
+	<input type="radio" name="options6" value="c">0<br>
+	<input type="radio" name="options6" value="d">1<br></td></tr>
 	<tr><td height="15px"></td></tr>
 <tr><td align="center" width="100%">
 {% elif item == 7 %}
 <label style="background-color: #0D6EFD;width: 100%;padding: 20px; color: white;">
-Which of the following are transport layer protocols used in networking?</label><br>
-	<input type="radio" name="options7" value="a">TCP and FTP<br>
-	<input type="radio" name="options7" value="b">UDP and HTTP
+Directives are translated by the</label><br>
+	<input type="radio" name="options7" value="a">Pre-processor
 <br>
-	<input type="radio" name="options7" value="c">TCP and UDP<br>
-	<input type="radio" name="options7" value="d">HTTP and FTP
+	<input type="radio" name="options7" value="b">Compiler
+<br>
+	<input type="radio" name="options7" value="c">Linker<br>
+	<input type="radio" name="options7" value="d">Editor
 <br></td></tr>
 	<tr><td height="15px"></td></tr>
 <tr><td align="center" width="100%">
 {% elif item == 8 %}
-<label style="background-color: #0D6EFD;width: 100%;padding: 20px; color: white;">Retransmission of packets must not be done when _______</label><br>
-	<input type="radio" name="options8" value="a">Packet is Lost<br>
-	<input type="radio" name="options8" value="b">Packet is corrupt<br>
-	<input type="radio" name="options8" value="c">Packet is Needed<br>
-	<input type="radio" name="options8" value="d">Packet is error free<br></td></tr>
+<label style="background-color: #0D6EFD;width: 100%;padding: 20px; color: white;">Why is a macro used in place of a function?</label><br>
+	<input type="radio" name="options8" value="a">It reduces execution time.
+<br>
+	<input type="radio" name="options8" value="b">It reduces code size.
+<br>
+	<input type="radio" name="options8" value="c">It increases execution time.
+<br>
+	<input type="radio" name="options8" value="d">It increases code size.
+<br></td></tr>
 	<tr><td height="15px"></td></tr>
 <tr><td align="center" width="100%">
 {% elif item == 9 %}
-<label style="background-color: #0D6EFD;width: 100%;padding: 20px; color: white;">In Go-Back-N window, when the timer of the packet times out, several packets have to be resent even some may have arrived safe. Whereas in Selective Repeat window, the sender resends ___________</label><br>
-	<input type="radio" name="options9" value="a">Packet which are not lost<br>
-	<input type="radio" name="options9" value="b">Only those packets which are lost or corrupted<br>
-	<input type="radio" name="options9" value="c">Packet from starting<br>
-	<input type="radio" name="options9" value="d">All the packets<br></td></tr>
+<label style="background-color: #0D6EFD;width: 100%;padding: 20px; color: white;">What is a lint?</label><br>
+	<input type="radio" name="options9" value="a">C compiler
+	<br>
+	<input type="radio" name="options9" value="b">Interactive debugger
+<br>
+	<input type="radio" name="options9" value="c">Analyzing tool
+<br>
+	<input type="radio" name="options9" value="d">C interpreter
+<br></td></tr>
 	<tr><td height="15px"></td></tr>
 <tr><td align="center" width="100%">
 {% elif item == 10 %}
-<label style="background-color: #0D6EFD;width: 100%;padding: 20px; color: white;">Communication between a computer and a keyboard involves ______________ transmission.</label><br>
-	<input type="radio" name="options10" value="a">Automatic<br>
-	<input type="radio" name="options10" value="b">Half Duplex<br>
-	<input type="radio" name="options10" value="c">Full Duplex<br>
-	<input type="radio" name="options10" value="d">Simplex<br></td></tr>
+<label style="background-color: #B6D3EF;width:100%;">main()<br>
+{  <br>
+  int i = 2;  <br>
+  {  <br>
+    int i = 4, j = 5; <br> 
+     printf("%d %d", i, j);  <br>
+  }    <br>
+  printf("%d %d", i, j);  <br>
+}  </label><br>
+<label style="background-color: #0D6EFD;width: 100%;padding: 20px; color: white;">What will be the output of the program?</label><br>
+	<input type="radio" name="options10" value="a">4525<br>
+	<input type="radio" name="options10" value="b">2525<br>
+	<input type="radio" name="options10" value="c">4545<br>
+	<input type="radio" name="options10" value="d">None of the above<br></td></tr>
 	<tr><td height="15px"></td></tr>
 
 {% endif %}
