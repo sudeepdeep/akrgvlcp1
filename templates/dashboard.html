@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Dash Board</title>
+	<title>Radio Buttons</title>
 	<style type="text/css">
 	body > #bg{
 	height: 100%;
@@ -24,36 +24,42 @@
 </head>
 <body><div id = "bg"></div>
 <table width="100%" >
+	<tr><td height="30px;"></td></tr>
 	<tr>
 		<td colspan  = "2" align="center" width="100%">
 			<div class = "logo">
-			<img src = "{{url_for('static',filename = 'images/unnamed.png')}}"></div>
+			<img src = "{{url_for('static',filename = 'images/unnamed.png')}}" style="width: 80%;"></div>
 		</td>
 	</tr>
-	<tr>
-		<td align="center" width="50%" height="50px;">
-		</td>
-		<td  align="center" width="50%">
-		</td>
-	</tr>
-	<tr><td colspan="2" align="center" width="100%">
+	<tr><td height="30px;"></td></tr>
+		<tr><td colspan  = "2" align="center" width="100%">
 		<ul class="nav justify-content-center">
 		<ul class="nav nav-pills">
+			 <li class="nav-item">
+    <a class="nav-link" href="/" style="color: white;">Home</a>
+  </li>
   
+
   <li class="nav-item">
-    <button type="button" class="btn btn-primary">
+    <a class="nav-link" href="/checkmarks" style="color: white;">Mid Marks</a>
+  </li>
+   <li class="nav-item">
+    <button type="button" class="btn btn-primary" style="box-shadow: -8px -8px 8px 0 rgba(0, 0, 0, 0.4), 0 6px 20px 0 rgba(0, 0, 0, 0.19); border: 0px solid black; background-color: #0D6EFD; color: white;border-radius: 50px; ">
                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-graph-up" viewBox="0 0 16 16">
   <path fill-rule="evenodd" d="M0 0h1v15h15v1H0V0zm10 3.5a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-1 0V4.9l-3.613 4.417a.5.5 0 0 1-.74.037L7.06 6.767l-3.656 5.027a.5.5 0 0 1-.808-.588l4-5.5a.5.5 0 0 1 .758-.06l2.609 2.61L13.445 4H10.5a.5.5 0 0 1-.5-.5z"/>
 </svg>
-                <a href = "/test1" style="color: white;text-decoration: none;">Dashboard</a>
+                <a href = "/dashboard" style="color: white;text-decoration: none;">Dashboard</a>
               </button>
   </li>
- 
-  
+   <li class="nav-item">
+    <a class="nav-link" href="/logout" style="color: white;">{{btn}}</a>
+  </li>
 </ul></ul>
 	</td></tr>
+	
+	</td></tr>
 	<tr>
-		<td align="center" width="50%" height="50px;">
+		<td colspan  = "2" align="center" width="50%" height="50px;">
 		</td>
 		<td  align="center" width="50%">
 		</td></tr>
@@ -61,16 +67,15 @@
 <tr>
 <td width="50%">
 		<div class="nav justify-content-center">
-<button type="button" class="btn btn-primary" style="width: 100px;margin: 30px;"onclick="document.location='/feescheck'">View Fees Details</button></div></td></div>
+<button type="button" class="btn btn-primary" style="width: 100px;margin: 30px;  display: flex; font-size: 15px;"onclick="document.location='/feescheck'">View Fees Details</button></div></td></div>
 <td width="50%">
 		<div class="nav justify-content-center">
-<button type="button" class="btn btn-primary" style="width: 100px;margin: 30px;" onclick="document.location='/attendfirst'">View Attendence</button></div></td></tr>
+<button type="button" class="btn btn-primary" style="width: 100px;margin: 30px;font-size: 15px;" onclick="document.location='/attendfirst'">View Attendence</button></div></td></tr>
 <tr>
 <td width="50%">
 		<div class="nav justify-content-center">
-<button type="button" class="btn btn-primary" style="width: 100px;margin: 30px;"onclick="document.location='/test1'">Perform Tests</button></div></td></div>
+<button type="button" class="btn btn-primary" style="width: 100px;margin: 30px;font-size: 15px;"onclick="document.location='/test1'">Perform Tests</button></div></td></div>
 <td width="50%">
-		<div class="nav justify-content-center">
-></div></td></tr>
+		<div class="nav justify-content-center"></div></td></tr>
 </div></tr>
 	</table></body></html>
