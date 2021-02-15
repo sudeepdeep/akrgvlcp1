@@ -426,21 +426,11 @@ def feesdetails():
 		for row in data:
 			key, *values = row
 			csv_dict[key] = {key: value for key, value in zip(header, values)}
-			try:
-				for a,b in csv_dict.items():
-					data = db.child("fees").child(a).child(sem).get()
-					main_data = db.child("fees").child(a).child(sem).get()
-					for task in main_data.each():
-						key1 = task.key()
-					for i,j in b.items():
-						db.child("fees").child(a).child(sem).child(key1).update({i:j})
-						msg = "Successfully updated..."
-					return render_template('feeselect.html',msg = msg)
-			except:
-				for a,b in csv_dict.items():
-					db.child("fees").child(a).child(sem).push(b)
-					msg =  "Successfully uploaded"
-				return render_template('feeselect.html',msg = msg)
+
+		for a,b in csv_dict.items():
+			db.child("fees").child(a).child(sem).push(b)
+			msg =  "Successfully uploaded"
+		return render_template('feeselect.html',msg = msg)
 		
 
 	return render_template('feeselect.html')
