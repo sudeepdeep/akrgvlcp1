@@ -435,12 +435,12 @@ def feesdetails():
 					for i,j in b.items():
 						db.child("fees").child(a).child(sem).child(key1).update({i:j})
 						msg = "Successfully updated..."
-						return render_template('feeselect.html',msg = msg)
+					return render_template('feeselect.html',msg = msg)
 			except:
 				for a,b in csv_dict.items():
 					db.child("fees").child(a).child(sem).push(b)
 					msg =  "Successfully uploaded"
-					return render_template('feeselect.html',msg = msg)
+				return render_template('feeselect.html',msg = msg)
 		
 
 	return render_template('feeselect.html')
