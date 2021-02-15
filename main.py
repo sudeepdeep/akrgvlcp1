@@ -46,15 +46,16 @@ def register1():
 @app.route('/authentication',methods = ['GET','POST'])
 def authentication():
 	if request.method == 'POST':
-		reg = request.form['regno']
-		check_data = db.child(reg).get()
-		for data in check_data.each():
-			for i,j in data.val().items():
-				if i == "regno":
-					if j == reg:
-						return render_template('userregister.html',msg = "User already exists!!")
+		try:
+			reg = request.form['regno']
+			check_data = db.child(reg).get()
+			for data in check_data.each():
+				for i,j in data.val().items():
+					if i == "regno":
+						if j == reg:
+							return render_template('userregister.html',msg = "User already exists!!")
 
-		else:
+		except:
 			regno = request.form['regno']
 
 			password = request.form['password']
