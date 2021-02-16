@@ -510,10 +510,10 @@ def attendenceupdate():
 				check_per = db.child("attendence").child(year).child(curr_month).child(a1).get()
 				for task in check_per.each():
 					for a in task.val().items():
-						if a[0] == "present class":
+						if a[0] == "total present":
 							a[1] = int(a[1])
 							temp_pc =temp_pc+ a[1]
-						elif a[0] == "absent class":
+						elif a[0] == "total absent":
 							a[1] = int(a[1])
 							temp_ac =temp_ac+ a[1]
 				db.child("attendence").child(year).child(curr_month).child(a1).remove()
