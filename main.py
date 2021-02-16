@@ -503,21 +503,24 @@ def attendenceupdate():
 		for a,b in csv_dict.items():
 			db.child("attendence").child(year).child(curr_month).child(date).child(a).push(b)
 		try:
-			
+			temp_ac = 0
+			temp_pc = 0
+			ac1 = 0
+			pc1 = 0
+			final_ac = 0
+			final_pc = 0
 			for a1,b1 in csv_dict.items():
-
-				data = db.child("attendence").child(year).child(curr_month).child(date).child(a1).get()
 				check_per = db.child("attendence").child(year).child(curr_month).child(a1).get()
-				for task in check_per.each():
-					for a in task.val().items():
-						if a[0] == "total present":
-							a[1] = int(a[1])
-							temp_pc =temp_pc+ a[1]
-						elif a[0] == "total absent":
-							a[1] = int(a[1])
-							temp_ac =temp_ac+ a[1]
+				for a in check_per.val().items():
+					if a[0] == "total present":
+						a[1] = int(a[1])
+						temp_pc =temp_pc+ a[1]
+					elif a[0] == "total absent":
+						a[1] = int(a[1])
+						temp_ac =temp_ac+ a[1]
 				db.child("attendence").child(year).child(curr_month).child(a1).remove()
-				for att1 in data.each():
+				data1 = db.child("attendence").child(year).child(curr_month).child(date).child(a1).get()
+				for att1 in data1.each():
 					for i in att1.val().items():
 						if i[1] == "0":
 							ac1 = ac1+1
@@ -543,36 +546,27 @@ def attendenceupdate():
 			return render_template('selectattendence.html',msg = msg)
 
 		except:
-
+			pc  = 0
+			ac = 0
 			for a1,b1 in csv_dict.items():
-
-
-
-				data = db.child("attendence").child(year).child(curr_month).child(date).child(a1).get()	
-
-				for att in data.each():
-					for a in att.val().items():
-
+				check_data = db.child("attendence").child(year).child(curr_month).child(date).child(a1).get()
+				for task in check_data.each():
+					for a in task.val().items():
 						if a[1] == "1":
-			
 							pc = pc+1
 						elif a[1] == "0":
 							ac = ac+1
-
-				b = {
-				'total absent':ac,
-				'total present':pc
+				data = {
+				'total present':pc,
+				'total absent':ac
 				}
-
+				pc = 0
 				ac = 0
-				pc =0
+				db.child("attendence").child(year).child(curr_month).child(a1).push(data)
+			return render_template("selectattendence.html",msg = "Data Successfully Uploaded!!")
 
 
 
-
-				data = db.child("attendence").child(year).child(curr_month).child(a1).push(b)
-				msg =  "Successfully uploaded"
-			return render_template('selectattendence.html',msg = msg)
 
 	return render_template('selectattendence.html')
 
