@@ -4,9 +4,16 @@
 	<title>c page</title>
 </head>
 <style type="text/css">
-	body{
-		background-color: #37517E;
-	}
+	body > #bg{
+	height: 100%;
+	width: 100%;
+	background: #37517E;
+	clip-path: polygon(0 0, 100% 0%, 100% 46%, 0 79%);
+
+	position: absolute;
+	z-index: -1;
+	box-shadow: 0px 0px 0.8px 0 rgba(0, 0, 0, 0.4), 0 6px 20px 0 rgba(0, 0, 0, 0.9);
+}
 	.logo img{
 		width:80%;
 		height:120px;
