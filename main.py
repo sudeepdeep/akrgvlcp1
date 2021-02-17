@@ -124,7 +124,7 @@ def logout():
 def checkmarks():
 	if 'loggedin' in session:
 		reg = session['reg']
-		return render_template('checkmarks.html',reg = reg)
+		return render_template('checkmarks.html',reg = reg,btn = "logout")
 	else:
 		return redirect(url_for('signin'))
 
@@ -228,7 +228,7 @@ def checking():
 @app.route('/dashboard')
 def dashboard():
 	if 'loggedin' in session:
-		return render_template('dashboard.html')
+		return render_template('dashboard.html',btn = "logout")
 	else:
 		return render_template('userlogin.html')
 
