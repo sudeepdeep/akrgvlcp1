@@ -11,6 +11,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Righteous&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Contrail+One&family=Fugaz+One&family=Leckerli+One&family=Marcellus+SC&family=Righteous&family=Rubik+Mono+One&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Varela+Round&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Alegreya+Sans+SC:wght@700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Alegreya+Sans+SC:wght@700&family=Julius+Sans+One&display=swap');
 body > #bg{
 	height: 100%;
 	width: 100%;
@@ -311,6 +314,13 @@ div.btn button:hover{
 	transform: scale(1.2);
 }
 
+div.mainlogo{
+	display: flex;
+
+}
+div.mainheading{
+	width: 80%;
+}
 
 </style>
 <link href='https://fonts.googleapis.com/css?family=Baloo 2' rel='stylesheet'>
@@ -363,18 +373,18 @@ function topFunction() {
 			<img src = "{{url_for('static',filename = 'images/unnamed.png')}}"></div>
 		</td>
 	</tr>
+	<tr><td colspan="2" height="10px;"></td></tr>
 	<tr>
 		<td colspan  = "2" align="center" width="100%" >
 			<div class = "heading">
-			<h1>Welcome to the Virtual lab of <br>AKRG CET</h1></div>
+			<h1 style="font-family: 'Julius Sans One', sans-serif; font-size: 25px; letter-spacing: 5px;"><p>Hai {% for i in name %}{{i}}{% endfor %}</h1></p></div>
 			</td>
 	</tr>
 	<tr><td colspan = "2" height= "10px"></td></tr>
-	<tr>
-		<td width = "50%" align= "center" ><button type="button" class="btn btn-primary" style="box-shadow: -8px -8px 8px 0 rgba(0, 0, 0, 0.4), 0 6px 20px 0 rgba(0, 0, 0, 0.19); border: 0px solid black; background-color: #0D6EFD; color: white;border-radius: 50px; "><a href = "/signin" style="color:white; text-decoration: none; font-size: 12px;">Student Login</a></button>
+	<tr><td width="50%"></td>
+		<td width = "50%" align= "right"><a href = "/signin" style="color:#F18D8D; text-decoration: none; font-size: 12px;">Student Login /</a>
 			
-		</td>
-		<td width = "50%" align = "center"><button type="button" class="btn btn-primary" style="box-shadow: -8px -8px 8px 0 rgba(0, 0, 0, 0.4), 0 6px 20px 0 rgba(0, 0, 0, 0.19); border: 0px solid black; background-color: #0D6EFD; color: white;border-radius: 50px; "><a href = "/adminlogin" style="color: white; text-decoration: none; font-size: 12px;">Admin Login</a></button></td>
+		<a href = "/adminlogin" style="color: #F18D8D; text-decoration: none; font-size: 12px; margin-right: 5px;">Admin Login</a></td>
 	</tr>
 	<tr>
 		<td align="center" width="50%" height="50px;">
@@ -395,13 +405,13 @@ function topFunction() {
               </button>
   </li>
   <li class="nav-item">
-    <a class="nav-link" href="/checkmarks" style="color: black;">Mid Marks</a>
+    <a class="nav-link" href="/checkmarks" style="color: black; font-family: 'Alegreya Sans SC', sans-serif;">Mid Marks</a>
   </li>
   <li class="nav-item">
-    <a class="nav-link" href="/dashboard" style="color: black;">Dashboard</a>
+    <a class="nav-link" href="/dashboard" style="color: black; font-family: 'Alegreya Sans SC', sans-serif;">Dashboard</a>
   </li>
    <li class="nav-item">
-    <a class="nav-link" href="/logout" style="color: black;">{{btn}}</a>
+    <a class="nav-link" href="/logout" style="color: black; font-family: 'Alegreya Sans SC', sans-serif;">{{btn}}</a>
   </li>
 </ul></ul>
 	</td></tr>
@@ -514,7 +524,7 @@ function topFunction() {
 		<td align="center" width="50%">
 			<div class = "btn">
 			<button style="background-image: url({{url_for('static',filename = 'images/bgm1.jpg')}}); border-radius: 10px; border-color: black; height: 200px; width: 100%;font-family: 'Varela Round', sans-serif; color: black;box-shadow: -15px -12px 8px rgba(0, 0, 0, 0.4); ">
-				<a href = "/htm" style="color: white; text-decoration: none;"><img src = "{{url_for('static',filename = 'images/html.png')}}" height="40px" width="40px"><br><b>WT</b></a></button></div>
+				<a href = "/htm" style="color: white; text-decoration: none;"><img src = "{{url_for('static',filename = 'images/html.png')}}" height="40px" width="40px"><br><b>HTML</b></a></button></div>
 		</td>
 		<td  align="center" width="50%">
 			<div class = "btn">
