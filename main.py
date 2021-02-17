@@ -476,22 +476,20 @@ def selectattendence():
 @app.route('/attendenceupdate',methods = ['GET','POST'])
 def attendenceupdate():
 	if request.method == 'POST':
-		ac = 0
-		pc = 0
-		temp_ac = 0
-		temp_pc = 0
-		ac1 = 0
-		pc1 = 0
-		final_ac = 0
-		final_pc = 0
+		
 		months = ['Jan','Feb','Mar','Apr','May','June','Jul','Aug','Sept','Oct','Nov','Dec']
-		today = datetime.today()
+		today = datetime.now()
 		a = today.month - 1
 		curr_month = months[a]
 		f = request.files['file']
 		date = today.date()
 		year = today.year
+
+
+		
+		f = request.files['file']
 		f.save(f.filename)
+
 		with open(f.filename,mode = 'r') as f:
 			csv_list = [[val.strip() for val in r.split(",")] for r in f.readlines()]
 
@@ -500,8 +498,11 @@ def attendenceupdate():
 		for row in data:
 			key, *values = row
 			csv_dict[key] = {key: value for key, value in zip(header, values)}
+
+
 		for a,b in csv_dict.items():
 			db.child("attendence").child(year).child(curr_month).child(date).child(a).push(b)
+
 		try:
 			temp_ac = 0
 			temp_pc = 0
@@ -511,30 +512,28 @@ def attendenceupdate():
 			final_pc = 0
 			for a1,b1 in csv_dict.items():
 				check_per = db.child("attendence").child(year).child(curr_month).child(a1).get()
+				new_data = db.child("attendence").child(year).child(curr_month).child(date).child(a1).get()
 				for task in check_per.each():
-					for a in task.val().items():
-						if a[0] == "total present":
-							a[1] = int(a[1])
-							temp_pc =temp_pc+ a[1]
-						elif a[0] == "total absent":
-							a[1] = int(a[1])
-							temp_ac =temp_ac+ a[1]
+					for i,j in task.val().items():
+						if i == "total absent":
+							temp_ac = temp_ac + j
+						elif i == "total present":
+							temp_pc = temp_pc + j
+
 				db.child("attendence").child(year).child(curr_month).child(a1).remove()
-				data1 = db.child("attendence").child(year).child(curr_month).child(date).child(a1).get()
-				for att1 in data1.each():
-					for i in att1.val().items():
-						if i[1] == "0":
-							ac1 = ac1+1
-						elif i[1] == "1":
-							pc1 = pc1+1
-				final_ac = ac1 + temp_ac
-				final_pc = pc1 + temp_pc
+				for task1 in new_data.each():
+					for i,j in task1.val().items():
+						if j == "0":
+							ac1 = ac1 + 1
+						elif j == "1":
+							pc1 =pc1 + 1
 
+				final_ac = temp_ac+ac1
+				final_pc = temp_pc+pc1
 				data = {
-				"total absent":final_ac,
-				"total present": final_pc
+				'total absent':final_ac,
+				'total present':final_pc
 				}
-
 				temp_ac = 0
 				temp_pc = 0
 				ac1 = 0
@@ -542,29 +541,38 @@ def attendenceupdate():
 				final_ac = 0
 				final_pc = 0
 				db.child("attendence").child(year).child(curr_month).child(a1).push(data)
-				msg = "Updated Successfully"
 
-			return render_template('selectattendence.html',msg = msg)
+
+			return render_template('selectattendence.html',msg = "Data updated Successfully")
 
 		except:
-			pc  = 0
-			ac = 0
-			for a1,b1 in csv_dict.items():
-				check_data = db.child("attendence").child(year).child(curr_month).child(date).child(a1).get()
-				for task in check_data.each():
-					for a in task.val().items():
-						if a[1] == "1":
-							pc = pc+1
-						elif a[1] == "0":
-							ac = ac+1
-				data = {
-				'total present':pc,
-				'total absent':ac
+
+			absent = 0
+			present = 0
+			for a,b in csv_dict.items():
+				old_data = db.child("attendence").child(year).child(curr_month).child(date).child(a).get()
+				for task1 in old_data.each():
+					for i,j in task1.val().items():
+						if j == "0":
+							absent = absent + 1
+						elif j == "1":
+							present =present + 1
+
+				data1 = {
+				'total absent':absent,
+				'total present':present
 				}
-				pc = 0
-				ac = 0
-				db.child("attendence").child(year).child(curr_month).child(a1).push(data)
-			return render_template("selectattendence.html",msg = "Data Successfully Uploaded!!")
+				absent = 0
+				present = 0
+				db.child("attendence").child(year).child(curr_month).child(a).push(data1)
+
+			return render_template('selectattendence.html',msg = "Data uploaded Successfully")
+
+
+
+
+
+
 
 
 
