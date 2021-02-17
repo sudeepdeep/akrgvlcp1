@@ -32,7 +32,17 @@ app.secret_key = "hellosudeep"
 
 def home():
 	if 'loggedin' in session:
-		return render_template('home.html',btn = 'logout')
+		x = []
+		regno = session['reg']
+		namedetails = db.child(regno).get()
+		for a in namedetails.each():
+			for i,j in a.val().items():
+				if i == "name":
+					x.append(j)
+
+
+		
+		return render_template('home.html',btn = 'logout',name = x)
 	else:
 		return render_template('home.html')
 
@@ -46,22 +56,23 @@ def register1():
 @app.route('/authentication',methods = ['GET','POST'])
 def authentication():
 	if request.method == 'POST':
+		reg = request.form['regno']
+
 		try:
-			reg = request.form['regno']
 			check_data = db.child(reg).get()
 			for data in check_data.each():
-				for i,j in data.val().items():
+				for i,j in data.val().items():	
 					if i == "regno":
 						if j == reg:
 							return render_template('userregister.html',msg = "User already exists!!")
 
 		except:
 			regno = request.form['regno']
-
+			name = request.form['name']
 			password = request.form['password']
 			repassword = request.form['re-password']
 			if password == repassword:
-				data = {'regno':regno,'password':password}
+				data = {'regno':regno,'password':password,'name':name}
 				db.child(regno).push(data)
 				return render_template('userlogin.html',msg = "Registration Successfull..")
 			else:
@@ -83,10 +94,10 @@ def auth():
 		if 'reg' in session:
 			return redirect(url_for("home"))
 		else:
-			regno = request.form['regno']
-			password = request.form['password']
-			user = db.child(regno).get()
-			if user:
+			try:
+				regno = request.form['regno']
+				password = request.form['password']
+				user = db.child(regno).get()
 
 				for details in user.each():
 					for a,b in details.val().items():
@@ -95,10 +106,11 @@ def auth():
 								session['loggedin'] = True
 								session['reg'] = regno
 								return redirect(url_for('home'))
-						else:
-							return "password incorrect"
+							else:
+								return "Password Incorrect"
 
-			else:
+
+			except:
 				return "Incorrect Details....."
 	return render_template('home.html',btn = 'logout')
 @app.route('/logout')
