@@ -70,7 +70,7 @@ span.psw {
 
 <h2>Register Form</h2>
 
-<form action="/authentication" method="post">
+<form action="/authentication" method="POST">
   <div class="imgcontainer">
     <img src="{{url_for('static',filename = 'images/loginimage.png')}}" alt="Avatar" class="avatar" height="200px">
   </div>
@@ -79,16 +79,18 @@ span.psw {
     <h5>{{msg}}</h5><br>
     <label for="uname"><b>Register No</b></label>
     <input type="text" placeholder="Enter Regd.No" name="regno" required>
+<label for="name"><b>Name of the Student</b></label>
+    <input type="text" placeholder="Enter Name" name="name" required>
 
     <label for="psw"><b>Password</b></label>
     <input type="password" placeholder="Enter Password" name="password" required>
     <label for="psw"><b>Re-enter Password</b></label>
-    <input type="password" placeholder="Enter Password" name="re-password" required>
+    <input type="password" placeholder="Enter Password again" name="re-password" required>
     <button type="submit">Register</button>
    
   </div>
 
-  <div class="container" style="background-color:#f1f1f1">
+  <div class="container" style="background-color:#37517E">
     <span class="psw">Already Have an account!! <a href="/signin">click here</a> to login.</span>
   </div>
 </form>
