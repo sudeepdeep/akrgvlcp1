@@ -511,13 +511,14 @@ def attendenceupdate():
 			final_pc = 0
 			for a1,b1 in csv_dict.items():
 				check_per = db.child("attendence").child(year).child(curr_month).child(a1).get()
-				for a in check_per.val().items():
-					if a[0] == "total present":
-						a[1] = int(a[1])
-						temp_pc =temp_pc+ a[1]
-					elif a[0] == "total absent":
-						a[1] = int(a[1])
-						temp_ac =temp_ac+ a[1]
+				for task in check_per.each():
+					for a in check_per.val().items():
+						if a[0] == "total present":
+							a[1] = int(a[1])
+							temp_pc =temp_pc+ a[1]
+						elif a[0] == "total absent":
+							a[1] = int(a[1])
+							temp_ac =temp_ac+ a[1]
 				db.child("attendence").child(year).child(curr_month).child(a1).remove()
 				data1 = db.child("attendence").child(year).child(curr_month).child(date).child(a1).get()
 				for att1 in data1.each():
