@@ -56,7 +56,7 @@ def register1():
 @app.route('/authentication',methods = ['GET','POST'])
 def authentication():
 	if request.method == 'POST':
-		reg = request.form['regno']
+		reg = request.form['regno'].upper()
 
 		try:
 			check_data = db.child(reg).get()
@@ -67,7 +67,7 @@ def authentication():
 							return render_template('userregister.html',msg = "User already exists!!")
 
 		except:
-			regno = request.form['regno']
+			regno = request.form['regno'].upper()
 			name = request.form['name']
 			password = request.form['password']
 			repassword = request.form['re-password']
@@ -95,7 +95,7 @@ def auth():
 			return redirect(url_for("home"))
 		else:
 			try:
-				regno = request.form['regno']
+				regno = request.form['regno'].upper()
 				password = request.form['password']
 				user = db.child(regno).get()
 
@@ -404,7 +404,7 @@ def deletefile():
 def delete():
 	if 'adminlogin' in session:
 		if request.method == 'POST':
-			regno = request.form['registerno']
+			regno = request.form['registerno'].upper()
 			mid = request.form['mid']
 			semid = request.form['semid']
 			db.child(semid).child(regno).child(mid).remove()
