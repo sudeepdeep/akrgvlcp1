@@ -83,9 +83,26 @@ span.psw {
     <input type="text" placeholder="Enter Name" name="name" required>
 
     <label for="psw"><b>Password</b></label>
-    <input type="password" placeholder="Enter Password" name="password" required>
+    <input type="password" placeholder="Enter Password" name="password" id="myInput" required>
     <label for="psw"><b>Re-enter Password</b></label>
-    <input type="password" placeholder="Enter Password again" name="re-password" required>
+    <input type="password" placeholder="Enter Password again" name="re-password" id="myInput1" required>
+    <input type="checkbox" onclick="myFunction()">Show Password's
+    <script>
+function myFunction() {
+  var x = document.getElementById("myInput");
+  if (x.type === "password") {
+    x.type = "text";
+  } else {
+    x.type = "password";
+  }
+  var x = document.getElementById("myInput1");
+  if (x.type === "password") {
+    x.type = "text";
+  } else {
+    x.type = "password";
+  }
+}
+</script>
     <button type="submit">Register</button>
    
   </div>
