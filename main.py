@@ -331,7 +331,24 @@ def attendcheck():
 
 	return data
 
+@app.route('/monthattend')
+def monthattend():
+	return render_template("monthattend.html")
 
+@app.route('/monthattendcheck',methods = ['GET','POST'])
+def monthattendcheck():
+	if request.method == "POST":
+		month = request.form['month']
+		year = request.form['year']
+		regno = session['reg']
+		try:
+			data = db.child("attendence").child(year).child(month).child(regno).get()
+			return render_template('monthres.html',data = data,month = month)
+
+		except:
+			return "No Data Found :("
+				
+	return render_template('monthattendcheck.html')
 
 
 
