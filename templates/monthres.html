@@ -29,7 +29,7 @@
     <table width = "80%" border = "2px solid black">
     {% for task in  data.each() %}
     {% for i,j in task.val().items() %}
-    <tr><td align = "center" width = "50%" height = "50px;">{{i}}</td>
+    <tr><td align = "center" width = "50%" height = "50px;">{{i}}/hour</td>
     <td height = "50px"><b style = "margin-left:10px;">{{j}}</b></td>
     </tr>
     {% endfor %}
