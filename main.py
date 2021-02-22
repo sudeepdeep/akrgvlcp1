@@ -343,7 +343,20 @@ def monthattendcheck():
 		regno = session['reg']
 		try:
 			data = db.child("attendence").child(year).child(month).child(regno).get()
-			return render_template('monthres.html',data = data,month = month)
+			absent_classes = 0
+			for task in data.each():
+				for a,b in task.val().items():
+					if a == "total absent":
+						b = int(b)
+						c = 7
+						if b%c == 0:
+							tot = b/c
+							absent_classes += tot
+						else:
+							tot = round(a/b,2)
+							absent_classes += tot
+
+			return render_template('monthres.html',data = data,month = month,ac = absent_classes)
 
 		except:
 			return "No Data Found :("
