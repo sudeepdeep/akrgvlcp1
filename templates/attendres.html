@@ -20,12 +20,21 @@
     <!-- JQuery links  -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <style>
-       
+       body > #bg{
+    height: 100%;
+    width: 100%;
+    background: #37517E;
+    clip-path: polygon(0 0, 100% 0%, 100% 46%, 0 79%);
+
+    position: absolute;
+    z-index: -1;
+    box-shadow: 0px 0px 0.8px 0 rgba(0, 0, 0, 0.4), 0 6px 20px 0 rgba(0, 0, 0, 0.9);
+}
     </style>
 </head>
-<body>
-    <center>
-{{data}}<br>
+<body><div id = "bg"></div>
+    <center style = "padding-top: 200px;">
+<b style="color: white;">{{data}}</b><br>
 <a href = "/monthattend" style="color: #F18D8D;">Check Previous Months attendence!!</a>
 </center>
 </body></html>
