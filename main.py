@@ -299,7 +299,7 @@ def attendfirst():
 					pc.append(n)
 			return render_template('attendcheck.html',hour = hour,status = status,reg = regno,per = per,ac = ac,pc = pc)
 		except:
-			return "No Data Found :( "
+			return render_template('attendres.html',data= "No Data Found")
 	else:
 		return render_template('userlogin.html')
 
