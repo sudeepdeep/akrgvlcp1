@@ -15,7 +15,7 @@
 	box-shadow: 0px 0px 0.8px 0 rgba(0, 0, 0, 0.4), 0 6px 20px 0 rgba(0, 0, 0, 0.9);
 }
 	.logo img{
-		width:80%;
+		width:50%;
 		height:120px;
 	}
 </style>
@@ -31,7 +31,7 @@
 	<tr>
 		<td colspan  = "2" align="center" width="100%">
 			<div class = "logo">
-			<img src = "{{url_for('static',filename = 'images/unnamed.png')}}" style="width: 80%;"></div>
+			<img src = "{{url_for('static',filename = 'images/dashboard1.png')}}" ></div>
 		</td>
 	</tr>
 	<tr><td height="30px;"></td></tr>
@@ -64,21 +64,22 @@
 	<tr>
 		<td colspan  = "2" align="center" width="50%" height="50px;">
 		</td>
-		<td  align="center" width="50%">
-		</td></tr>
 
+</tr>
 <tr>
 <td width="50%">
 		<div class="nav justify-content-center">
-<button type="button" class="btn btn-primary" style="width: 100px;margin: 30px;  display: flex; font-size: 15px;"onclick="document.location='/feescheck'">View Fees Details</button></div></td></div>
+<button type="button" class="btn btn-primary" onclick="document.location='/feescheck'" style="box-shadow: -8px -8px 8px 0 rgba(0, 0, 0, 0.4), 0 6px 20px 0 rgba(0, 0, 0, 0.19); border: 0px solid black; background-color: #0D6EFD; color: white;border-radius: 50px; width: 180px;">View Fees Details</button></div></td></div>
 <td width="50%">
 		<div class="nav justify-content-center">
-<button type="button" class="btn btn-primary" style="width: 100px;margin: 30px;font-size: 15px;" onclick="document.location='/attendfirst'">View Attendence</button></div></td></tr>
+<button type="button" class="btn btn-primary" onclick="document.location='/attendfirst'" style="box-shadow: -8px -8px 8px 0 rgba(0, 0, 0, 0.4), 0 6px 20px 0 rgba(0, 0, 0, 0.19); border: 0px solid black; background-color: #0D6EFD; color: white;border-radius: 50px; width: 180px;">View Attendence</button></div></td></tr>
+<tr><td colspan = "2" height="20px"></td></tr>
 <tr>
 <td width="50%">
 		<div class="nav justify-content-center">
-<button type="button" class="btn btn-primary" style="width: 100px;margin: 30px;font-size: 15px;"onclick="document.location='/test1'">Perform Tests</button></div></td></div>
+<button type="button" class="btn btn-primary" onclick="document.location='/test1'" style="box-shadow: -8px -8px 8px 0 rgba(0, 0, 0, 0.4), 0 6px 20px 0 rgba(0, 0, 0, 0.19); border: 0px solid black; background-color: #0D6EFD; color: white;border-radius: 50px; width: 180px;">Perform Tests</button></div></td>
 <td width="50%">
-		<div class="nav justify-content-center"></div></td></tr>
+		<div class="nav justify-content-center">
+			<button type="button" class="btn btn-primary" onclick="document.location='/deleteacc'" style="box-shadow: -8px -8px 8px 0 rgba(0, 0, 0, 0.4), 0 6px 20px 0 rgba(0, 0, 0, 0.19); border: 0px solid black; background-color: #0D6EFD; color: white;border-radius: 50px; width: 180px;">Update My Account</button></div></td></tr>
 </div></tr>
 	</table></body></html>
