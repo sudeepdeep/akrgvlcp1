@@ -446,6 +446,34 @@ def delete():
 		return render_template('adminlogin1.html')
 	return render_template('deletefile.html')
 
+@app.route('/deleteacc')
+def deleteacc():
+	return render_template('updatedetails.html')
+
+
+@app.route('/updatedetails',methods = ['GET','POST'])
+def updatedetails():
+	if request.method == "POST":
+		name = request.form['name']
+		regno = session['reg']
+		try:
+			data = {}
+			check_data = db.child(regno).get()
+			for task in check_data.each():
+				for a,b in task.val().items():
+					data[a] = b
+			db.child(regno).remove()
+			for a,b in data.items():
+				if a == "name":
+					data[a] = name
+			db.child(regno).push(data)
+
+			return "Successfully updated"
+		except Exception as e:
+			return render_template('userlogin.html')
+
+
+
 @app.route('/fees')
 def fees():
 	if 'adminlogin' in session:
