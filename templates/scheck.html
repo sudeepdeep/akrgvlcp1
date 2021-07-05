@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Students Check</title>
+</head>
+<body>
+    <form method="POST", action = "/search">
+        <input type = "search" name = "q"><input type = "submit" value = "Search">
+    {% for a,b in data.val().items() %}
+    <h4>Reg Number : {{a}}</h4>    
+		{% for c in b.values() %}
+			{% for e,f in c.items() %} 
+            
+            {{e}} : {{f}}<br>
+				{% endfor %}
+				{% endfor %}
+                <a href = "/sedit/{{a}}">Edit</a><br><a href = "/sdelete/{{a}}">Delete</a>
+                <p>--------------------------------------------------------</p>
+				{% endfor %}
+                </form>
+
+            <a href = '/sinsert'>Insert data</a>
+</body>
+</html>
