@@ -534,6 +534,169 @@ def feeupdation():
 	return render_template('feeupdation.html')
 
 
+@app.route('/sdetails')
+def sdetails():
+	return render_template('sdetails.html')
+
+@app.route('/supload')
+def supload():
+	return render_template('supload.html')
+
+
+@app.route('/supload1', methods = ['POST','GET'])
+def supload1():
+	if request.method == 'POST':
+		f = request.files['file']
+		f.save(f.filename)
+		with open(f.filename,mode = 'r') as f:
+			csv_list = [[val.strip() for val in r.split(",")] for r in f.readlines()]
+
+		(_, *header), *data = csv_list
+		csv_dict = {}
+		for row in data:
+			key, *values = row
+			csv_dict[key] = {key: value for key, value in zip(header, values)}
+
+		for a,b in csv_dict.items():
+			db.child("student details").child(a).push(b)
+				
+	return render_template('supload.html', msg  = "succesfully uploaded")
+
+
+@app.route('/scheck')
+def scheck():
+	students_data = db.child("student details").get()
+	
+	return render_template('scheck.html', data = students_data)
+
+
+@app.route('/sedit/<regno>', methods = ['POST','GET'])
+def sedit(regno):
+	session['regno'] = regno
+	stud_data = db.child("student details").child(regno).get()
+	return render_template('sedit.html', regno = stud_data)
+@app.route('/supdate', methods = ['POST','GET'])
+def supdate():
+	if request.method == 'POST':   
+		fathername = request.form['father name']
+		name = request.form['name']
+		status = request.form['status']
+		transport = request.form['transport']
+		village = request.form['village']
+		data = {
+			'father name' : fathername,
+			'name' : name,
+			'status' : status,
+			'transport' : transport,
+			'village' : village
+
+		}
+		regno = session['regno']
+		data_key = db.child("student details").child(regno).get() 
+		for a,b in data_key.val().items():
+
+			db.child("student details").child(regno).child(a).update(data)
+			students_data = db.child("student details").get()
+			return render_template('scheck.html', data = students_data, msg = "data updated successfully")
+
+	return render_template('sdetails.html')
+
+@app.route('/sdelete/<regno>')
+def sdelete(regno):
+	db.child("student details").child(regno).remove()
+	students_data = db.child("student details").get()
+	return render_template('scheck.html',data = students_data, msg = "data deleted successfully")
+
+@app.route('/sinsert')
+def sinsert():
+	
+	return render_template('sinsert.html')
+@app.route('/sinsertion', methods = ['GET','POST'])
+def sinsertion():  
+	if request.method == 'POST':
+		regno = request.form['regno']
+		fathername = request.form['father name']
+		name = request.form['name']
+		status = request.form['status']
+		transport = request.form['transport']
+		village = request.form['village']
+		data = {
+			'father name' : fathername,
+			'name' : name,
+			'status' : status,
+			'transport' : transport,
+			'village' : village
+
+		}
+
+		db.child('student details').child(regno).push(data)
+		students_data = db.child("student details").get()
+		return render_template('scheck.html', data=students_data)
+
+	return render_template('sinsert.html')
+
+
+@app.route('/search', methods=['GET','POST'])
+def search():
+	if request.method == 'POST':
+		data = {} 
+		q = request.form['q']
+		students_data = db.child("student details").get()
+		for a,b in students_data.val().items():
+
+			for c in b.values():
+				for d,e in c.items():  
+					if q == e or q == a:  
+						name=  c['name']
+						fathername= c['father name']
+						village= c['village']
+						transport = c['transport']
+						status = c['status']
+
+						data[a] = {'name': name, 'fathername' : fathername, 'village' :village, 'transport' : transport, 'status' : status}
+
+
+		text_file = open('new_file.txt', 'wt')
+		if text_file: 
+			for a,b in data.items():
+				text_file.write(str('----------------\n'))
+				text_file.write(str(f'{a}\n'))
+				for d,e in b.items():
+					text_file.write(str(f'{d} : {e}\n'))
+
+
+			text_file.close()
+							
+			pdf = FPDF()
+
+			pdf.add_page()
+			
+			pdf.set_font("Arial", size = 15)
+
+			f = open("new_file.txt", "r")
+			for x in f:
+				pdf.cell(200, 10, txt = x, ln = 1, align = 'C')
+
+			random1 = ''.join([random.choice(string.ascii_letters 
+					+ string.digits) for n in range(10)]) 
+			filen = f'students-{random1}.pdf'
+			pdf.output(filen)
+			storage.child(f"pdf/{filen}").put(filen)
+			url1 = storage.child(f'pdf/{filen}').get_url(None)
+			return render_template('sresult.html', data = data, url = url1)
+
+
+	return render_template('sresult.html',data = {'value' : 'no data found error'})
+
+
+
+
+
+
+
+
+
+
 
 
 @app.route('/selectattendence')
