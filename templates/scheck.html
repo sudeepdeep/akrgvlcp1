@@ -13,7 +13,7 @@
 <body>
     <center>
     <form method="POST", action = "/search">
-        <div class="container mx-5">
+
         <input type = "search" name = "q" class = "my-5"><input type = "submit" value = "Search" class = "btn btn-outline-info mx-4 my-5">
     {% for a,b in data.val().items() %}
     <h4>Reg Number : {{a}}</h4>    
@@ -28,7 +28,7 @@
                 
                 <a href = "/sedit/{{a}}" class="btn btn-primary mt-3">Edit</a><a href = "/sdelete/{{a}}" class="btn btn-danger mx-2 mt-3">Delete</a>
                 <p>--------------------------------------------------------</p>
-				{% endfor %}</div>
+				{% endfor %}
                 </form>
                 <a href = '/sinsert' class="btn btn-secondary mb-5">Insert data</a>
                 </center>
