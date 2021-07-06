@@ -646,14 +646,37 @@ def search():
 
 			for c in b.values():
 				for d,e in c.items():  
-					if q == e.lower() or q == a.lower():  
-						name=  c['name']
-						fathername= c['father name']
-						village= c['village']
-						transport = c['transport']
-						status = c['status']
+					vals = e.lower().split(' ')
+					vals1 = e.lower().split('.')
+					
+					if len(vals) > 1:
+						if q == vals[0] or q == vals[1] or  q == a.lower():  
+							name=  c['name']
+							fathername= c['father name']
+							village= c['village']
+							transport = c['transport']
+							status = c['status']
 
-						data[a] = {'name': name, 'fathername' : fathername, 'village' :village, 'transport' : transport, 'status' : status}
+							data[a] = {'name': name, 'fathername' : fathername, 'village' :village, 'transport' : transport, 'status' : status}
+					elif len(vals1) > 1:
+						if q == vals1[0] or q == vals1[1] or q == a.lower():
+							name=  c['name']
+							fathername= c['father name']
+							village= c['village']
+							transport = c['transport']
+							status = c['status']
+
+							data[a] = {'name': name, 'fathername' : fathername, 'village' :village, 'transport' : transport, 'status' : status}
+
+					else:  
+						if q == vals or  q == a.lower():  
+							name=  c['name']
+							fathername= c['father name']
+							village= c['village']
+							transport = c['transport']
+							status = c['status']
+
+							data[a] = {'name': name, 'fathername' : fathername, 'village' :village, 'transport' : transport, 'status' : status}
 
 
 		text_file = open('new_file.txt', 'wt')
