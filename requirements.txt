@@ -1,5 +1,6 @@
 Flask==1.1.2
 pandas==1.0.3
+re==2.2.1
 fpdf==1.7.2
 Pyrebase4==4.4.3
 pyrebase==3.0.27
