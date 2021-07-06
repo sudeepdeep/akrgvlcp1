@@ -640,13 +640,13 @@ def sinsertion():
 def search():
 	if request.method == 'POST':
 		data = {} 
-		q = request.form['q']
+		q = request.form['q'].lower()
 		students_data = db.child("student details").get()
 		for a,b in students_data.val().items():
 
 			for c in b.values():
 				for d,e in c.items():  
-					if q == e or q == a:  
+					if q == e.lower() or q == a.lower():  
 						name=  c['name']
 						fathername= c['father name']
 						village= c['village']
