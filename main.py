@@ -669,7 +669,7 @@ def search():
 							data[a] = {'name': name, 'fathername' : fathername, 'village' :village, 'transport' : transport, 'status' : status}
 
 					else:  
-						if q == vals or  q == a.lower():  
+						if q == e or  q == a.lower():  
 							name=  c['name']
 							fathername= c['father name']
 							village= c['village']
